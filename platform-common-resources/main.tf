@@ -11,17 +11,17 @@ provider "kubernetes" {
   # client_certificate     = local.client_certificate
   # client_key             = local.client_key
   # cluster_ca_certificate = local.cluster_ca_certificate
-  config_path = "../config"
+  config_path = "./config"
 }
 
 provider "helm" {
   kubernetes {
-    config_path = "../config"
+    config_path = "./config"
   }
 }
 
 provider "kubectl" {
-  config_path = "../config"
+  config_path = "./config"
 
   load_config_file = false
 }
