@@ -36,6 +36,5 @@ variable "publicip_resource_group" {
 }
 
 variable "is_bare_metal" {
-  type    = bool
-  default = true
+  type = bool
 }

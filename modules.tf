@@ -1,6 +1,7 @@
 module "create-ingress-nginx" {
   source = "./create-ingress-nginx"
 
+  is_bare_metal           = var.is_bare_metal
   monitoring_namespace    = var.monitoring_namespace
   ingress_nginx_version   = var.ingress_nginx_version
   loadbalancer_ip         = var.loadbalancer_ip
@@ -42,17 +43,16 @@ module "cert-manager" {
   depends_on = [module.create-ingress-nginx]
 }
 
-# module "loki" {
-#   source = "./create-loki"
+module "loki" {
+  source = "./create-loki"
 
-#   namespace                        = var.namespace
-#   monitoring_namespace             = var.monitoring_namespace
-
-#   loki_release_name                = var.loki_release_name
-#   loki_persistence_memory          = var.loki_persistence_memory
-#   loki_retention_period            = var.loki_retention_period
-#   helm_repo_url                    = var.helm_repo_url
-#   helm_chart                       = var.helm_chart
-#   loki_max_entries_limet_per_query = var.loki_max_entries_limet_per_query
-#   grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
-# }
+  namespace                            = var.namespace
+  monitoring_namespace                 = var.monitoring_namespace
+  loki_release_name                    = var.loki_release_name
+  loki_persistence_memory              = var.loki_persistence_memory
+  loki_retention_period                = var.loki_retention_period
+  helm_repo_url                        = var.helm_repo_url
+  helm_chart                           = var.helm_chart
+  loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
+  grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
+}

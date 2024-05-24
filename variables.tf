@@ -136,3 +136,8 @@ variable "prom_cpu_mem_request" {
 variable "grafana_loki_compatibility_image_tag" {
   type = string
 }
+
+variable "is_bare_metal" {
+  type    = bool
+  default = false
+}
