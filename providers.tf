@@ -14,13 +14,5 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name  = "arch5"
-    storage_account_name = "arch5terraform"
-    container_name       = "ganymede"
-    key                  = "terraform-core.tfstate"
-    access_key           = "4deHYErky3mQV5O8a9eZBNq2kzE8s3HYrVZXAeH07O5Ku/30hpIqMdgH1XWLCKNnXW8yZsrClhb3+AStPgaaZA=="
-  }
-
   required_version = ">= 1.3.9"
 }
