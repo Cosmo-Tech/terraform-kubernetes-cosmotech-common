@@ -37,3 +37,6 @@ variable "loki_max_entries_limet_per_query" {
   default = 50000
 }
 
+variable "grafana_loki_compatibility_image_tag" {
+  type = string
+}

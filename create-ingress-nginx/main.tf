@@ -8,7 +8,7 @@ locals {
     "PUBLIC_IP_RESOURCE_GROUP"                 = var.publicip_resource_group
   }
   instance_name = "${var.helm_release_name}-${var.namespace}"
-  values = var.is_bare_metal ? "values-vanilla" : "values-azure"
+  values        = var.is_bare_metal ? "values-vanilla" : "values-azure"
 }
 
 resource "kubernetes_namespace" "monitoring_namespace" {

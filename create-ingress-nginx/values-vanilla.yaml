@@ -20,7 +20,6 @@ controller:
     labels:
       networking/traffic-allowed: "yes"
     type: NodePort
-    # loadBalancerIP: ${NGINX_INGRESS_CONTROLLER_LOADBALANCER_IP}
   extraArgs:
     default-ssl-certificate: ${NAMESPACE}/${TLS_SECRET_NAME}
   resources:
