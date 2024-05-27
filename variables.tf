@@ -141,3 +141,31 @@ variable "is_bare_metal" {
   type    = bool
   default = false
 }
+
+variable "resources" {
+  type = list(object({
+    name         = string
+    storage      = string
+    labels       = map(string)
+    access_modes = list(string)
+  }))
+  default = [{
+
+    name    = "loki"
+    storage = "8Gi"
+    labels = {
+      "cosmotech.com/db" = "loki"
+    }
+    access_modes = ["ReadWriteOnce"]
+    }
+    ,
+    {
+      name    = "grafana"
+      storage = "8Gi"
+      labels = {
+        "cosmotech.com/db" = "grafana"
+      }
+      access_modes = ["ReadWriteOnce"]
+    }
+  ]
+}

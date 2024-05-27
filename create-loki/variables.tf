@@ -40,3 +40,16 @@ variable "loki_max_entries_limet_per_query" {
 variable "grafana_loki_compatibility_image_tag" {
   type = string
 }
+
+variable "is_bare_metal" {
+  type = bool
+}
+
+variable "resources" {
+  type = list(object({
+    name         = string
+    storage      = string
+    labels       = map(string)
+    access_modes = list(string)
+  }))
+}
