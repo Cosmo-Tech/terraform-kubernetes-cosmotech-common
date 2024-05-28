@@ -54,21 +54,21 @@ resource "time_sleep" "wait" {
   depends_on = [helm_release.cert-manager]
 }
 
-# resource "kubectl_manifest" "cluster_issuer" {
-#   count           = var.tls_certificate_type == "let_s_encrypt" ? 1 : 0
-#   validate_schema = false
-#   yaml_body       = templatefile("${path.module}/values-issuer.yaml", local.values_cert_manager)
+resource "kubectl_manifest" "cluster_issuer" {
+  count           = var.tls_certificate_type == "let_s_encrypt" ? 1 : 0
+  validate_schema = false
+  yaml_body       = templatefile("${path.module}/values-issuer.yaml", local.values_cert_manager)
 
-#   depends_on = [helm_release.cert-manager, time_sleep.wait]
-# }
+  depends_on = [helm_release.cert-manager, time_sleep.wait]
+}
 
-# resource "kubectl_manifest" "certificates" {
-#   count           = var.tls_certificate_type == "let_s_encrypt" ? 1 : 0
-#   validate_schema = false
-#   yaml_body       = templatefile("${path.module}/values-certificate.yaml", local.values_cert_manager)
+resource "kubectl_manifest" "certificates" {
+  count           = var.tls_certificate_type == "let_s_encrypt" ? 1 : 0
+  validate_schema = false
+  yaml_body       = templatefile("${path.module}/values-certificate.yaml", local.values_cert_manager)
 
-#   depends_on = [kubectl_manifest.cluster_issuer]
-# }
+  depends_on = [kubectl_manifest.cluster_issuer]
+}
 
 resource "kubernetes_secret" "tls" {
   count = var.tls_certificate_type == "custom" ? 1 : 0

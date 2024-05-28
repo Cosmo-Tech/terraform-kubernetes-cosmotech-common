@@ -9,25 +9,25 @@ spec:
     privateKeySecretRef:
       name: ${CERT_MANAGER_ACME}-private-key
     solvers:
-    - http01:
-        ingress:
-          class: nginx
-          podTemplate:
-            metadata:
-              labels:
-                networking/traffic-allowed: "yes"
-            spec:
-              tolerations:
-              - key: "vendor"
-                operator: "Equal"
-                value: "cosmotech"
-                effect: "NoSchedule"
-              nodeSelector:
-                "cosmotech.com/tier": "services"
-              # resources:
-              #   requests:
-              #     cpu: 10m
-              #     memory: 64Mi
-              #   limits:
-              #     cpu: 1000m
-              #     memory: 64Mi
+      - http01:
+          ingress:
+            class: nginx
+            podTemplate:
+              metadata:
+                labels:
+                  networking/traffic-allowed: "yes"
+              spec:
+                tolerations:
+                - key: "vendor"
+                  operator: "Equal"
+                  value: "cosmotech"
+                  effect: "NoSchedule"
+                nodeSelector:
+                  "cosmotech.com/tier": "services"
+                resources:
+                  requests:
+                    cpu: 10m
+                    memory: 64Mi
+                  limits:
+                    cpu: 1000m
+                    memory: 64Mi

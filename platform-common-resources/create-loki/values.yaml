@@ -1,11 +1,12 @@
 loki:
+  isDefault: false
   persistence:
     enabled: true
     accessModes:
     - ReadWriteOnce
     size: "${LOKI_PERSISTENCE_MEMORY}"
   config:
-    auth_enabled: true
+    auth_enabled: false
     table_manager:
       retention_deletes_enabled: true
       retention_period: "${LOKI_RETENTION_PERIOD}"
@@ -19,6 +20,9 @@ grafana:
     accessModes:
       - ReadWriteOnce
     size: "${LOKI_PERSISTENCE_MEMORY}"
+  image:
+    tag: "${GRAFANA_IMAGE_TAG}"
+
 promtail:
   config:
     clients:
@@ -27,7 +31,7 @@ promtail:
       pipelineStages:
       - cri: {}
       - match:
-          selector: '{namespace="${NAMESPACE}"}'
+          selector: '{job="*"} |= "workflow"'
           stages:
             - json:
                 expressions:
@@ -35,15 +39,32 @@ promtail:
             - json:
                 source: output
                 expressions:
-                  tenant_id: ${NAMESPACE}
                   message: message
                   level: log.level
             - labels:
                 tenant_id:
                 message:
                 namespace:
-            - tenant:
-                value: ${NAMESPACE}
+      - match:
+          action: drop
+          pipeline_name: keep only workflows logs
+          selector: '{container!="main"}'
+      - match:
+          action: drop
+          pipeline_name: drop redis
+          selector: '{app="redis"}'
+      - match:
+          action: drop
+          pipeline_name: drop minio
+          selector: '{app="minio"}'
+      - match:
+          action: drop
+          pipeline_name: drop postgresql
+          selector: '{app="postgresql"}'
+      - match:
+          action: drop
+          pipeline_name: drop cosmotech-api
+          selector: '{app="cosmotech-api"}'
       - output:
           source: message
   tolerations:

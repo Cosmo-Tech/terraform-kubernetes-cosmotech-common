@@ -7,21 +7,26 @@ locals {
 }
 
 provider "kubernetes" {
-  # host                   = local.host
-  # client_certificate     = local.client_certificate
-  # client_key             = local.client_key
-  # cluster_ca_certificate = local.cluster_ca_certificate
-  config_path = "./config"
+  host                   = local.host
+  client_certificate     = local.client_certificate
+  client_key             = local.client_key
+  cluster_ca_certificate = local.cluster_ca_certificate
 }
 
 provider "helm" {
   kubernetes {
-    config_path = "./config"
+    host                   = local.host
+    client_certificate     = local.client_certificate
+    client_key             = local.client_key
+    cluster_ca_certificate = local.cluster_ca_certificate
   }
 }
 
 provider "kubectl" {
-  config_path = "./config"
+  host                   = local.host
+  client_certificate     = local.client_certificate
+  client_key             = local.client_key
+  cluster_ca_certificate = local.cluster_ca_certificate
 
   load_config_file = false
 }
