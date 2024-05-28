@@ -23,7 +23,7 @@ provider "helm" {
 provider "kubectl" {
   config_path = "./config"
 
-  load_config_file = false
+  load_config_file = true
 }
 
 resource "random_password" "prom_admin_password" {
