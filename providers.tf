@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>3.54.0"
+      version = "=3.54.0"
     }
     azuread = {
       source  = "hashicorp/azuread"
@@ -12,12 +12,15 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "2.20.0"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.9.0"
+    }
     kubectl = {
       source  = "alekc/kubectl"
       version = "2.0.4"
     }
   }
-  required_version = ">= 1.3.9"
 }
 
 # Configure the Microsoft Azure Provider

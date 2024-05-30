@@ -34,11 +34,11 @@ variable "prom_storage_class_name" {
 }
 
 variable "prom_cpu_mem_limits" {
-  type    = string
+  type = string
 }
 
 variable "prom_cpu_mem_request" {
-  type    = string
+  type = string
 }
 
 variable "prom_replicas_number" {
