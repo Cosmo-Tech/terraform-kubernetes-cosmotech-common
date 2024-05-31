@@ -1,11 +1,42 @@
 locals {
-  cluster_name    = var.cluster_name != "" ? var.cluster_name : "${var.dns_record}${random_string.cluster_id.result}"
-  resource_group  = var.resource_group != "" ? var.resource_group : var.dns_record
-  tls_secret_name = var.tls_certificate_type == "let_s_encrypt" ? var.tls_secret_name : "custom-tls-secret"
+  host                   = var.kube_config.0.host
+  client_certificate     = base64decode(var.kube_config.0.client_certificate)
+  client_key             = base64decode(var.kube_config.0.client_key)
+  cluster_ca_certificate = base64decode(var.kube_config.0.cluster_ca_certificate)
+  tls_secret_name        = var.tls_certificate_type != "none" ? var.tls_secret_name : ""
 }
 
-resource "random_string" "cluster_id" {
-  length  = 6
+provider "kubernetes" {
+  host                   = local.host
+  client_certificate     = local.client_certificate
+  client_key             = local.client_key
+  cluster_ca_certificate = local.cluster_ca_certificate
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = local.host
+    client_certificate     = local.client_certificate
+    client_key             = local.client_key
+    cluster_ca_certificate = local.cluster_ca_certificate
+  }
+}
+
+provider "kubectl" {
+  host                   = local.host
+  client_certificate     = local.client_certificate
+  client_key             = local.client_key
+  cluster_ca_certificate = local.cluster_ca_certificate
+
+  load_config_file = false
+}
+
+resource "random_password" "prom_admin_password" {
+  length  = 30
   special = false
-  upper   = false
+}
+
+resource "random_password" "redis_admin_password" {
+  length  = 30
+  special = false
 }

@@ -1,6 +1,6 @@
-terraform.tfvars*
+.terraform/
+.terraform.lock.hcl
+.terraform.*
+terraform.*
 tfplan*
-terraform.tfstate*
-config*
-.terraform/*
-.terraform.lock*
+*.sh
