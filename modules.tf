@@ -57,5 +57,6 @@ module "loki" {
   loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
   grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
   is_bare_metal                        = var.is_bare_metal
+  provisioner                          = var.provisioner
   resources                            = var.resources
 }

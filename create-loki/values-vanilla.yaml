@@ -9,7 +9,7 @@ loki:
     "cosmotech.com/tier": "monitoring"
   persistence:
     enabled: true
-    storageClass: "-"
+    storageClass: "${STORAGE_CLASS}"
     existingClaim: "${LOKI_PVC_NAME}"
     accessModes:
     - ReadWriteOnce
@@ -25,7 +25,7 @@ grafana:
   enabled: true
   persistence:
     type: pvc
-    storageClass: "-"
+    storageClass: "${STORAGE_CLASS}"
     existingClaim: "${GRAFANA_PVC_NAME}"
     enabled: true
     accessModes:

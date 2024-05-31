@@ -4,16 +4,17 @@ locals {
     "LOKI_RETENTION_PERIOD"            = var.loki_retention_period
     "LOKI_PERSISTENCE_MEMORY"          = var.loki_persistence_memory
     "LOKI_MAX_ENTRIES_LIMIT_PER_QUERY" = var.loki_max_entries_limet_per_query
-    "LOKI_PVC_NAME"                    = "${var.resources[0].name}-pvc"
-    "GRAFANA_PVC_NAME"                 = "${var.resources[1].name}-pvc"
+    "LOKI_PVC_NAME"                    = var.provisioner == "local-path" ? "${var.resources[0].name}-pvc" : ""
+    "GRAFANA_PVC_NAME"                 = var.provisioner == "local-path" ? "${var.resources[1].name}-pvc" : ""
     "NAMESPACE"                        = var.namespace
     "GRAFANA_IMAGE_TAG"                = var.grafana_loki_compatibility_image_tag
+    "STORAGE_CLASS"                    = var.provisioner == "local-path" ? "-" : var.provisioner
   }
   values = var.is_bare_metal ? "values-vanilla" : "values-azure"
 }
 
 resource "kubernetes_persistent_volume_v1" "loki-pv" {
-  count = var.is_bare_metal ? length(var.resources) : 0
+  count = var.is_bare_metal && var.provisioner == "local-path" ? length(var.resources) : 0
   metadata {
     name   = "${var.resources[count.index].name}-pv"
     labels = var.resources[count.index].labels
@@ -27,7 +28,7 @@ resource "kubernetes_persistent_volume_v1" "loki-pv" {
 
     persistent_volume_source {
       local {
-        path = "/mnt/${var.resources[count.index].name}-storage"
+        path = var.resources[count.index].path
       }
     }
     persistent_volume_reclaim_policy = "Retain"
@@ -41,6 +42,13 @@ resource "kubernetes_persistent_volume_v1" "loki-pv" {
           }
         }
       }
+    }
+  }
+
+  lifecycle {
+    precondition {
+      condition     = var.is_bare_metal && var.provisioner == "local-path"
+      error_message = "This resource is only available in a bare metal environment and for local-path provisioner."
     }
   }
 }
@@ -62,6 +70,13 @@ resource "kubernetes_persistent_volume_claim_v1" "loki-pvc" {
       }
     }
     volume_name = "${var.resources[count.index].name}-pv"
+  }
+
+  lifecycle {
+    precondition {
+      condition     = var.is_bare_metal && var.provisioner == "local-path"
+      error_message = "This resource is only available in a bare metal environment and for local-path provisioner."
+    }
   }
 }
 

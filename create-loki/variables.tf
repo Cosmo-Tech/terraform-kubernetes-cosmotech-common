@@ -46,10 +46,8 @@ variable "is_bare_metal" {
 }
 
 variable "resources" {
-  type = list(object({
-    name         = string
-    storage      = string
-    labels       = map(string)
-    access_modes = list(string)
-  }))
+}
+
+variable "provisioner" {
+  type = string
 }
