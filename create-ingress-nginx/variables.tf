@@ -34,3 +34,7 @@ variable "tls_secret_name" {
 variable "publicip_resource_group" {
   type = string
 }
+
+variable "is_bare_metal" {
+  type = bool
+}

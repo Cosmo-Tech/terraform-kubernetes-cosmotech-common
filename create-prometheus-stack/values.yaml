@@ -228,6 +228,13 @@ prometheus:
         matchLabels:
           app.kubernetes.io/instance: cosmotech-api-v1
 kube-state-metrics:
+  tolerations:
+    - key: "vendor"
+      operator: "Equal"
+      value: "cosmotech"
+      effect: "NoSchedule"
+  nodeSelector:
+    "cosmotech.com/tier": "monitoring"
   namespaceOverride: ""
   rbac:
     create: true

@@ -20,6 +20,7 @@ variable "tenant_id" {
   description = "The tenant id"
 }
 
+# Common environment variables
 variable "cluster_issuer_email" {
   type = string
 }
@@ -35,7 +36,16 @@ variable "tls_secret_name" {
 }
 
 variable "tls_certificate_type" {
-  type = string
+  type    = string
+  default = "let_s_encrypt"
+  validation {
+    condition = contains([
+      "let_s_encrypt",
+      "custom",
+      "none"
+    ], var.tls_certificate_type)
+    error_message = "Only let_s_encrypt and none are supported for tls_certificate_type."
+  }
 }
 
 variable "namespace" {
@@ -48,11 +58,13 @@ variable "monitoring_namespace" {
 }
 
 variable "ingress_nginx_version" {
-  type = string
+  type    = string
+  default = "4.2.5"
 }
 
 variable "create_prometheus_stack" {
-  type = bool
+  type    = bool
+  default = true
 }
 
 variable "publicip_resource_group" {
@@ -120,4 +132,57 @@ variable "prom_cpu_mem_request" {
 
 variable "grafana_loki_compatibility_image_tag" {
   type = string
+}
+
+variable "is_bare_metal" {
+  type    = bool
+  default = false
+}
+
+variable "resources" {
+  type = list(object({
+    name         = string
+    storage      = string
+    labels       = map(string)
+    access_modes = list(string)
+    path         = string
+  }))
+  description = <<EOT
+  Values for the persistent volume and persistent volume claims when in 
+  a bare metal context and provisioner is set to local-path.
+  If a provisioner is available, set the provisioner variable to the 
+  value of the StorageClass for this provisioner.
+  EOT
+  default = [{
+
+    name    = "loki"
+    storage = "8Gi"
+    labels = {
+      "cosmotech.com/db" = "loki"
+    }
+    access_modes = ["ReadWriteOnce"]
+    path         = "/mnt/loki-storage"
+    }
+    ,
+    {
+      name    = "grafana"
+      storage = "8Gi"
+      labels = {
+        "cosmotech.com/db" = "grafana"
+      }
+      access_modes = ["ReadWriteOnce"]
+      path         = "/mnt/grafana-storage"
+    }
+  ]
+}
+
+variable "provisioner" {
+  type        = string
+  default     = ""
+  description = "Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path'"
+}
+
+variable "config_path" {
+  type    = string
+  default = ""
 }

@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ${TLS_SECRET_NAME}
+  namespace: ${MONITORING_NAMESPACE}
+spec:
+  secretName: ${TLS_SECRET_NAME}
+  dnsNames:
+    - ${COSMOTECH_API_DNS_NAME}
+  issuerRef:
+    name: ${CERT_MANAGER_ACME}
+    kind: ClusterIssuer

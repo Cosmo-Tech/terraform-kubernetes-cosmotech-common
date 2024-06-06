@@ -57,3 +57,7 @@ variable "certificate_cert_content" {
 
 variable "certificate_key_content" {
 }
+
+variable "is_bare_metal" {
+  type = bool
+}

@@ -1,6 +1,7 @@
 module "create-ingress-nginx" {
   source = "./create-ingress-nginx"
 
+  is_bare_metal           = var.is_bare_metal
   monitoring_namespace    = var.monitoring_namespace
   ingress_nginx_version   = var.ingress_nginx_version
   loadbalancer_ip         = var.loadbalancer_ip
@@ -38,6 +39,7 @@ module "cert-manager" {
   api_dns_name             = var.api_dns_name
   certificate_cert_content = var.certificate_cert_content
   certificate_key_content  = var.certificate_key_content
+  is_bare_metal            = var.is_bare_metal
 
   depends_on = [module.create-ingress-nginx]
 }
@@ -45,9 +47,8 @@ module "cert-manager" {
 module "loki" {
   source = "./create-loki"
 
-  namespace            = var.namespace
-  monitoring_namespace = var.monitoring_namespace
-
+  namespace                            = var.namespace
+  monitoring_namespace                 = var.monitoring_namespace
   loki_release_name                    = var.loki_release_name
   loki_persistence_memory              = var.loki_persistence_memory
   loki_retention_period                = var.loki_retention_period
@@ -55,4 +56,7 @@ module "loki" {
   helm_chart                           = var.helm_chart
   loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
   grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
+  is_bare_metal                        = var.is_bare_metal
+  provisioner                          = var.provisioner
+  resources                            = var.resources
 }
