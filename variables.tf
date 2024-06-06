@@ -1,4 +1,3 @@
-# Azure only environment variables
 variable "client_id" {
   type        = string
   description = "The client id of the app registration used to build this"
@@ -21,14 +20,9 @@ variable "tenant_id" {
   description = "The tenant id"
 }
 
-variable "publicip_resource_group" {
-  type = string
-}
-
 # Common environment variables
 variable "cluster_issuer_email" {
-  type    = string
-  default = "platform@cosmotech.com"
+  type = string
 }
 
 variable "cluster_issuer_name" {
@@ -55,8 +49,7 @@ variable "tls_certificate_type" {
 }
 
 variable "namespace" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "monitoring_namespace" {
@@ -72,6 +65,10 @@ variable "ingress_nginx_version" {
 variable "create_prometheus_stack" {
   type    = bool
   default = true
+}
+
+variable "publicip_resource_group" {
+  type = string
 }
 
 variable "api_dns_name" {
@@ -183,4 +180,9 @@ variable "provisioner" {
   type        = string
   default     = ""
   description = "Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path'"
+}
+
+variable "config_path" {
+  type    = string
+  default = ""
 }
