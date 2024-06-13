@@ -114,7 +114,7 @@ variable "grafana_loki_compatibility_image_tag" {
 
 variable "is_bare_metal" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "resources" {
