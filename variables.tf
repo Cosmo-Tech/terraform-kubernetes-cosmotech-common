@@ -1,25 +1,3 @@
-variable "client_id" {
-  type        = string
-  description = "The client id of the app registration used to build this"
-  default     = ""
-}
-
-variable "client_secret" {
-  type        = string
-  description = "The client secret of the app registration used to build this"
-  default     = ""
-}
-
-variable "subscription_id" {
-  type        = string
-  description = "The subscription id"
-}
-
-variable "tenant_id" {
-  type        = string
-  description = "The tenant id"
-}
-
 # Common environment variables
 variable "cluster_issuer_email" {
   type = string
@@ -136,7 +114,7 @@ variable "grafana_loki_compatibility_image_tag" {
 
 variable "is_bare_metal" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "resources" {
