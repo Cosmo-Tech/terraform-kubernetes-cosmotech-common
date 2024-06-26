@@ -60,3 +60,10 @@ module "loki" {
   provisioner                          = var.provisioner
   resources                            = var.resources
 }
+
+module "keycloak" {
+  source = "./create-keycloak"
+
+  keycloak_ingress_hostname = var.api_dns_name
+  is_bare_metal             = var.is_bare_metal  
+}
