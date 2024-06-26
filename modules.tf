@@ -65,5 +65,5 @@ module "keycloak" {
   source = "./create-keycloak"
 
   keycloak_ingress_hostname = var.api_dns_name
-  is_bare_metal             = var.is_bare_metal  
+  is_bare_metal             = var.is_bare_metal
 }
