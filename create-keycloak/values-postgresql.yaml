@@ -12,7 +12,7 @@ primary:
       enabled: true
       existingClaim: ${PVC_NAME}
   nodeSelector:
-    "cosmotech.com/tier": "services"
+    "cosmotech.com/tier": "db"
   tolerations:
   - key: "vendor"
     operator: "Equal"

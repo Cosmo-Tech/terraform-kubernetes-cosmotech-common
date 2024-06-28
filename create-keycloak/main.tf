@@ -1,7 +1,5 @@
 locals {
   namespace          = "keycloak"
-  keycloak_version   = "21.3.1"
-  postgresql_version = "15.5.1"
 
   pvc_name = "${local.namespace}-pvc"
   pv_name  = "${local.namespace}-pv"
@@ -84,9 +82,9 @@ resource "kubernetes_persistent_volume_claim_v1" "postgres-pvc" {
 
 resource "helm_release" "keycloak-postgresql" {
     name       = "keycloak-postgresql"
-    repository = "https://charts.bitnami.com/bitnami"
-    chart      = "postgresql"
-    version    = local.postgresql_version
+    repository = var.postgres_helm_repo
+    chart      = var.postgres_helm_chart
+    version    = var.postgres_helm_chart_version
     namespace  = local.namespace
 
     values = [
@@ -98,9 +96,9 @@ resource "helm_release" "keycloak-postgresql" {
 
 resource "helm_release" "keycloak" {
     name       = "keycloak"
-    repository = "https://charts.bitnami.com/bitnami"
-    chart      = "keycloak"
-    version    = local.keycloak_version
+    repository = var.keycloak_helm_repo
+    chart      = var.keycloak_helm_chart
+    version    = var.keycloak_helm_chart_version
     namespace  = local.namespace
     
     values = [
