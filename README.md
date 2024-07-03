@@ -21,6 +21,7 @@
 | <a name="module_cert-manager"></a> [cert-manager](#module\_cert-manager) | ./create-cert-manager | n/a |
 | <a name="module_create-ingress-nginx"></a> [create-ingress-nginx](#module\_create-ingress-nginx) | ./create-ingress-nginx | n/a |
 | <a name="module_create-prometheus-stack"></a> [create-prometheus-stack](#module\_create-prometheus-stack) | ./create-prometheus-stack | n/a |
+| <a name="module_keycloak"></a> [keycloak](#module\_keycloak) | ./create-keycloak | n/a |
 | <a name="module_loki"></a> [loki](#module\_loki) | ./create-loki | n/a |
 
 ## Resources
