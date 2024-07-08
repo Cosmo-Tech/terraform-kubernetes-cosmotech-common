@@ -28,7 +28,7 @@ variable "keycloak_helm_chart" {
 
 variable "keycloak_helm_chart_version" {
   type = string
-  default = "15.5.1"
+  default = "21.3.1"
 }
 
 variable "postgres_helm_repo" {
@@ -43,5 +43,5 @@ variable "postgres_helm_chart" {
 
 variable "postgres_helm_chart_version" {
   type = string
-  default = "21.3.1"
+  default = "15.5.1"
 }
