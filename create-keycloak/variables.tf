@@ -47,5 +47,5 @@ variable "postgres_helm_chart_version" {
 }
 
 variable "provisioner" {
-  type    = string  
+  type = string
 }
