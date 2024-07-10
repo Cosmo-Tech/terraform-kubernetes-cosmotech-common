@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    kubectl = {
+      source  = "alekc/kubectl"
+      version = "2.0.4"
+    }
+  }
+}
+
 locals {
   values_loki = {
     "MONITORING_NAMESPACE"             = var.monitoring_namespace
@@ -91,4 +100,16 @@ resource "helm_release" "loki" {
   ]
 
   depends_on = [kubernetes_persistent_volume_claim_v1.loki-pvc, kubernetes_persistent_volume_v1.loki-pv]
+}
+
+resource "kubectl_manifest" "role" {
+  count           = var.is_bare_metal ? 1 : 0
+  validate_schema = false
+  yaml_body       = templatefile("${path.module}/role.yaml", local.values_loki)
+}
+
+resource "kubectl_manifest" "rolebinding" {
+  count           = var.is_bare_metal ? 1 : 0
+  validate_schema = false
+  yaml_body       = templatefile("${path.module}/rolebinding.yaml", local.values_loki)
 }
