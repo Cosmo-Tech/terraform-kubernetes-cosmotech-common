@@ -1,4 +1,7 @@
 controller:
+  config:
+    worker-processes: "1"
+    worker-shutdown-timeout: "30"
   metrics:
     enabled: true
     serviceMonitor:
