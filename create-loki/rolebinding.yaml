@@ -3,10 +3,6 @@
   metadata:
     name: loki-promtail
     namespace: ${MONITORING_NAMESPACE}
-    labels:
-      app.kubernetes.io/instance: loki
-      app.kubernetes.io/name: promtail
-      app.kubernetes.io/version: 2.9.3
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: Role
