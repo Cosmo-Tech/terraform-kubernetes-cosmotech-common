@@ -45,3 +45,7 @@ variable "postgres_helm_chart_version" {
   type    = string
   default = "15.5.1"
 }
+
+variable "provisioner" {
+  type    = string  
+}

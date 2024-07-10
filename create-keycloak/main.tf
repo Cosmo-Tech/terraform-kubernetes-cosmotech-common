@@ -14,69 +14,13 @@ locals {
     "POSTGRES_PASSWORD_SECRET_KEY"       = "keycloak_postgres_password"
     "POSTGRES_ADMIN_PASSWORD_SECRET_KEY" = "keycloak_postgres_admin_password"
     "PVC_NAME"                           = var.is_bare_metal ? local.pvc_name : ""
+    "STORAGE_CLASS"                      = var.provisioner
   }
 }
 
 resource "kubernetes_namespace" "keycloak_namespace" {
   metadata {
     name = local.namespace
-  }
-}
-
-resource "kubernetes_persistent_volume_v1" "postgresql-pv" {
-  count = var.is_bare_metal ? 1 : 0
-  metadata {
-    name = local.pv_name
-    labels = {
-      "cosmotech.com/service" = "keycloak"
-    }
-  }
-  spec {
-    storage_class_name = ""
-    access_modes       = ["ReadWriteOnce"]
-    claim_ref {
-      name      = local.pvc_name
-      namespace = local.namespace
-    }
-    capacity = {
-      storage = "4Gi"
-    }
-    persistent_volume_source {
-      local {
-        path = "/mnt/postgres-storage"
-      }
-    }
-    persistent_volume_reclaim_policy = "Retain"
-
-    node_affinity {
-      required {
-        node_selector_term {
-          match_expressions {
-            key      = "cosmotech.com/tier"
-            operator = "In"
-            values   = ["services"]
-          }
-        }
-      }
-    }
-  }
-}
-
-resource "kubernetes_persistent_volume_claim_v1" "postgres-pvc" {
-  count = var.is_bare_metal ? 1 : 0
-  metadata {
-    name      = local.pvc_name
-    namespace = local.namespace
-  }
-  spec {
-    storage_class_name = ""
-    access_modes       = ["ReadWriteOnce"]
-    resources {
-      requests = {
-        storage = "4Gi"
-      }
-    }
-    volume_name = local.pv_name
   }
 }
 
