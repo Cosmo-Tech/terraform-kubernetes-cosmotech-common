@@ -62,12 +62,15 @@ variable "loadbalancer_ip" {
 }
 
 variable "kube_config" {
+  type = string
 }
 
 variable "certificate_cert_content" {
+  type = string
 }
 
 variable "certificate_key_content" {
+  type = string
 }
 
 variable "loki_release_name" {
@@ -113,8 +116,7 @@ variable "grafana_loki_compatibility_image_tag" {
 }
 
 variable "is_bare_metal" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "resources" {
@@ -158,4 +160,8 @@ variable "provisioner" {
   type        = string
   default     = ""
   description = "Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path'"
+}
+
+variable "create_keycloak" {
+  type = bool
 }
