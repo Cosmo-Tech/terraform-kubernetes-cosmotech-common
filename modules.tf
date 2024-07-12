@@ -64,6 +64,7 @@ module "loki" {
 module "keycloak" {
   source = "./create-keycloak"
 
+  count                     = var.create_keycloak ? 1 : 0
   keycloak_ingress_hostname = var.api_dns_name
   is_bare_metal             = var.is_bare_metal
   provisioner               = var.provisioner
