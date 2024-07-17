@@ -61,10 +61,6 @@ variable "loadbalancer_ip" {
   type = string
 }
 
-variable "kube_config" {
-  type = string
-}
-
 variable "certificate_cert_content" {
   type = string
 }
