@@ -42,7 +42,6 @@
 | <a name="input_create_keycloak"></a> [create\_keycloak](#input\_create\_keycloak) | n/a | `bool` | n/a | yes |
 | <a name="input_grafana_loki_compatibility_image_tag"></a> [grafana\_loki\_compatibility\_image\_tag](#input\_grafana\_loki\_compatibility\_image\_tag) | n/a | `string` | n/a | yes |
 | <a name="input_is_bare_metal"></a> [is\_bare\_metal](#input\_is\_bare\_metal) | n/a | `bool` | n/a | yes |
-| <a name="input_kube_config"></a> [kube\_config](#input\_kube\_config) | n/a | `string` | n/a | yes |
 | <a name="input_loadbalancer_ip"></a> [loadbalancer\_ip](#input\_loadbalancer\_ip) | n/a | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_prom_cpu_mem_limits"></a> [prom\_cpu\_mem\_limits](#input\_prom\_cpu\_mem\_limits) | n/a | `string` | n/a | yes |
