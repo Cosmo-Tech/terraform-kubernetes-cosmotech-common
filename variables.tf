@@ -88,9 +88,14 @@ variable "helm_repo_url" {
   default = "https://grafana.github.io/helm-charts"
 }
 
-variable "helm_chart" {
+variable "loki_helm_chart" {
   type    = string
-  default = "loki-stack"
+  default = "loki"
+}
+
+variable "promtail_helm_chart" {
+  type    = string
+  default = "promtail"
 }
 
 variable "loki_max_entries_limet_per_query" {
