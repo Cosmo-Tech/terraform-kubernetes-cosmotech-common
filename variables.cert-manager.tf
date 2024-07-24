@@ -1,3 +1,30 @@
+variable "cert_manager_namespace" {
+  type = string
+  default = "cert-manager"
+}
+
+variable "cert_manager_helm_repo_url" {
+  type    = string
+  default = "https://charts.jetstack.io"
+}
+
+variable "cert_manager_helm_release_name" {
+  type    = string
+  default = "cert-manager"
+}
+
+variable "cert_manager_version" {
+  type        = string
+  description = "HELM Chart Version for cert-manager"
+  default     = "1.11.0"
+}
+
+variable "cluster_issuer_server" {
+  description = "The ACME server URL"
+  type        = string
+  default     = "https://acme-v02.api.letsencrypt.org/directory"
+}
+
 variable "cluster_issuer_email" {
   type = string
 }

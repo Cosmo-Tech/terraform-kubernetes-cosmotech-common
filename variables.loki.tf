@@ -1,9 +1,14 @@
-variable "helm_repo_url" {
+variable "loki_namespace" {
+  type = string
+  default = "phoenix"
+}
+
+variable "loki_helm_repo_url" {
   type    = string
   default = "https://grafana.github.io/helm-charts"
 }
 
-variable "helm_chart" {
+variable "loki_helm_chart" {
   type    = string
   default = "loki-stack"
 }

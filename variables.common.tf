@@ -1,8 +1,4 @@
 # Common environment variables
-variable "namespace" {
-  type = string
-}
-
 variable "monitoring_namespace" {
   type    = string
   default = "cosmotech-monitoring"
