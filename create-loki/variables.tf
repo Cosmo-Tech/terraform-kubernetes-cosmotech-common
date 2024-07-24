@@ -9,6 +9,7 @@ variable "namespace" {
 variable "loki_release_name" {
   type    = string
 }
+
 variable "loki_persistence_memory" {
   type    = string
 }

@@ -1,5 +1,5 @@
 variable "loki_namespace" {
-  type = string
+  type    = string
   default = "phoenix"
 }
 
@@ -17,6 +17,7 @@ variable "loki_release_name" {
   type    = string
   default = "loki"
 }
+
 variable "loki_persistence_memory" {
   type    = string
   default = "4Gi"

@@ -1,5 +1,5 @@
 variable "cert_manager_namespace" {
-  type = string
+  type    = string
   default = "cert-manager"
 }
 
