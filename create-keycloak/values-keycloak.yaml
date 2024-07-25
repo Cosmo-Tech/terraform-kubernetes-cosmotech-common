@@ -1,3 +1,4 @@
+production: true
 proxy: "edge"
 httpRelativePath: "/keycloak/"
 auth: 
