@@ -33,3 +33,7 @@ variable "publicip_resource_group" {
 variable "is_bare_metal" {
   type = bool
 }
+
+variable "replica_count" {
+  type = number
+}

@@ -10,6 +10,7 @@ module "create-ingress-nginx" {
   helm_repo_url           = var.ingress_nginx_helm_repo_url
   helm_release_name       = var.ingress_nginx_helm_release_name
   namespace               = var.ingress_nginx_namespace
+  replica_count           = var.ingress_nginx_replica_count
 
   depends_on = [
     module.create-prometheus-stack

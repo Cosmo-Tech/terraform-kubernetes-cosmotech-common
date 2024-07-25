@@ -1,7 +1,7 @@
 locals {
   values_ingress_nginx = {
     "MONITORING_NAMESPACE"                     = var.monitoring_namespace
-    "NGINX_INGRESS_CONTROLLER_REPLICA_COUNT"   = 1
+    "NGINX_INGRESS_CONTROLLER_REPLICA_COUNT"   = var.replica_count
     "NGINX_INGRESS_CONTROLLER_LOADBALANCER_IP" = var.loadbalancer_ip
     "NAMESPACE"                                = var.namespace
     "TLS_SECRET_NAME"                          = var.tls_secret_name

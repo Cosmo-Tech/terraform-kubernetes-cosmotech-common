@@ -25,3 +25,8 @@ variable "publicip_resource_group" {
 variable "loadbalancer_ip" {
   type = string
 }
+
+variable "ingress_nginx_replica_count" {
+  type    = number
+  default = 1
+}
