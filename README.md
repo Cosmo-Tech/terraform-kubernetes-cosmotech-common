@@ -42,6 +42,7 @@
 | <a name="input_create_keycloak"></a> [create\_keycloak](#input\_create\_keycloak) | n/a | `bool` | n/a | yes |
 | <a name="input_grafana_loki_compatibility_image_tag"></a> [grafana\_loki\_compatibility\_image\_tag](#input\_grafana\_loki\_compatibility\_image\_tag) | n/a | `string` | n/a | yes |
 | <a name="input_is_bare_metal"></a> [is\_bare\_metal](#input\_is\_bare\_metal) | n/a | `bool` | n/a | yes |
+| <a name="input_kube_config"></a> [kube\_config](#input\_kube\_config) | n/a | `string` | n/a | yes |
 | <a name="input_loadbalancer_ip"></a> [loadbalancer\_ip](#input\_loadbalancer\_ip) | n/a | `string` | n/a | yes |
 | <a name="input_prom_cpu_mem_limits"></a> [prom\_cpu\_mem\_limits](#input\_prom\_cpu\_mem\_limits) | n/a | `string` | n/a | yes |
 | <a name="input_prom_cpu_mem_request"></a> [prom\_cpu\_mem\_request](#input\_prom\_cpu\_mem\_request) | n/a | `string` | n/a | yes |
@@ -58,6 +59,7 @@
 | <a name="input_ingress_nginx_helm_release_name"></a> [ingress\_nginx\_helm\_release\_name](#input\_ingress\_nginx\_helm\_release\_name) | n/a | `string` | `"ingress-nginx"` | no |
 | <a name="input_ingress_nginx_helm_repo_url"></a> [ingress\_nginx\_helm\_repo\_url](#input\_ingress\_nginx\_helm\_repo\_url) | n/a | `string` | `"https://kubernetes.github.io/ingress-nginx"` | no |
 | <a name="input_ingress_nginx_namespace"></a> [ingress\_nginx\_namespace](#input\_ingress\_nginx\_namespace) | n/a | `string` | `"ingress-nginx"` | no |
+| <a name="input_ingress_nginx_replica_count"></a> [ingress\_nginx\_replica\_count](#input\_ingress\_nginx\_replica\_count) | n/a | `number` | `1` | no |
 | <a name="input_ingress_nginx_version"></a> [ingress\_nginx\_version](#input\_ingress\_nginx\_version) | n/a | `string` | `"4.2.5"` | no |
 | <a name="input_keycloak_admin_user"></a> [keycloak\_admin\_user](#input\_keycloak\_admin\_user) | n/a | `string` | `"admin-cosmo"` | no |
 | <a name="input_keycloak_helm_chart"></a> [keycloak\_helm\_chart](#input\_keycloak\_helm\_chart) | n/a | `string` | `"keycloak"` | no |
