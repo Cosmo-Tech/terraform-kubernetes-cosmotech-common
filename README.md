@@ -19,6 +19,7 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_cert-manager"></a> [cert-manager](#module\_cert-manager) | ./create-cert-manager | n/a |
+| <a name="module_create-argo-crds"></a> [create-argo-crds](#module\_create-argo-crds) | ./create-argo-crds | n/a |
 | <a name="module_create-ingress-nginx"></a> [create-ingress-nginx](#module\_create-ingress-nginx) | ./create-ingress-nginx | n/a |
 | <a name="module_create-prometheus-stack"></a> [create-prometheus-stack](#module\_create-prometheus-stack) | ./create-prometheus-stack | n/a |
 | <a name="module_keycloak"></a> [keycloak](#module\_keycloak) | ./create-keycloak | n/a |
@@ -48,6 +49,8 @@
 | <a name="input_prom_cpu_mem_request"></a> [prom\_cpu\_mem\_request](#input\_prom\_cpu\_mem\_request) | n/a | `string` | n/a | yes |
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | n/a | `string` | n/a | yes |
+| <a name="input_argo_workflows_app_version"></a> [argo\_workflows\_app\_version](#input\_argo\_workflows\_app\_version) | The argo-workflows application version to install (not the Helm chart version !) | `string` | `"v3.5.8"` | no |
+| <a name="input_argo_workflows_crds_list"></a> [argo\_workflows\_crds\_list](#input\_argo\_workflows\_crds\_list) | List of Argo Workflows CRDs to install. Should match the list of <br>  CRDs for the specific version of the application.<br>  The pattern of the URL to check is something like:<br>  "https://raw.githubusercontent.com/argoproj/argo-workflows/<APP\_VERSION>/manifests/base/crds/minimal" | `list(string)` | <pre>[<br>  "argoproj.io_clusterworkflowtemplates.yaml",<br>  "argoproj.io_cronworkflows.yaml",<br>  "argoproj.io_workflowartifactgctasks.yaml",<br>  "argoproj.io_workfloweventbindings.yaml",<br>  "argoproj.io_workflows.yaml",<br>  "argoproj.io_workflowtaskresults.yaml",<br>  "argoproj.io_workflowtasksets.yaml",<br>  "argoproj.io_workflowtemplates.yaml"<br>]</pre> | no |
 | <a name="input_cluster_issuer_name"></a> [cluster\_issuer\_name](#input\_cluster\_issuer\_name) | n/a | `string` | `"letsencrypt-prod"` | no |
 | <a name="input_create_prometheus_stack"></a> [create\_prometheus\_stack](#input\_create\_prometheus\_stack) | n/a | `bool` | `true` | no |
 | <a name="input_helm_chart"></a> [helm\_chart](#input\_helm\_chart) | n/a | `string` | `"loki-stack"` | no |
