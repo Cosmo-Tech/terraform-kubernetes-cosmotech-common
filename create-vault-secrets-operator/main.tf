@@ -276,7 +276,7 @@ resource "kubernetes_job" "vault_config" {
 
       spec {
         restart_policy       = "OnFailure"
-        service_account_name = "vault"
+        service_account_name = "vault-unseal"
         container {
           name    = "vault-config"
           image   = "bitnami/kubectl:latest"
