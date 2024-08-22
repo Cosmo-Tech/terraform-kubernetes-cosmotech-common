@@ -9,4 +9,7 @@ rules:
   verbs: ["get", "list", "create", "watch"]
 - apiGroups: [""]
   resources: ["pods/exec"]
-  verbs: ["create"]
+  verbs: ["create", "get"]
+- apiGroups: [""]
+  resources: ["serviceaccounts", "serviceaccounts/token"]
+  verbs: ["get", "create"]
