@@ -137,7 +137,7 @@ resource "kubernetes_job" "argocd_setup" {
         container {
           name    = "setup-argocd"
           image   = "argoproj/argocd:${var.argocd_setup_job_image_version}"
-          command = ["/bin/sh", "/scripts/setup.sh", var.namespace, var.argocd_project, join(",", var.argocd_repositories), var.argocd_repository_username, var.argocd_repository_access_token]
+          command = ["/bin/sh", "/scripts/setup.sh", var.namespace, var.argocd_project, join(",", [for repo in var.argocd_repositories : "${repo.url} ${repo.type} ${repo.token} ${repo.username}"])]
 
           volume_mount {
             name       = "scripts"

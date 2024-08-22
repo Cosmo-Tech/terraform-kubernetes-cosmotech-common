@@ -84,8 +84,6 @@ module "create_argocd" {
   create_ingress                 = var.argocd_create_ingress
   argocd_project                 = var.argocd_project
   argocd_repositories            = var.argocd_repositories
-  argocd_repository_username     = var.argocd_repository_username
-  argocd_repository_access_token = var.argocd_repository_access_token
   argocd_dns_name                = var.api_dns_name
   argocd_setup_job_image_version = var.argocd_setup_job_image_version
 
