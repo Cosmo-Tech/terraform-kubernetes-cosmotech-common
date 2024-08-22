@@ -46,16 +46,16 @@ echo "Logged in successfully"
 
 # Add repositories
 if [ -n "$REPOSITORIES" ]; then
-    if [ -z "$REPO_USERNAME" ] || [ -z "$REPO_ACCESS_TOKEN" ]; then
-        echo "Error: Repository username and access token are required when repositories are specified"
-        exit 1
-    fi
-    for repo_url in $repos; do
-        if ! argocd repo add $repo_url --server $ARGOCD_SERVER --username $REPO_USERNAME --password $REPO_ACCESS_TOKEN; then
-            echo "Error: Failed to add repository $repo_url"
-            exit 1
-        fi
-        echo "Added repository: $repo_url"
+    for repo_info in $repos; do
+        for i in "${!repo_info[@]}"; do
+            if [ ${repo_info[1]} == true ]; then
+                argocd repo add ${repo_info[0]} --server $ARGOCD_SERVER --username ${repo_info[3]} --password ${repo_info[2]}
+                echo "Added private repository : ${repo_info[0]}"
+            elif [ ${repo_info[1]} == false ]; then
+                argocd repo add ${repo_info[0]} --server $ARGOCD_SERVER
+                echo "Added public repository : ${repo_info[0]}"
+            fi
+        done
     done
 else
     echo "No repositories to add."
