@@ -14,8 +14,6 @@ resource "kubernetes_namespace" "vault_secrets_operator" {
   }
 }
 
-# test
-
 resource "kubernetes_namespace" "allowed_namespaces" {
   for_each = toset(var.allowed_namespaces)
 
@@ -57,6 +55,17 @@ resource "helm_release" "vault_secrets_operator" {
     kubernetes_role_binding.vault_secrets_operator_auth_delegator,
     kubernetes_namespace.allowed_namespaces
   ]
+}
+
+resource "kubernetes_secret" "vault_secrets_operator" {
+  metadata {
+    annotations = {
+      "kubernetes.io/service-account.name" = "vault-secrets-operator"
+    }
+    generate_name = "vault-secrets-operator-"
+  }
+  type                           = "kubernetes.io/service-account-token"
+  wait_for_service_account_token = true
 }
 
 resource "kubernetes_service_account" "vault_secrets_operator" {
