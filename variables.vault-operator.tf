@@ -1,9 +1,10 @@
-variable "vault_secrets_operator_deploy" {
+variable "create_vault_secrets_operator" {
   type = bool
 }
 
 variable "vault_secrets_operator_namespace" {
-  type = string
+  type    = string
+  default = "vault-secrets-operator"
 }
 
 variable "vault_secrets_operator_helm_repo_url" {
@@ -23,9 +24,25 @@ variable "vault_secrets_operator_helm_release_name" {
 }
 
 variable "vault_secrets_operator_vault_address" {
-  type = string
+  type    = string
+}
+
+variable "vault_secrets_operator_allowed_namespaces" {
+  type        = list(string)
 }
 
 variable "vault_secrets_operator_replicas" {
   type = number
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "cluster_name" {
+  type = string
+}
+
+variable "customer_name" {
+  type = string
 }

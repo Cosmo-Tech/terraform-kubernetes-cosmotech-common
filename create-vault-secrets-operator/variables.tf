@@ -26,6 +26,24 @@ variable "vault_address" {
   type = string
 }
 
+variable "allowed_namespaces" {
+  type        = list(string)
+  description = "List of namespaces allowed to access secrets"
+}
+
 variable "replicas" {
   type = number
+}
+
+variable "cluster_name" {
+  type    = string
+  default = ""
+}
+
+variable "tenant_id" {
+  type = string
+}
+
+variable "organization" {
+  type = string
 }

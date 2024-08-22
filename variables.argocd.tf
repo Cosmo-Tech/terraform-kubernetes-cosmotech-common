@@ -1,9 +1,9 @@
-variable "argocd_deploy" {
+variable "create_argocd" {
   type = bool
 }
 
 variable "argocd_namespace" {
-  type = string
+  type    = string
 }
 
 variable "argocd_helm_repo_url" {
@@ -35,12 +35,16 @@ variable "argocd_project" {
 }
 
 variable "argocd_repositories" {
-  type = list(object({
-    url      = string
-    private  = bool
-    token    = string
-    username = string
-  }))
+  type = list(string)
+}
+
+variable "argocd_repository_username" {
+  type      = string
+  sensitive = true
+}
+
+variable "argocd_repository_access_token" {
+  type      = string
   sensitive = true
 }
 

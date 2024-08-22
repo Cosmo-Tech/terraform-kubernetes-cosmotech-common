@@ -4,7 +4,6 @@ locals {
     "NAMESPACE"       = var.namespace
     "CREATE_INGRESS"  = var.create_ingress
     "ARGOCD_DNS_NAME" = var.argocd_dns_name
-    "ARGOCD_ENV_FOO"  = "{$helm_args}"
   }
   instance_name = var.helm_release_name
 }
@@ -28,8 +27,6 @@ resource "helm_release" "argocd" {
   values = [
     templatefile("${path.module}/values.yaml", local.values_argocd)
   ]
-
-  depends_on = [kubernetes_namespace.argocd_namespace]
 }
 
 # RBAC
@@ -65,19 +62,12 @@ resource "kubernetes_config_map" "get_password_script" {
   data = {
     "get-password.sh" = file("${path.module}/get-password.sh")
   }
-
-  depends_on = [kubernetes_namespace.argocd_namespace]
 }
 
 resource "kubernetes_job" "get_argocd_password" {
   metadata {
     name      = "get-argocd-password-job"
     namespace = var.namespace
-  }
-  wait_for_completion = true
-  timeouts {
-    create = "10m"
-    update = "10m"
   }
   spec {
     template {
@@ -111,7 +101,7 @@ resource "kubernetes_job" "get_argocd_password" {
     }
   }
 
-  depends_on = [helm_release.argocd, kubernetes_namespace.argocd_namespace]
+  depends_on = [helm_release.argocd]
 }
 
 # ------------- CONFIGURE ARGOCD ------------ #
@@ -133,11 +123,6 @@ resource "kubernetes_job" "argocd_setup" {
     name      = "argocd-setup-job"
     namespace = var.namespace
   }
-  wait_for_completion = true
-  timeouts {
-    create = "10m"
-    update = "10m"
-  }
   spec {
     template {
       metadata {
@@ -149,13 +134,7 @@ resource "kubernetes_job" "argocd_setup" {
         container {
           name    = "setup-argocd"
           image   = "argoproj/argocd:${var.argocd_setup_job_image_version}"
-          command = [
-            "/bin/sh", 
-            "/scripts/setup.sh", 
-            var.namespace, 
-            var.argocd_project, 
-            join(",", [for repo in var.argocd_repositories : "${repo.url} ${repo.private} ${repo.token} ${repo.username}"])
-          ]
+          command = ["/bin/sh", "/scripts/setup.sh", var.namespace, var.argocd_project, join(",", var.argocd_repositories), var.argocd_repository_username, var.argocd_repository_access_token]
 
           volume_mount {
             name       = "scripts"
@@ -194,7 +173,6 @@ resource "kubernetes_job" "argocd_setup" {
     kubernetes_config_map.argocd_script,
     kubectl_manifest.argocd_setup_role,
     kubectl_manifest.argocd_setup_rolebinding,
-    kubectl_manifest.argocd_setup_serviceaccount,
-    kubernetes_namespace.argocd_namespace
+    kubectl_manifest.argocd_setup_serviceaccount
   ]
 }

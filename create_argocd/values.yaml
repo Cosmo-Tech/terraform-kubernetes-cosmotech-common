@@ -1,40 +1,28 @@
-global:
-  nodeSelector:
-    "cosmotech.com/tier": "services"
-  podLabels:
-    "networking/traffic-allowed": "yes"
-  tolerations:
-  - key: "vendor"
-    operator: "Equal"
-    value: "cosmotech"
-    effect: "NoSchedule"
-
 server:
   replicas: ${REPLICAS}
   resources:
     limits:
-      cpu: 2
-      memory: 750Mi
-    requests:
-      cpu: 1
+      cpu: 1000m
       memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
   ingress:
-    enabled: false
+    enabled: ${CREATE_INGRESS}
     ingressClassName: "nginx"
-    hostname: ${ARGOCD_DNS_NAME}
+    extraHosts:
+      - name: ${ARGOCD_DNS_NAME}
+        path: /argocd
     pathType: Prefix
-    path: /argocd
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-      email: platform@cosmotech.com
-      nginx.ingress.kubernetes.io/backend-protocol: HTTP
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
-      nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
-      nginx.ingress.kubernetes.io/proxy-send-timeout: "30"
-      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      nginx.ingress.kubernetes.io/proxy-body-size: "100m"
 
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 8080
 
 configs:
   params:
