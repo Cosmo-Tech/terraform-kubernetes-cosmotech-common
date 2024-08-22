@@ -64,13 +64,13 @@ resource "kubernetes_config_map" "vault_unseal_script" {
 
 resource "kubernetes_secret" "vault_unseal" {
   metadata {
+    name = "vault-unseal-token"
+    namespace = var.namespace
     annotations = {
       "kubernetes.io/service-account.name" = "vault"
     }
-    generate_name = "vault-unseal-"
   }
-  type                           = "kubernetes.io/service-account-token"
-  wait_for_service_account_token = true
+  type = "kubernetes.io/service-account-token"
 }
 
 resource "kubectl_manifest" "vault_unseal_serviceaccount" {
@@ -127,7 +127,8 @@ resource "kubernetes_job" "vault_unseal" {
     helm_release.vault,
     kubernetes_config_map.vault_unseal_script,
     kubectl_manifest.vault_unseal_role,
-    kubectl_manifest.vault_unseal_rolebinding
-    # kubectl_manifest.vault_unseal_serviceaccount
+    kubectl_manifest.vault_unseal_rolebinding,
+    kubectl_manifest.vault_unseal_serviceaccount,
+    kubernetes_kubernetes_secret.vault_unseal
   ]
 }
