@@ -11,5 +11,8 @@ rules:
   resources: ["pods/exec"]
   verbs: ["create", "get"]
 - apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get"]
+- apiGroups: [""]
   resources: ["serviceaccounts", "serviceaccounts/token"]
   verbs: ["get", "create"]
