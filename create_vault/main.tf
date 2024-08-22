@@ -65,7 +65,7 @@ resource "kubernetes_config_map" "vault_unseal_script" {
 resource "kubernetes_secret" "vault_unseal" {
   metadata {
     annotations = {
-      "kubernetes.io/service-account.name" = "vault-unseal"
+      "kubernetes.io/service-account.name" = "vault"
     }
     generate_name = "vault-unseal-"
   }
