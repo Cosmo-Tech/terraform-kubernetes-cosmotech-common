@@ -62,17 +62,6 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   depends_on = [helm_release.vault]
 }
 
-resource "kubernetes_secret" "vault_unseal" {
-  metadata {
-    name = "vault-unseal-token"
-    namespace = var.namespace
-    annotations = {
-      "kubernetes.io/service-account.name" = "vault"
-    }
-  }
-  type = "kubernetes.io/service-account-token"
-}
-
 resource "kubectl_manifest" "vault_unseal_serviceaccount" {
   validate_schema = false
   yaml_body = templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl",
@@ -95,7 +84,7 @@ resource "kubernetes_job" "vault_unseal" {
 
       spec {
         restart_policy       = "OnFailure"
-        service_account_name = "vault"
+        service_account_name = "vault-unseal"
         container {
           name    = "vault-unseal"
           image   = "bitnami/kubectl:latest"

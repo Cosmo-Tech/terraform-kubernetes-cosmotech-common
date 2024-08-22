@@ -5,7 +5,7 @@ metadata:
   namespace: ${NAMESPACE}
 subjects:
 - kind: ServiceAccount
-  name: vault
+  name: vault-unseal
   namespace: ${NAMESPACE}
 roleRef:
   kind: Role
