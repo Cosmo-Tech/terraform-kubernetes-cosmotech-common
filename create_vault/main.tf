@@ -72,7 +72,9 @@ resource "kubernetes_secret" "vault_unseal" {
   type                           = "kubernetes.io/service-account-token"
   wait_for_service_account_token = true
 }
+
 resource "kubectl_manifest" "vault_unseal_serviceaccount" {
+  validate_schema = false
   yaml_body = templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl",
     local.values_vault
   )
