@@ -33,23 +33,3 @@ variable "vault_ingress_enabled" {
 variable "vault_dns_name" {
   type = string
 }
-
-variable "auto_restart_deploy" {
-  type = bool
-}
-
-variable "start_aks_minutes" {
-  type = number
-  validation {
-    condition = var.start_aks_minutes >= 0 && var.start_aks_minutes < 60
-    error_message = "Minutes must be between 0 and 59"
-  }
-}
-
-variable "start_aks_hours" {
-  type = number
-  validation {
-    condition = var.start_aks_hours >= 0 && var.start_aks_hours < 24
-    error_message = "Hours must be between 0 and 23"
-  }
-}

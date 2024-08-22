@@ -32,17 +32,21 @@ variable "argocd_project" {
 }
 
 variable "argocd_repositories" {
-  type = list(object({
-    url = string
-    private = bool
-    token = string
-    username = string
-  }))
-  sensitive = true
+  type = list(string)
 }
 
 variable "argocd_dns_name" {
   type = string
+}
+
+variable "argocd_repository_username" {
+  type = string
+  sensitive = true
+}
+
+variable "argocd_repository_access_token" {
+  type = string
+  sensitive = true
 }
 
 variable "argocd_setup_job_image_version" {

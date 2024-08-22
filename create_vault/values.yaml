@@ -3,23 +3,10 @@ global:
   namespace: ${NAMESPACE}
   tlsDisable: true
 server:
-  service:
-    active:
-      annotations:
-        networking/traffic-allowed: "yes"
   standalone:
     enabled: false
-  networkPolicy:
-    enabled: true
-  nodeSelector:
-    "cosmotech.com/tier": "services"
-  tolerations:
-  - key: "vendor"
-    operator: "Equal"
-    value: "cosmotech"
-    effect: "NoSchedule"
-  annotations:
-    networking/traffic-allowed: "yes"
+
+
   resources: {}
   # resources:
   #   requests:
@@ -61,11 +48,17 @@ server:
     disruptionBudget:
       enabled: false
 
-  affinity: ""
+  affinity: |
+    # podAntiAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #     - labelSelector:
+    #         matchLabels:
+    #           app.kubernetes.io/name: {{ template "vault.name" . }}
+    #           app.kubernetes.io/instance: "{{ .Release.Name }}"
+    #           component: server
+    #       topologyKey: kubernetes.io/hostname
 
   ingress:
-    labels:
-      networking/traffic-allowed: "yes"
     enabled: ${VAULT_INGRESS_ENABLED}
     annotations:
       nginx.ingress.kubernetes.io/ssl-passthrough: "false"
