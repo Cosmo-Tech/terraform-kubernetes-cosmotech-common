@@ -1,15 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 NAMESPACE=$1
 PROJECT=$2
 REPOSITORIES=$3
+REPO_USERNAME=$4
+REPO_ACCESS_TOKEN=$5
 
 # Check if required parameters are provided
 if [ -z "$NAMESPACE" ]; then
     echo "Error: NAMESPACE is required"
     exit 1
 fi
+
+# Convert repositories into list
+repos=$(echo $REPOSITORIES | tr ',' ' ')
 
 # Wait for argo cd server
 sleep 30
@@ -41,22 +46,16 @@ echo "Logged in successfully"
 
 # Add repositories
 if [ -n "$REPOSITORIES" ]; then
-    echo "$REPOSITORIES" | tr ',' '\n' | while IFS=' ' read -r url private token username; do
-        if [ "$private" = "true" ]; then
-            if argocd repo add "$url" --server $ARGOCD_SERVER --username "$username" --password "$token"; then
-                echo "Added private repository: $url"
-            else
-                echo "Error: Failed to add private repository $url"
-                exit 1
-            fi
-        else
-            if argocd repo add "$url" --server $ARGOCD_SERVER; then
-                echo "Added public repository: $url"
-            else
-                echo "Error: Failed to add public repository $url"
-                exit 1
-            fi
+    if [ -z "$REPO_USERNAME" ] || [ -z "$REPO_ACCESS_TOKEN" ]; then
+        echo "Error: Repository username and access token are required when repositories are specified"
+        exit 1
+    fi
+    for repo_url in $repos; do
+        if ! argocd repo add $repo_url --server $ARGOCD_SERVER --username $REPO_USERNAME --password $REPO_ACCESS_TOKEN; then
+            echo "Error: Failed to add repository $repo_url"
+            exit 1
         fi
+        echo "Added repository: $repo_url"
     done
 else
     echo "No repositories to add."

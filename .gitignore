@@ -4,10 +4,5 @@ modules.json
 .terraform.*
 terraform.*
 tfplan*
-out_*
-export_*
-providers.azure.tf
 *.sh
-!*/*/*.sh
-!*/*.sh
-!terraform.default.tfvars
+!/*/*.sh
