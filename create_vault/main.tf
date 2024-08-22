@@ -62,6 +62,22 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   depends_on = [helm_release.vault]
 }
 
+resource "kubernetes_secret" "vault_unseal" {
+  metadata {
+    annotations = {
+      "kubernetes.io/service-account.name" = "vault-unseal"
+    }
+    generate_name = "vault-unseal-"
+  }
+  type                           = "kubernetes.io/service-account-token"
+  wait_for_service_account_token = true
+}
+resource "kubectl_manifest" "vault_unseal_serviceaccount" {
+  yaml_body = templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl",
+    local.values_vault
+  )
+}
+
 #Job for script
 resource "kubernetes_job" "vault_unseal" {
   metadata {
