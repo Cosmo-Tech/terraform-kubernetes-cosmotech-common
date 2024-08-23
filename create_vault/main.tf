@@ -75,7 +75,7 @@ resource "kubernetes_job" "vault_unseal" {
     name      = "vault-unseal"
     namespace = var.namespace
   }
-  wait_for_completion = false
+  wait_for_completion = true
   spec {
     template {
       metadata {
@@ -88,7 +88,12 @@ resource "kubernetes_job" "vault_unseal" {
         container {
           name    = "vault-unseal"
           image   = "bitnami/kubectl:latest"
-          command = ["/bin/bash", "/scripts/unseal.sh", var.namespace, var.vault_secret_name, var.vault_replicas]
+          command = [
+            "/bin/bash", "/scripts/unseal.sh", 
+            var.namespace, 
+            var.vault_secret_name, 
+            var.vault_replicas
+          ]
 
           volume_mount {
             name       = "script-volume"
