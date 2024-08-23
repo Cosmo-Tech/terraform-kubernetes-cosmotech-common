@@ -75,6 +75,24 @@ resource "kubernetes_service_account" "vault_secrets_operator" {
   }
 }
 
+resource "kubernetes_cluster_role" "vault_secrets_operator" {
+  metadata {
+    name      = "vault-secrets-operator-role"
+  }
+
+  rule {
+    api_groups = [""]
+    resources = ["secrets"]
+    verbs = ["get", "list", "watch", "create", "update", "patch", "delete"]
+  }
+
+  rule {
+    api_groups = [""]
+    resources = ["vaultstaticsecrets", "vaultdynamicsecrets"]
+    verbs = ["get", "list", "watch", "create", "update", "patch", "delete"]
+  }
+}
+
 resource "kubernetes_cluster_role_binding" "vault_secrets_operator" {
   metadata {
     name = "vault-secrets-operator-rolebinding"
