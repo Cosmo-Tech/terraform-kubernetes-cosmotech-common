@@ -46,7 +46,7 @@
 | <a name="input_argocd_helm_repo_url"></a> [argocd\_helm\_repo\_url](#input\_argocd\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_project"></a> [argocd\_project](#input\_argocd\_project) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_replicas"></a> [argocd\_replicas](#input\_argocd\_replicas) | n/a | `number` | n/a | yes |
-| <a name="input_argocd_repositories"></a> [argocd\_repositories](#input\_argocd\_repositories) | n/a | <pre>list(object({<br>    url = string<br>    private = bool<br>    token = string<br>    username = string<br>  }))</pre> | n/a | yes |
+| <a name="input_argocd_repositories"></a> [argocd\_repositories](#input\_argocd\_repositories) | n/a | <pre>list(object({<br>    url      = string<br>    private  = bool<br>    token    = string<br>    username = string<br>  }))</pre> | n/a | yes |
 | <a name="input_argocd_setup_job_image_version"></a> [argocd\_setup\_job\_image\_version](#input\_argocd\_setup\_job\_image\_version) | n/a | `string` | n/a | yes |
 | <a name="input_certificate_cert_content"></a> [certificate\_cert\_content](#input\_certificate\_cert\_content) | n/a | `string` | n/a | yes |
 | <a name="input_certificate_key_content"></a> [certificate\_key\_content](#input\_certificate\_key\_content) | n/a | `string` | n/a | yes |
