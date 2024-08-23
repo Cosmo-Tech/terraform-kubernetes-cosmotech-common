@@ -229,6 +229,27 @@ resource "kubernetes_role_binding" "secret_access" {
   depends_on = [kubernetes_namespace.allowed_namespaces]
 }
 
+resource "kubernetes_role_binding" "secret_access_auth_delegator" {
+  for_each = toset(var.allowed_namespaces)
+
+  metadata {
+    name      = "secret-access-${each.key}-auth-delegator"
+    namespace = each.key
+  }
+
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "system:auth-delegator"
+  }
+
+  subject {
+    kind      = "ServiceAccount"
+    name      = "default"
+    namespace = each.key
+  }
+}
+
 resource "kubectl_manifest" "operator_vault_auth" {
   validate_schema = false
   yaml_body = templatefile("${path.module}/templates/vault-secrets-operator-auth.yaml.tpl", {
