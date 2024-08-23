@@ -248,6 +248,8 @@ resource "kubernetes_role_binding" "secret_access_auth_delegator" {
     name      = "default"
     namespace = each.key
   }
+
+  depends_on = [kubernetes_namespace.allowed_namespaces]
 }
 
 resource "kubectl_manifest" "operator_vault_auth" {

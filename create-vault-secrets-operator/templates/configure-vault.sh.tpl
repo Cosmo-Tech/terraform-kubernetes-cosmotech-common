@@ -36,6 +36,7 @@ fi
 
 # Créer une politique pour les secrets de la plateforme et de l'espace de travail
 GLOBAL_POLICY='
+path "auth/kubernetes/login" { capabilities = ["create"] }
 path "${organization}/data/*" { capabilities = ["read", "list"] }
 path "${organization}/metadata/*" { capabilities = ["read", "list"] }
 '
@@ -50,6 +51,7 @@ vault_cmd write auth/kubernetes/role/vault-secrets-operator \
 # Créer des politiques et des rôles pour chaque namespace autorisé
 %{ for namespace in allowed_namespaces ~}
 NAMESPACE_POLICY='
+path "auth/kubernetes/login" { capabilities = ["create"] }
 path "${organization}/data/${tenant_id}/clusters/${cluster_name}/${namespace}-platform-secrets" { capabilities = ["read", "list"] }
 path "${organization}/metadata/${tenant_id}/clusters/${cluster_name}/${namespace}-platform-secrets" { capabilities = ["read", "list"] } 
 path "${organization}/data/${tenant_id}/clusters/${cluster_name}/${namespace}-platform-secrets/*" { capabilities = ["read", "list"] }
