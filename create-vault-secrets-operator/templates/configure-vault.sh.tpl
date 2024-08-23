@@ -36,8 +36,8 @@ fi
 
 # Créer une politique pour les secrets de la plateforme et de l'espace de travail
 GLOBAL_POLICY='
-path "${organization}/data/*" { capabilities = ["read", "list"]" } 
-path "${organization}/metadata/*" { capabilities = ["read", "list"] } 
+path "${organization}/data/*" { capabilities = ["read", "list"] }
+path "${organization}/metadata/*" { capabilities = ["read", "list"] }
 '
 echo "$GLOBAL_POLICY" | vault_cmd policy write global-secrets -
 
