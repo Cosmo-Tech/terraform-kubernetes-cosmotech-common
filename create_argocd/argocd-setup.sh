@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 NAMESPACE=$1
@@ -41,15 +41,8 @@ echo "Logged in successfully"
 
 # Add repositories
 if [ -n "$REPOSITORIES" ]; then
-    IFS=',' read -ra REPO_ARRAY <<< "$REPOSITORIES"
-    for repo_info in "${REPO_ARRAY[@]}"; do
-        IFS=' ' read -ra REPO_DETAILS <<< "$repo_info"
-        url="${REPO_DETAILS[0]}"
-        is_private="${REPO_DETAILS[1]}"
-        username="${REPO_DETAILS[3]}"
-        token="${REPO_DETAILS[2]}"
-        
-        if [ "$is_private" = true ]; then
+    echo "$REPOSITORIES" | tr ',' '\n' | while IFS=' ' read -r url private token username; do
+        if [ "$private" = "true" ]; then
             if argocd repo add "$url" --server $ARGOCD_SERVER --username "$username" --password "$token"; then
                 echo "Added private repository: $url"
             else
