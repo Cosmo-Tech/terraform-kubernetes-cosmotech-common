@@ -117,7 +117,6 @@ resource "kubernetes_job" "vault_unseal" {
     kubernetes_config_map.vault_unseal_script,
     kubectl_manifest.vault_unseal_role,
     kubectl_manifest.vault_unseal_rolebinding,
-    kubectl_manifest.vault_unseal_serviceaccount,
-    kubernetes_kubernetes_secret.vault_unseal
+    kubectl_manifest.vault_unseal_serviceaccount
   ]
 }

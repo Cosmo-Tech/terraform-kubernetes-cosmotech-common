@@ -37,9 +37,9 @@ variable "argocd_project" {
 
 variable "argocd_repositories" {
   type = list(object({
-    url = string
-    private = bool
-    token = string
+    url      = string
+    private  = bool
+    token    = string
     username = string
   }))
   sensitive = true
