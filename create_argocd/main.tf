@@ -124,20 +124,24 @@ resource "kubernetes_job" "argocd_setup" {
     name      = "argocd-setup-job"
     namespace = var.namespace
   }
-
+  wait_for_completion = true
   spec {
     template {
       metadata {
         name = "argocd-setup-job"
       }
-
       spec {
         restart_policy       = "OnFailure"
         service_account_name = "argocd-setup"
         container {
           name    = "setup-argocd"
           image   = "argoproj/argocd:${var.argocd_setup_job_image_version}"
-          command = ["/bin/sh", "/scripts/setup.sh", var.namespace, var.argocd_project, join(",", [for repo in var.argocd_repositories : "${repo.url} ${repo.private} ${repo.token} ${repo.username}"])]
+          command = [
+            "/bin/sh", "/scripts/setup.sh", 
+            var.namespace, 
+            var.argocd_project, 
+            join(",", [for repo in var.argocd_repositories : "${repo.url} ${repo.private} ${repo.token} ${repo.username}"])
+          ]
 
           volume_mount {
             name       = "scripts"
