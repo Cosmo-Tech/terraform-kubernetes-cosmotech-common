@@ -34,6 +34,19 @@ else
   echo "${organization} secret engine already exists"
 fi
 
+# Créer une politique pour les secrets de la plateforme et de l'espace de travail
+GLOBAL_POLICY='
+path "${organization}/data/*" { capabilities = ["read", "list"]" } 
+path "${organization}/metadata/*" { capabilities = ["read", "list"] } 
+'
+echo "$GLOBAL_POLICY" | vault_cmd policy write global-secrets -
+
+vault_cmd write auth/kubernetes/role/vault-secrets-operator \
+  bound_service_account_names=vault-secrets-operator \
+  bound_service_account_namespaces=${VAULT_SECRETS_OPERATOR_NAMESPACE} \
+  policies=global-secrets \
+  ttl=1h
+
 # Créer des politiques et des rôles pour chaque namespace autorisé
 %{ for namespace in allowed_namespaces ~}
 NAMESPACE_POLICY='
