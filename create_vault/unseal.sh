@@ -50,8 +50,8 @@ for key in $unseal_keys; do
   kubectl exec vault-0 --namespace $NAMESPACE -- vault operator unseal $key
 done
 
-echo "Waiting for 30 seconds before starting..."
-sleep 30
+echo "Waiting for 10 seconds before starting..."
+sleep 10
 
 # Join raft
 for i in $(seq 1 $(($REPLICAS - 1))); do
@@ -66,8 +66,8 @@ for i in $(seq 1 $(($REPLICAS - 1))); do
   echo "replica $i unsealed"
 done
 
-echo "Waiting for 30 seconds before starting..."
-sleep 30
+echo "Waiting for 10 seconds before starting..."
+sleep 10
 
 # Output token and pods state
 echo "Raft list-peers output:"
