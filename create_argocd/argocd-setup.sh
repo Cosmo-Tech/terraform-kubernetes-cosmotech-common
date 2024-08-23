@@ -4,17 +4,12 @@ set -e
 NAMESPACE=$1
 PROJECT=$2
 REPOSITORIES=$3
-REPO_USERNAME=$4
-REPO_ACCESS_TOKEN=$5
 
 # Check if required parameters are provided
 if [ -z "$NAMESPACE" ]; then
     echo "Error: NAMESPACE is required"
     exit 1
 fi
-
-# Convert repositories into list
-repos=$(echo $REPOSITORIES | tr ',' ' ')
 
 # Wait for argo cd server
 sleep 30
@@ -46,16 +41,29 @@ echo "Logged in successfully"
 
 # Add repositories
 if [ -n "$REPOSITORIES" ]; then
-    for repo_info in $repos; do
-        for i in "${!repo_info[@]}"; do
-            if [ ${repo_info[1]} == true ]; then
-                argocd repo add ${repo_info[0]} --server $ARGOCD_SERVER --username ${repo_info[3]} --password ${repo_info[2]}
-                echo "Added private repository : ${repo_info[0]}"
-            elif [ ${repo_info[1]} == false ]; then
-                argocd repo add ${repo_info[0]} --server $ARGOCD_SERVER
-                echo "Added public repository : ${repo_info[0]}"
+    IFS=',' read -ra REPO_ARRAY <<< "$REPOSITORIES"
+    for repo_info in "${REPO_ARRAY[@]}"; do
+        IFS=' ' read -ra REPO_DETAILS <<< "$repo_info"
+        url="${REPO_DETAILS[0]}"
+        is_private="${REPO_DETAILS[1]}"
+        username="${REPO_DETAILS[3]}"
+        token="${REPO_DETAILS[2]}"
+        
+        if [ "$is_private" = true ]; then
+            if argocd repo add "$url" --server $ARGOCD_SERVER --username "$username" --password "$token"; then
+                echo "Added private repository: $url"
+            else
+                echo "Error: Failed to add private repository $url"
+                exit 1
             fi
-        done
+        else
+            if argocd repo add "$url" --server $ARGOCD_SERVER; then
+                echo "Added public repository: $url"
+            else
+                echo "Error: Failed to add public repository $url"
+                exit 1
+            fi
+        fi
     done
 else
     echo "No repositories to add."
