@@ -15,4 +15,4 @@ rules:
   verbs: ["get"]
 - apiGroups: [""]
   resources: ["serviceaccounts", "serviceaccounts/token"]
-  verbs: ["get", "create"]
+  verbs: ["get", "list", "create", "watch"]

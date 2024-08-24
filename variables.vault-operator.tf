@@ -28,31 +28,6 @@ variable "vault_secrets_operator_vault_address" {
   default = "http://vault.vault.svc.cluster.local:8200"
 }
 
-variable "vault_secrets_operator_allowed_namespaces" {
-  type        = list(string)
-  description = "List of namespaces allowed to access secrets"
-}
-
 variable "vault_secrets_operator_replicas" {
   type = number
-}
-
-# variable "organization_id" {
-#   type = string
-# }
-
-# variable "workspace_key" {
-#   type = string
-# }
-
-variable "tenant_id" {
-  type = string
-}
-
-variable "cluster_name" {
-  type = string
-}
-
-variable "customer_name" {
-  type = string
 }

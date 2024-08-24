@@ -45,16 +45,6 @@ variable "argocd_repositories" {
   sensitive = true
 }
 
-# variable "argocd_repository_username" {
-#   type      = string
-#   sensitive = true
-# }
-
-# variable "argocd_repository_access_token" {
-#   type      = string
-#   sensitive = true
-# }
-
 variable "argocd_setup_job_image_version" {
   type = string
 }

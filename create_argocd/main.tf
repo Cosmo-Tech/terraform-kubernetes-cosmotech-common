@@ -27,6 +27,8 @@ resource "helm_release" "argocd" {
   values = [
     templatefile("${path.module}/values.yaml", local.values_argocd)
   ]
+
+  depends_on = [kubernetes_namespace.argocd_namespace]
 }
 
 # RBAC
@@ -62,6 +64,8 @@ resource "kubernetes_config_map" "get_password_script" {
   data = {
     "get-password.sh" = file("${path.module}/get-password.sh")
   }
+
+  depends_on = [kubernetes_namespace.argocd_namespace]
 }
 
 resource "kubernetes_job" "get_argocd_password" {
@@ -69,7 +73,11 @@ resource "kubernetes_job" "get_argocd_password" {
     name      = "get-argocd-password-job"
     namespace = var.namespace
   }
-
+  wait_for_completion = true
+  timeouts {
+    create = "10m"
+    update = "10m"
+  }
   spec {
     template {
       metadata {
@@ -102,7 +110,7 @@ resource "kubernetes_job" "get_argocd_password" {
     }
   }
 
-  depends_on = [helm_release.argocd]
+  depends_on = [helm_release.argocd, kubernetes_namespace.argocd_namespace]
 }
 
 # ------------- CONFIGURE ARGOCD ------------ #
@@ -125,6 +133,10 @@ resource "kubernetes_job" "argocd_setup" {
     namespace = var.namespace
   }
   wait_for_completion = true
+  timeouts {
+    create = "10m"
+    update = "10m"
+  }
   spec {
     template {
       metadata {
@@ -137,7 +149,8 @@ resource "kubernetes_job" "argocd_setup" {
           name    = "setup-argocd"
           image   = "argoproj/argocd:${var.argocd_setup_job_image_version}"
           command = [
-            "/bin/sh", "/scripts/setup.sh", 
+            "/bin/sh", 
+            "/scripts/setup.sh", 
             var.namespace, 
             var.argocd_project, 
             join(",", [for repo in var.argocd_repositories : "${repo.url} ${repo.private} ${repo.token} ${repo.username}"])
@@ -180,6 +193,7 @@ resource "kubernetes_job" "argocd_setup" {
     kubernetes_config_map.argocd_script,
     kubectl_manifest.argocd_setup_role,
     kubectl_manifest.argocd_setup_rolebinding,
-    kubectl_manifest.argocd_setup_serviceaccount
+    kubectl_manifest.argocd_setup_serviceaccount,
+    kubernetes_namespace.argocd_namespace
   ]
 }

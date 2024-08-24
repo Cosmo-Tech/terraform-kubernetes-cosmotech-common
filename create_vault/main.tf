@@ -4,10 +4,8 @@ locals {
     "NAMESPACE"             = var.namespace
     "VAULT_INGRESS_ENABLED" = var.vault_ingress_enabled
     "VAULT_DNS_NAME"        = var.vault_dns_name
-    #     "TLS_SECRET_NAME"       = local.tls_secret_name
   }
   instance_name = var.helm_release_name
-  # tls_secret_name = "${var.tls_secret_name}-${var.namespace}"
 }
 
 resource "kubernetes_namespace" "vault_namespace" {
@@ -17,13 +15,12 @@ resource "kubernetes_namespace" "vault_namespace" {
 }
 
 resource "helm_release" "vault" {
-  name       = local.instance_name
-  repository = var.helm_repo_url
-  chart      = var.helm_chart
-  version    = var.helm_chart_version
-  namespace  = var.namespace
-
-  reuse_values = true
+  name         = local.instance_name
+  repository   = var.helm_repo_url
+  chart        = var.helm_chart
+  version      = var.helm_chart_version
+  namespace    = var.namespace
+  reset_values = true
   timeout      = 600
 
   values = [
@@ -37,14 +34,14 @@ resource "helm_release" "vault" {
 
 resource "kubectl_manifest" "vault_unseal_role" {
   validate_schema = false
-  yaml_body = templatefile("${path.module}/vault-unseal-role.yaml.tpl",
+  yaml_body = templatefile("${path.module}/templates/vault-unseal-role.yaml.tpl",
     local.values_vault
   )
 }
 
 resource "kubectl_manifest" "vault_unseal_rolebinding" {
   validate_schema = false
-  yaml_body = templatefile("${path.module}/vault-unseal-rolebinding.yaml.tpl",
+  yaml_body = templatefile("${path.module}/templates/vault-unseal-rolebinding.yaml.tpl",
     local.values_vault
   )
 }
@@ -57,14 +54,16 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   }
 
   data = {
-    "unseal.sh" = file("${path.module}/unseal.sh")
+    "unseal.sh" = file("${path.module}/scripts/unseal.sh")
   }
-  depends_on = [helm_release.vault]
+  depends_on = [
+    helm_release.vault
+  ]
 }
 
 resource "kubectl_manifest" "vault_unseal_serviceaccount" {
   validate_schema = false
-  yaml_body = templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl",
+  yaml_body = templatefile("${path.module}/templates/vault-unseal-serviceaccount.yaml.tpl",
     local.values_vault
   )
 }
@@ -76,6 +75,10 @@ resource "kubernetes_job" "vault_unseal" {
     namespace = var.namespace
   }
   wait_for_completion = true
+  timeouts {
+    create = "10m"
+    update = "10m"
+  }
   spec {
     template {
       metadata {
@@ -86,12 +89,12 @@ resource "kubernetes_job" "vault_unseal" {
         restart_policy       = "OnFailure"
         service_account_name = "vault-unseal"
         container {
-          name    = "vault-unseal"
-          image   = "bitnami/kubectl:latest"
+          name  = "vault-unseal"
+          image = "bitnami/kubectl:latest"
           command = [
-            "/bin/bash", "/scripts/unseal.sh", 
-            var.namespace, 
-            var.vault_secret_name, 
+            "/bin/bash", "/scripts/unseal.sh",
+            var.namespace,
+            var.vault_secret_name,
             var.vault_replicas
           ]
 
@@ -123,5 +126,88 @@ resource "kubernetes_job" "vault_unseal" {
     kubectl_manifest.vault_unseal_role,
     kubectl_manifest.vault_unseal_rolebinding,
     kubectl_manifest.vault_unseal_serviceaccount
+  ]
+}
+
+# Configmap
+resource "kubernetes_config_map" "vault_enable_auth_script" {
+  metadata {
+    name      = "vault-enable-auth-script"
+    namespace = var.namespace
+  }
+
+  data = {
+    "enable_auth.sh" = file("${path.module}/scripts/enable_auth.sh")
+  }
+  depends_on = [
+    helm_release.vault
+  ]
+}
+
+#Job for script
+resource "kubernetes_job" "vault_enable_auth" {
+  metadata {
+    name      = "vault-enable-auth"
+    namespace = var.namespace
+  }
+  wait_for_completion = true
+  timeouts {
+    create = "10m"
+    update = "10m"
+  }
+  spec {
+    template {
+      metadata {
+        name = "vault-enable-auth"
+      }
+
+      spec {
+        restart_policy       = "OnFailure"
+        service_account_name = "vault-unseal"
+        container {
+          name  = "vault-enable-auth"
+          image = "bitnami/kubectl:latest"
+          command = [
+            "/bin/bash", "/scripts/enable_auth.sh",
+            var.namespace,
+            var.vault_secret_name,
+            var.vault_replicas
+          ]
+          env {
+            name  = "VAULT_NAMESPACE"
+            value = var.namespace
+          }
+          
+          volume_mount {
+            name       = "script-volume"
+            mount_path = "/scripts/enable_auth.sh"
+            sub_path   = "enable_auth.sh"
+          }
+        }
+
+        volume {
+          name = "script-volume"
+
+          config_map {
+            name = kubernetes_config_map.vault_enable_auth_script.metadata[0].name
+
+            items {
+              key  = "enable_auth.sh"
+              path = "enable_auth.sh"
+            }
+          }
+        }
+      }
+    }
+  }
+
+  depends_on = [
+    helm_release.vault,
+    kubectl_manifest.vault_unseal_role,
+    kubectl_manifest.vault_unseal_rolebinding,
+    kubectl_manifest.vault_unseal_serviceaccount,
+    kubernetes_config_map.vault_unseal_script,
+    kubernetes_job.vault_unseal,
+    kubernetes_config_map.vault_enable_auth_script
   ]
 }
