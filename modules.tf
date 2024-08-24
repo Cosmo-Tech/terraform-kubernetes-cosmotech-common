@@ -119,12 +119,8 @@ module "create_vault_secrets_operator" {
   helm_chart_version = var.vault_secrets_operator_helm_chart_version
   helm_release_name  = var.vault_secrets_operator_helm_release_name
   vault_address      = var.vault_secrets_operator_vault_address
-  allowed_namespaces = var.vault_secrets_operator_allowed_namespaces
   replicas           = var.vault_secrets_operator_replicas
   vault_namespace    = var.vault_namespace
-  tenant_id          = var.tenant_id
-  cluster_name       = var.cluster_name
-  organization       = var.customer_name
 
   depends_on = [module.create_vault]
 }

@@ -3,5 +3,3 @@
 .terraform.*
 terraform.*
 tfplan*
-*.sh
-!/*/*.sh
