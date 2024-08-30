@@ -3,11 +3,6 @@ variable "monitoring_namespace" {
   default = "cosmotech-monitoring"
 }
 
-variable "namespace" {
-  type    = string
-  default = "phoenix"
-}
-
 variable "loki_release_name" {
   type    = string
   default = "loki"

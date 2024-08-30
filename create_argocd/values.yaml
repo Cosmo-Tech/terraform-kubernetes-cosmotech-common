@@ -10,20 +10,19 @@ server:
   ingress:
     enabled: ${CREATE_INGRESS}
     ingressClassName: "nginx"
-    extraHosts:
-      - name: ${ARGOCD_DNS_NAME}
-        path: /argocd
+    hostname: ${ARGOCD_DNS_NAME}
     pathType: Prefix
+    path: /argocd
     annotations:
-      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-      nginx.ingress.kubernetes.io/proxy-body-size: "100m"
-
-  service:
-    type: ClusterIP
-    port: 80
-    targetPort: 8080
-
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      email: platform@cosmotech.com
+      nginx.ingress.kubernetes.io/backend-protocol: HTTP
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "30"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 configs:
   params:
     server.insecure: true
