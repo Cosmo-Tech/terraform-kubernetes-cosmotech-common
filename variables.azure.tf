@@ -21,3 +21,11 @@ variable "client_secret" {
 variable "subscription_id" {
   type = string
 }
+
+variable "common_resource_group" {
+  type = string
+}
+
+variable "publicip_resource_group" {
+  type = string
+}

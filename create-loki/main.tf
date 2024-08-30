@@ -15,7 +15,6 @@ locals {
     "LOKI_MAX_ENTRIES_LIMIT_PER_QUERY" = var.loki_max_entries_limet_per_query
     "LOKI_PVC_NAME"                    = var.provisioner == "local-path" ? "${var.resources[0].name}-pvc" : ""
     "GRAFANA_PVC_NAME"                 = var.provisioner == "local-path" ? "${var.resources[1].name}-pvc" : ""
-    "NAMESPACE"                        = var.namespace
     "GRAFANA_IMAGE_TAG"                = var.grafana_loki_compatibility_image_tag
     "STORAGE_CLASS"                    = var.provisioner == "local-path" ? "-" : var.provisioner
   }
