@@ -4,6 +4,7 @@ locals {
     "NAMESPACE"       = var.namespace
     "CREATE_INGRESS"  = var.create_ingress
     "ARGOCD_DNS_NAME" = var.argocd_dns_name
+    "ARGOCD_ENV_FOO"  = "{$helm_args}"
   }
   instance_name = var.helm_release_name
 }
