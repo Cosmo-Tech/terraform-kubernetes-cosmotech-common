@@ -8,9 +8,6 @@ module "create-ingress-nginx" {
   tls_secret_name         = local.tls_secret_name
   publicip_resource_group = var.publicip_resource_group
 
-  depends_on = [
-    module.create-prometheus-stack
-  ]
 }
 
 module "create-prometheus-stack" {
@@ -87,6 +84,24 @@ module "keycloak" {
   postgres_helm_repo          = var.postgres_helm_repo
 }
 
+module "create_vault" {
+  source = "./create_vault"
+
+  count = var.vault_create ? 1 : 0
+
+  namespace             = var.vault_namespace
+  helm_repo_url         = var.vault_helm_repo_url
+  helm_chart            = var.vault_helm_chart
+  helm_chart_version    = var.vault_helm_chart_version
+  helm_release_name     = var.vault_helm_release_name
+  vault_replicas        = var.vault_replicas
+  vault_secret_name     = var.vault_secret_name
+  vault_ingress_enabled = var.vault_ingress_enabled
+  vault_dns_name        = var.api_dns_name
+
+  depends_on = [module.cert-manager]
+}
+
 module "create_argocd" {
   source = "./create_argocd"
 
@@ -104,25 +119,7 @@ module "create_argocd" {
   argocd_dns_name                = var.api_dns_name
   argocd_setup_job_image_version = var.argocd_setup_job_image_version
 
-  depends_on = [module.cert-manager]
-}
-
-module "create_vault" {
-  source = "./create_vault"
-
-  count = var.create_vault ? 1 : 0
-
-  namespace             = var.vault_namespace
-  helm_repo_url         = var.vault_helm_repo_url
-  helm_chart            = var.vault_helm_chart
-  helm_chart_version    = var.vault_helm_chart_version
-  helm_release_name     = var.vault_helm_release_name
-  vault_replicas        = var.vault_replicas
-  vault_secret_name     = var.vault_secret_name
-  vault_ingress_enabled = var.vault_ingress_enabled
-  vault_dns_name        = var.api_dns_name
-
-  depends_on = [module.cert-manager]
+  depends_on = [ module.create_vault ]
 }
 
 module "create_vault_secrets_operator" {
