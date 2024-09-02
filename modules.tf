@@ -46,6 +46,11 @@ module "cert-manager" {
   certificate_cert_content = var.certificate_cert_content
   certificate_key_content  = var.certificate_key_content
   is_bare_metal            = var.is_bare_metal
+  helm_release_name        = var.cert_helm_release_name
+  helm_repo_url            = var.cert_helm_repo_url
+  cluster_issuer_server    = var.cluster_issuer_server
+  namespace                = var.cert_namespace
+  cert_manager_version     = var.cert_manager_version
 
   depends_on = [module.create-ingress-nginx]
 }
@@ -119,7 +124,7 @@ module "create_argocd" {
   argocd_dns_name                = var.api_dns_name
   argocd_setup_job_image_version = var.argocd_setup_job_image_version
 
-  depends_on = [ module.create_vault ]
+  depends_on = [module.create_vault]
 }
 
 module "create_vault_secrets_operator" {
