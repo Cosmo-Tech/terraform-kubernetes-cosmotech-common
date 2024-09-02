@@ -45,6 +45,7 @@ variable "api_dns_name" {
 
 variable "tls_certificate_type" {
   type = string
+  default = "let_s_encrypt"
 }
 
 variable "certificate_cert_content" {

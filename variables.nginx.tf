@@ -18,23 +18,6 @@ variable "nginx_namespace" {
   default = "ingress-nginx"
 }
 
-variable "monitoring_namespace" {
-  type    = string
-  default = "cosmotech-monitoring"
-}
-
 variable "publicip_address" {
   type = string
-}
-
-variable "tls_secret_name" {
-  type = string
-}
-
-variable "publicip_resource_group" {
-  type = string
-}
-
-variable "is_bare_metal" {
-  type = bool
 }

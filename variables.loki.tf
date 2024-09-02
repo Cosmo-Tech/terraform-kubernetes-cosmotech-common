@@ -73,5 +73,3 @@ variable "loki_provisioner" {
   default     = ""
   description = "Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path'"
 }
-
-
