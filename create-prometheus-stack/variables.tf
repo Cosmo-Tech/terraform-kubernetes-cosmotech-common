@@ -8,7 +8,6 @@ variable "prom_admin_password" {
 
 variable "monitoring_namespace" {
   type    = string
-  default = "cosmotech-monitoring"
 }
 
 variable "api_dns_name" {
