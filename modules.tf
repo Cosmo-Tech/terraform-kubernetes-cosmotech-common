@@ -5,8 +5,11 @@ module "create-ingress-nginx" {
   monitoring_namespace    = var.monitoring_namespace
   ingress_nginx_version   = var.ingress_nginx_version
   loadbalancer_ip         = var.publicip_address
-  tls_secret_name         = local.tls_secret_name
   publicip_resource_group = var.publicip_resource_group
+  helm_release_name       = var.nginx_helm_release_name
+  helm_repo_url           = var.nginx_helm_repo_url
+  namespace               = var.nginx_namespace
+  tls_secret_name         = local.tls_secret_name
 
 }
 
