@@ -64,6 +64,22 @@ configs:
               - sh
               - "-c"
               - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
+      my-plugin:
+        init:
+          command: [sh, -c, "echo hello"]
+        generate:
+          command: [sh, -c]
+          args:
+            - |
+              cat >test.yaml <<EOF
+              apiVersion: v1
+              kind: secret
+              metadata:
+                name: test
+                namespace: argocd
+              stringData:
+                password: mypassword
+              EOF > kubectl -n apply -f -
 repoServer:
   rbac:
     - verbs:
@@ -95,7 +111,7 @@ repoServer:
     # argocd-vault-plugin with plain YAML
     - name: argocd-vault
       command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.4.0
+      image: quay.io/argoproj/argocd:v2.5.3
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
@@ -132,6 +148,26 @@ repoServer:
           name: tmp
         - mountPath: /home/argocd/cmp-server/config/plugin.yaml
           subPath: argocd-vault-helm.yaml
+          name: argocd-cmp-cm
+        - name: custom-tools
+          subPath: argocd-vault-plugin
+          mountPath: /usr/local/bin/argocd-vault-plugin
+
+    - name: my-plugin
+      command: [/var/run/argocd/argocd-cmp-server]
+      image: quay.io/argoproj/argocd:v2.5.3
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+      volumeMounts:
+        - mountPath: /var/run/argocd
+          name: var-files
+        - mountPath: /home/argocd/cmp-server/plugins
+          name: plugins
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          subPath: my-plugin.yaml
           name: argocd-cmp-cm
         - name: custom-tools
           subPath: argocd-vault-plugin
