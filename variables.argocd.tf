@@ -1,4 +1,4 @@
-variable "argocd_create" {
+variable "argocd_deploy" {
   type = bool
 }
 

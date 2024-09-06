@@ -21,3 +21,7 @@ variable "nginx_namespace" {
 variable "publicip_address" {
   type = string
 }
+
+variable "nginx_deploy" {
+  type = bool
+}

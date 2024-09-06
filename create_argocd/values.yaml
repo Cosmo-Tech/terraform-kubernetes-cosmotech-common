@@ -2,13 +2,13 @@ server:
   replicas: ${REPLICAS}
   resources:
     limits:
-      cpu: 1000m
-      memory: 512Mi
+      cpu: 2
+      memory: 750Mi
     requests:
-      cpu: 250m
-      memory: 256Mi
+      cpu: 1
+      memory: 512Mi
   ingress:
-    enabled: ${CREATE_INGRESS}
+    enabled: false
     ingressClassName: "nginx"
     hostname: ${ARGOCD_DNS_NAME}
     pathType: Prefix
@@ -23,164 +23,10 @@ server:
       nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
       nginx.ingress.kubernetes.io/proxy-send-timeout: "30"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+
+
 configs:
   params:
     server.insecure: true
     server.rootpath: "/argocd"
     server.basehref: "/argocd"
-  cmp:
-    create: true
-    plugins:
-      argocd-vault:
-        generate:
-          command: [argocd-vault-plugin]
-          args:
-            - generate
-            - "."
-            - "-s"
-            - "vault-configuration"
-        discover:
-          find:
-            command:
-              - sh
-              - "-c"
-              - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
-      argocd-vault-helm:
-        init:
-          command: [sh, -c]
-          args:
-            - |
-              helm repo add bitnami https://charts.bitnami.com/bitnami && 
-              helm dependency build
-        generate:
-          command: [sh, -c]
-          args: 
-            - |
-              helm template $ARGOCD_APP_NAME ${ARGOCD_ENV_FOO} -n $ARGOCD_APP_NAMESPACE . |\
-              argocd-vault-plugin generate -s vault-configuration -
-        discover:
-          find:
-            command:
-              - sh
-              - "-c"
-              - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
-      my-plugin:
-        init:
-          command: [sh, -c, "echo hello"]
-        generate:
-          command: [sh, -c]
-          args:
-            - |
-              cat >test.yaml <<EOF
-              apiVersion: v1
-              kind: secret
-              metadata:
-                name: test
-                namespace: argocd
-              stringData:
-                password: mypassword
-              EOF > kubectl -n apply -f -
-repoServer:
-  rbac:
-    - verbs:
-        - get
-        - list
-        - watch
-      apiGroups:
-        - ''
-      resources:
-        - secrets
-        - configmaps
-  initContainers:
-    - name: download-tools
-      image: registry.access.redhat.com/ubi8
-      env:
-        - name: AVP_VERSION
-          value: 1.11.0
-      command: [sh, -c]
-      args:
-        - >-
-          curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v$(AVP_VERSION)/argocd-vault-plugin_$(AVP_VERSION)_linux_amd64 -o argocd-vault-plugin &&
-          chmod +x argocd-vault-plugin &&
-          mv argocd-vault-plugin /custom-tools/
-      volumeMounts:
-        - mountPath: /custom-tools
-          name: custom-tools
-
-  extraContainers:
-    # argocd-vault-plugin with plain YAML
-    - name: argocd-vault
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.5.3
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
-
-        # Register plugins into sidecar
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: argocd-vault.yaml
-          name: argocd-cmp-cm
-
-        # Important: Mount tools into $PATH
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
-    
-    - name: argocd-vault-helm
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.5.3
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: argocd-vault-helm.yaml
-          name: argocd-cmp-cm
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
-
-    - name: my-plugin
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.5.3
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: my-plugin.yaml
-          name: argocd-cmp-cm
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
-
-  volumeMounts:
-  - name: custom-tools
-    subPath: argocd-vault-plugin
-    mountPath: /usr/local/bin/argocd-vault-plugin
-
-  volumes:
-    - configMap:
-        name: argocd-cmp-cm
-      name: argocd-cmp-cm
-    - name: custom-tools
-      emptyDir: {}

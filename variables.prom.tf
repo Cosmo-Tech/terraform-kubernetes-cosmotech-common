@@ -1,4 +1,4 @@
-variable "create_prometheus_stack" {
+variable "prometheus_stack_deploy" {
   type    = bool
   default = true
 }
@@ -53,9 +53,21 @@ variable "prom_stack_version" {
 }
 
 variable "prom_cpu_mem_limits" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "prom_cpu_mem_request" {
+  type    = string
+  default = ""
+}
+
+variable "redis_admin_password" {
   type = string
+  default = ""
+}
+
+variable "prom_admin_password" {
+  type = string
+  default = ""
 }

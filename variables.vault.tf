@@ -1,4 +1,4 @@
-variable "vault_create" {
+variable "vault_deploy" {
   type = bool
 }
 

@@ -12,16 +12,6 @@ data "azurerm_kubernetes_cluster" "current" {
   resource_group_name = var.common_resource_group
 }
 
-resource "random_password" "prom_admin_password" {
-  length  = 30
-  special = false
-}
-
-resource "random_password" "redis_admin_password" {
-  length  = 30
-  special = false
-}
-
 provider "kubernetes" {
   host                   = local.host
   client_certificate     = local.client_certificate

@@ -1,3 +1,7 @@
+variable "cert_deploy" {
+  type = bool
+}
+
 variable "cert_helm_repo_url" {
   type    = string
   default = "https://charts.jetstack.io"
@@ -44,12 +48,16 @@ variable "api_dns_name" {
 }
 
 variable "tls_certificate_type" {
-  type = string
+  type    = string
   default = "let_s_encrypt"
 }
 
 variable "certificate_cert_content" {
+  type    = string
+  default = ""
 }
 
 variable "certificate_key_content" {
+  type    = string
+  default = ""
 }
