@@ -1,4 +1,4 @@
-variable "create_vault_secrets_operator" {
+variable "vault_secrets_operator_deploy" {
   type = bool
 }
 

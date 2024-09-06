@@ -1,4 +1,4 @@
-variable "create_keycloak" {
+variable "keycloak_deploy" {
   type = bool
 }
 

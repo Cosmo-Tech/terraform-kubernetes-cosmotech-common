@@ -1,7 +1,12 @@
+variable "loki_deploy" {
+  type = bool
+}
+
 variable "loki_release_name" {
   type    = string
   default = "loki"
 }
+
 variable "loki_persistence_memory" {
   type    = string
   default = "4Gi"
@@ -28,7 +33,8 @@ variable "loki_max_entries_limet_per_query" {
 }
 
 variable "grafana_loki_compatibility_image_tag" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "resources" {
