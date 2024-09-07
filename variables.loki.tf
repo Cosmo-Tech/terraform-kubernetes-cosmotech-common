@@ -37,7 +37,7 @@ variable "grafana_loki_compatibility_image_tag" {
   default = ""
 }
 
-variable "resources" {
+variable "loki_resources" {
   type = list(object({
     name         = string
     storage      = string

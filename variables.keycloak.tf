@@ -31,21 +31,6 @@ variable "keycloak_helm_chart_version" {
   default = "21.3.1"
 }
 
-variable "postgres_helm_repo" {
-  type    = string
-  default = "https://charts.bitnami.com/bitnami"
-}
-
-variable "postgres_helm_chart" {
-  type    = string
-  default = "postgresql"
-}
-
-variable "postgres_helm_chart_version" {
-  type    = string
-  default = "15.5.1"
-}
-
 variable "keycloack_provisioner" {
   type    = string
   default = ""

@@ -61,3 +61,7 @@ variable "certificate_key_content" {
   type    = string
   default = ""
 }
+
+variable "publicip_resource_group" {
+  type = string
+}
