@@ -25,7 +25,8 @@ variable "cluster_issuer_server" {
 }
 
 variable "cluster_issuer_email" {
-  type = string
+  type    = string
+  default = "platform@cosmotech.com"
 }
 
 variable "cluster_issuer_name" {
@@ -63,5 +64,9 @@ variable "certificate_key_content" {
 }
 
 variable "publicip_resource_group" {
+  type = string
+}
+
+variable "publicip_address" {
   type = string
 }

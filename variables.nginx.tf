@@ -10,16 +10,12 @@ variable "nginx_helm_release_name" {
 
 variable "nginx_ingress_version" {
   type    = string
-  default = "4.2.5"
+  default = "4.10.1"
 }
 
 variable "nginx_namespace" {
   type    = string
   default = "ingress-nginx"
-}
-
-variable "nginx_publicip_address" {
-  type = string
 }
 
 variable "nginx_deploy" {
