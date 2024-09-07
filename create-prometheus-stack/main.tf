@@ -50,3 +50,10 @@ resource "helm_release" "prometheus-stack" {
     templatefile("${path.module}/values.yaml", local.values_prometheus_stack)
   ]
 }
+
+resource "time_sleep" "wait_seconds" {
+  depends_on = [helm_release.prometheus-stack]
+
+  destroy_duration = "60s"
+}
+
