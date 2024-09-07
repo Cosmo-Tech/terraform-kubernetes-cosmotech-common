@@ -1,9 +1,9 @@
 variable "helm_repo_url" {
-  type    = string
+  type = string
 }
 
 variable "helm_release_name" {
-  type    = string
+  type = string
 }
 
 variable "cert_manager_version" {
@@ -21,19 +21,19 @@ variable "cluster_issuer_email" {
 }
 
 variable "cluster_issuer_name" {
-  type    = string
+  type = string
 }
 
-variable "namespace" {
-  type    = string
+variable "cert_namespace" {
+  type = string
 }
 
 variable "monitoring_namespace" {
-  type    = string
+  type = string
 }
 
 variable "tls_secret_name" {
-  type    = string
+  type = string
 }
 
 variable "api_dns_name" {

@@ -22,6 +22,9 @@ resource "kubernetes_namespace" "keycloak_namespace" {
   metadata {
     name = local.namespace
   }
+  timeouts {
+    delete = "5m"
+  }
 }
 
 resource "helm_release" "keycloak-postgresql" {

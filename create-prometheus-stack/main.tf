@@ -19,12 +19,6 @@ locals {
   }
 }
 
-resource "kubernetes_namespace" "monitoring_namespace" {
-  metadata {
-    name = var.monitoring_namespace
-  }
-}
-
 resource "random_password" "redis_admin_password" {
   length  = 30
   special = false
@@ -33,6 +27,10 @@ resource "random_password" "redis_admin_password" {
 resource "random_password" "prom_admin_password" {
   length  = 30
   special = false
+}
+
+resource "time_sleep" "wait_termination" {
+  destroy_duration = "10s"
 }
 
 resource "helm_release" "prometheus-stack" {
@@ -49,11 +47,6 @@ resource "helm_release" "prometheus-stack" {
   values = [
     templatefile("${path.module}/values.yaml", local.values_prometheus_stack)
   ]
+
+  depends_on = [time_sleep.wait_termination]
 }
-
-resource "time_sleep" "wait_seconds" {
-  depends_on = [helm_release.prometheus-stack]
-
-  destroy_duration = "60s"
-}
-

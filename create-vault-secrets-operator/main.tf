@@ -11,6 +11,9 @@ resource "kubernetes_namespace" "vault_secrets_operator" {
   metadata {
     name = var.namespace
   }
+  timeouts {
+    delete = "5m"
+  }
 }
 
 resource "helm_release" "vault_secrets_operator" {

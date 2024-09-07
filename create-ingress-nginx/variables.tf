@@ -10,7 +10,7 @@ variable "ingress_nginx_version" {
   type    = string
 }
 
-variable "namespace" {
+variable "nginx_namespace" {
   type    = string
 }
 
