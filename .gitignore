@@ -1,9 +1,12 @@
-.terraform/
 .terraform.lock.hcl
+modules.json
+.terraform/
 .terraform.*
 terraform.*
 tfplan*
-*.txt
 out_*
+export_*
+providers.azure.tf
 *.sh
-tfplan_*
+!*/*/*.sh
+!*/*.sh
