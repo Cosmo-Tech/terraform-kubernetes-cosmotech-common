@@ -31,3 +31,7 @@ provider "azuread" {
   client_id     = var.client_id
   client_secret = var.client_secret
 }
+terraform {
+  backend "azurerm" {}
+}
+

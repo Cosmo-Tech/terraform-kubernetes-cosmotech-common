@@ -63,11 +63,11 @@ variable "prom_cpu_mem_request" {
 }
 
 variable "redis_admin_password" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "prom_admin_password" {
-  type = string
+  type    = string
   default = ""
 }

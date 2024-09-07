@@ -1,4 +1,5 @@
 variable "project_customer_name" {
-  type = string
+  type    = string
+  default = "cosmotech"
 }
 
