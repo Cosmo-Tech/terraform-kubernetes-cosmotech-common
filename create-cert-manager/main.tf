@@ -19,10 +19,22 @@ locals {
   values = var.is_bare_metal ? "values-vanilla" : "values"
 }
 
-resource "kubernetes_namespace" "monitoring_namespace" {
+resource "kubernetes_namespace" "cert_namespace" {
   metadata {
-    name = var.namespace
+    name = var.cert_namespace
   }
+  timeouts {
+    delete = "5m"
+  }
+}
+
+# Experimental: gives helm time to finish cleaning up.
+#
+# Otherwise, after `terraform destroy`:
+# │ Error: uninstallation completed with 1 error(s): uninstall: Failed to purge
+#   the release: release: not found
+resource "time_sleep" "wait_termination" {
+  destroy_duration = "10s"
 }
 
 # Here we have three options:
@@ -34,7 +46,7 @@ resource "helm_release" "cert-manager" {
   name       = var.helm_release_name
   repository = var.helm_repo_url
   chart      = var.helm_release_name
-  namespace  = var.namespace
+  namespace  = var.cert_namespace
   version    = var.cert_manager_version
 
   reuse_values = true
@@ -47,6 +59,7 @@ resource "helm_release" "cert-manager" {
     name  = "installCRDs"
     value = true
   }
+  depends_on = [time_sleep.wait_termination]
 }
 
 resource "time_sleep" "wait" {
@@ -75,7 +88,7 @@ resource "kubernetes_secret" "tls" {
   count = var.tls_certificate_type == "custom" ? 1 : 0
   metadata {
     name      = var.tls_secret_name
-    namespace = var.namespace
+    namespace = var.cert_namespace
   }
 
   type = "kubernetes.io/tls"
@@ -85,15 +98,4 @@ resource "kubernetes_secret" "tls" {
     "tls.key" = var.certificate_key_content
   }
 
-}
-
-# Experimental: gives helm time to finish cleaning up.
-#
-# Otherwise, after `terraform destroy`:
-# │ Error: uninstallation completed with 1 error(s): uninstall: Failed to purge
-#   the release: release: not found
-resource "time_sleep" "wait_seconds" {
-  depends_on = [helm_release.cert-manager]
-
-  destroy_duration = "60s"
 }
