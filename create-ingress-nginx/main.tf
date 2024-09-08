@@ -11,17 +11,6 @@ locals {
   values        = var.is_bare_metal ? "values-vanilla" : "values-azure"
 }
 
-resource "kubernetes_namespace" "monitoring_namespace" {
-  metadata {
-    name = var.monitoring_namespace
-  }
-  timeouts {
-    delete = "5m"
-  }
-
-  depends_on = [kubernetes_namespace.nginx_namespace]
-}
-
 resource "kubernetes_namespace" "nginx_namespace" {
   metadata {
     name = var.nginx_namespace

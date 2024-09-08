@@ -1,43 +1,3 @@
-module "create-ingress-nginx" {
-  source = "./create-ingress-nginx"
-
-  count = var.nginx_deploy ? 1 : 0
-
-  is_bare_metal           = var.is_bare_metal
-  monitoring_namespace    = var.monitoring_namespace
-  ingress_nginx_version   = var.nginx_ingress_version
-  loadbalancer_ip         = var.publicip_address
-  publicip_resource_group = var.publicip_resource_group
-  helm_release_name       = var.nginx_helm_release_name
-  helm_repo_url           = var.nginx_helm_repo_url
-  nginx_namespace         = var.nginx_namespace
-  tls_secret_name         = local.tls_secret_name
-
-}
-
-module "cert-manager" {
-  source = "./create-cert-manager"
-
-  count = var.cert_deploy ? 1 : 0
-
-  tls_certificate_type     = var.tls_certificate_type
-  monitoring_namespace     = var.monitoring_namespace
-  cluster_issuer_email     = var.cluster_issuer_email
-  cluster_issuer_name      = var.cluster_issuer_name
-  tls_secret_name          = local.tls_secret_name
-  api_dns_name             = var.api_dns_name
-  certificate_cert_content = var.certificate_cert_content
-  certificate_key_content  = var.certificate_key_content
-  is_bare_metal            = var.is_bare_metal
-  helm_release_name        = var.cert_helm_release_name
-  helm_repo_url            = var.cert_helm_repo_url
-  cluster_issuer_server    = var.cluster_issuer_server
-  cert_namespace           = var.cert_namespace
-  cert_manager_version     = var.cert_manager_version
-
-  depends_on = [module.create-ingress-nginx]
-}
-
 module "create-prometheus-stack" {
   source = "./create-prometheus-stack"
 
@@ -61,7 +21,47 @@ module "create-prometheus-stack" {
   prom_retention                = var.prom_retention
   prom_storage_resource_request = var.prom_storage_resource_request
 
-  depends_on = [module.cert-manager]
+}
+
+module "create-ingress-nginx" {
+  source = "./create-ingress-nginx"
+
+  count = var.nginx_deploy ? 1 : 0
+
+  is_bare_metal           = var.is_bare_metal
+  monitoring_namespace    = var.monitoring_namespace
+  ingress_nginx_version   = var.nginx_ingress_version
+  loadbalancer_ip         = var.publicip_address
+  publicip_resource_group = var.publicip_resource_group
+  helm_release_name       = var.nginx_helm_release_name
+  helm_repo_url           = var.nginx_helm_repo_url
+  nginx_namespace         = var.nginx_namespace
+  tls_secret_name         = local.tls_secret_name
+
+  depends_on = [ module.create-prometheus-stack ]
+}
+
+module "cert-manager" {
+  source = "./create-cert-manager"
+
+  count = var.cert_deploy ? 1 : 0
+
+  tls_certificate_type     = var.tls_certificate_type
+  monitoring_namespace     = var.monitoring_namespace
+  cluster_issuer_email     = var.cluster_issuer_email
+  cluster_issuer_name      = var.cluster_issuer_name
+  tls_secret_name          = local.tls_secret_name
+  api_dns_name             = var.api_dns_name
+  certificate_cert_content = var.certificate_cert_content
+  certificate_key_content  = var.certificate_key_content
+  is_bare_metal            = var.is_bare_metal
+  helm_release_name        = var.cert_helm_release_name
+  helm_repo_url            = var.cert_helm_repo_url
+  cluster_issuer_server    = var.cluster_issuer_server
+  cert_namespace           = var.cert_namespace
+  cert_manager_version     = var.cert_manager_version
+
+  depends_on = [module.create-ingress-nginx]
 }
 
 module "loki" {

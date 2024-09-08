@@ -19,6 +19,15 @@ locals {
   }
 }
 
+resource "kubernetes_namespace" "monitoring_namespace" {
+  metadata {
+    name = var.monitoring_namespace
+  }
+  timeouts {
+    delete = "5m"
+  }
+}
+
 resource "random_password" "redis_admin_password" {
   length  = 30
   special = false
