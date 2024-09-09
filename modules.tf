@@ -23,6 +23,26 @@ module "create-prometheus-stack" {
 
 }
 
+module "loki" {
+  source = "./create-loki"
+
+  count = var.loki_deploy ? 1 : 0
+
+  monitoring_namespace                 = var.monitoring_namespace
+  loki_release_name                    = var.loki_release_name
+  loki_persistence_memory              = var.loki_persistence_memory
+  loki_retention_period                = var.loki_retention_period
+  helm_repo_url                        = var.loki_helm_repo_url
+  helm_chart                           = var.loki_helm_chart
+  loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
+  grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
+  is_bare_metal                        = var.is_bare_metal
+  provisioner                          = var.loki_provisioner
+  resources                            = var.loki_resources
+
+  depends_on = [module.create-prometheus-stack]
+}
+
 module "create-ingress-nginx" {
   source = "./create-ingress-nginx"
 
@@ -38,7 +58,7 @@ module "create-ingress-nginx" {
   nginx_namespace         = var.nginx_namespace
   tls_secret_name         = local.tls_secret_name
 
-  depends_on = [ module.create-prometheus-stack ]
+  depends_on = [ module.loki ]
 }
 
 module "cert-manager" {
@@ -64,25 +84,6 @@ module "cert-manager" {
   depends_on = [module.create-ingress-nginx]
 }
 
-module "loki" {
-  source = "./create-loki"
-
-  count = var.loki_deploy ? 1 : 0
-
-  monitoring_namespace                 = var.monitoring_namespace
-  loki_release_name                    = var.loki_release_name
-  loki_persistence_memory              = var.loki_persistence_memory
-  loki_retention_period                = var.loki_retention_period
-  helm_repo_url                        = var.loki_helm_repo_url
-  helm_chart                           = var.loki_helm_chart
-  loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
-  grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
-  is_bare_metal                        = var.is_bare_metal
-  provisioner                          = var.loki_provisioner
-  resources                            = var.loki_resources
-
-  depends_on = [module.create-prometheus-stack]
-}
 
 module "keycloak" {
   source = "./create-keycloak"
