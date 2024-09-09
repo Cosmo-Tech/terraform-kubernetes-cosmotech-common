@@ -20,10 +20,6 @@ resource "kubernetes_namespace" "nginx_namespace" {
   }
 }
 
-resource "time_sleep" "wait_termination" {
-  destroy_duration = "10s"
-}
-
 resource "helm_release" "ingress-nginx" {
   name       = local.instance_name
   repository = var.helm_repo_url
@@ -37,5 +33,7 @@ resource "helm_release" "ingress-nginx" {
     templatefile("${path.module}/${local.values}.yaml", local.values_ingress_nginx)
   ]
 
-  depends_on = [time_sleep.wait_termination]
+  depends_on = [
+    kubernetes_namespace.nginx_namespace
+  ]
 }

@@ -38,10 +38,6 @@ resource "random_password" "prom_admin_password" {
   special = false
 }
 
-resource "time_sleep" "wait_termination" {
-  destroy_duration = "10s"
-}
-
 resource "helm_release" "prometheus-stack" {
   name             = var.helm_release_name
   repository       = var.helm_repo_url
@@ -57,5 +53,7 @@ resource "helm_release" "prometheus-stack" {
     templatefile("${path.module}/values.yaml", local.values_prometheus_stack)
   ]
 
-  depends_on = [time_sleep.wait_termination]
+  depends_on = [
+    kubernetes_namespace.monitoring_namespace
+  ]
 }
