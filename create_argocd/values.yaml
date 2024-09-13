@@ -1,3 +1,14 @@
+global:
+  nodeSelector:
+    "cosmotech.com/tier": "services"
+  podLabels:
+    "networking/traffic-allowed": "yes"
+  tolerations:
+  - key: "vendor"
+    operator: "Equal"
+    value: "cosmotech"
+    effect: "NoSchedule"
+
 server:
   replicas: ${REPLICAS}
   resources:
