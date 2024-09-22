@@ -45,9 +45,11 @@ variable "tls_certificate_type" {
 }
 
 variable "certificate_cert_content" {
+  type = string
 }
 
 variable "certificate_key_content" {
+  type = string
 }
 
 variable "is_bare_metal" {

@@ -64,7 +64,7 @@ module "create-ingress-nginx" {
 module "cert-manager" {
   source = "./create-cert-manager"
 
-  count = var.cert_deploy ? 1 : 0
+  count = var.tls_certificate_type == "let_s_encrypt" ? 1 : 0
 
   tls_certificate_type     = var.tls_certificate_type
   monitoring_namespace     = var.monitoring_namespace
