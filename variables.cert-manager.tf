@@ -1,7 +1,3 @@
-variable "cert_deploy" {
-  type = bool
-}
-
 variable "cert_helm_repo_url" {
   type    = string
   default = "https://charts.jetstack.io"
