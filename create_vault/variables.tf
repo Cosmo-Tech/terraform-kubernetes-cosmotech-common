@@ -33,3 +33,7 @@ variable "vault_ingress_enabled" {
 variable "vault_dns_name" {
   type = string
 }
+
+variable "schedule" {
+  type = string
+}
