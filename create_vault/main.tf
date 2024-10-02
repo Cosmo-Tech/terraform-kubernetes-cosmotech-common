@@ -6,6 +6,14 @@ locals {
     "VAULT_DNS_NAME"        = var.vault_dns_name
   }
   instance_name = var.helm_release_name
+
+  new_minutes = (var.start_aks_minutes + 10) % 60
+
+  additional_hour = var.start_aks_minutes + 5 >= 60 ? 1 : 0
+  new_hours       = (var.start_aks_hours + local.additional_hour) % 24
+
+  schedule = "${local.new_minutes} ${local.new_hours} * * 1-5"
+
 }
 
 resource "kubernetes_namespace" "vault_namespace" {
@@ -61,14 +69,14 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   ]
 }
 
-resource "kubernetes_config_map" "vault_unseal_cron" {
+resource "kubernetes_config_map" "vault_unseal_cron_script" {
   metadata {
-    name      = "vault-unseal-cron"
+    name      = "vault-unseal-cron-script"
     namespace = var.namespace
   }
 
   data = {
-    "unseal.sh" = file("${path.module}/scripts/unseal_job.sh")
+    "unseal_job.sh" = file("${path.module}/scripts/unseal_job.sh")
   }
   depends_on = [
     helm_release.vault
@@ -143,13 +151,13 @@ resource "kubernetes_job" "vault_unseal" {
   ]
 }
 
-resource "kubernetes_cron_job" "vault_unseal" {
+resource "kubernetes_cron_job_v1" "vault_unseal_cron" {
   metadata {
-    name      = "vault-unseal"
+    name      = "vault-unseal-cron"
     namespace = var.namespace
   }
   spec {
-    schedule = var.schedule
+    schedule = local.schedule
     job_template {
       metadata {
         name = "vault-unseal-cron"
@@ -170,17 +178,17 @@ resource "kubernetes_cron_job" "vault_unseal" {
                 var.vault_replicas
               ]
               volume_mount {
-                name       = "script-volume"
+                name       = "cron-volume"
                 mount_path = "/scripts/unseal_job.sh"
                 sub_path   = "unseal_job.sh"
               }
             }
 
             volume {
-              name = "script-volume"
+              name = "cron-volume"
 
               config_map {
-                name = kubernetes_config_map.vault_unseal_cron.metadata[0].name
+                name = kubernetes_config_map.vault_unseal_cron_script.metadata[0].name
 
                 items {
                   key  = "unseal_job.sh"
@@ -195,7 +203,7 @@ resource "kubernetes_cron_job" "vault_unseal" {
   }
   depends_on = [
     helm_release.vault,
-    kubernetes_config_map.vault_unseal_cron,
+    kubernetes_config_map.vault_unseal_cron_script,
     kubectl_manifest.vault_unseal_role,
     kubectl_manifest.vault_unseal_rolebinding,
     kubectl_manifest.vault_unseal_serviceaccount
@@ -250,7 +258,7 @@ resource "kubernetes_job" "vault_enable_auth" {
             name  = "VAULT_NAMESPACE"
             value = var.namespace
           }
-          
+
           volume_mount {
             name       = "script-volume"
             mount_path = "/scripts/enable_auth.sh"
