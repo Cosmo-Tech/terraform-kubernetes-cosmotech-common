@@ -61,6 +61,20 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   ]
 }
 
+resource "kubernetes_config_map" "vault_unseal_cron" {
+  metadata {
+    name      = "vault-unseal-cron"
+    namespace = var.namespace
+  }
+
+  data = {
+    "unseal.sh" = file("${path.module}/scripts/unseal_job.sh")
+  }
+  depends_on = [
+    helm_release.vault
+  ]
+}
+
 resource "kubectl_manifest" "vault_unseal_serviceaccount" {
   validate_schema = false
   yaml_body = templatefile("${path.module}/templates/vault-unseal-serviceaccount.yaml.tpl",
@@ -123,6 +137,65 @@ resource "kubernetes_job" "vault_unseal" {
   depends_on = [
     helm_release.vault,
     kubernetes_config_map.vault_unseal_script,
+    kubectl_manifest.vault_unseal_role,
+    kubectl_manifest.vault_unseal_rolebinding,
+    kubectl_manifest.vault_unseal_serviceaccount
+  ]
+}
+
+resource "kubernetes_cron_job" "vault_unseal" {
+  metadata {
+    name      = "vault-unseal"
+    namespace = var.namespace
+  }
+  spec {
+    schedule = var.schedule
+    job_template {
+      metadata {
+        name = "vault-unseal-cron"
+      }
+      spec {
+        template {
+          metadata {}
+          spec {
+            restart_policy       = "OnFailure"
+            service_account_name = "vault-unseal"
+            container {
+              name  = "vault-unseal-cron"
+              image = "bitnami/kubectl:latest"
+              command = [
+                "/bin/bash", "/scripts/unseal_job.sh",
+                var.namespace,
+                var.vault_secret_name,
+                var.vault_replicas
+              ]
+              volume_mount {
+                name       = "script-volume"
+                mount_path = "/scripts/unseal_job.sh"
+                sub_path   = "unseal_job.sh"
+              }
+            }
+
+            volume {
+              name = "script-volume"
+
+              config_map {
+                name = kubernetes_config_map.vault_unseal_cron.metadata[0].name
+
+                items {
+                  key  = "unseal_job.sh"
+                  path = "unseal_job.sh"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  depends_on = [
+    helm_release.vault,
+    kubernetes_config_map.vault_unseal_cron,
     kubectl_manifest.vault_unseal_role,
     kubectl_manifest.vault_unseal_rolebinding,
     kubectl_manifest.vault_unseal_serviceaccount

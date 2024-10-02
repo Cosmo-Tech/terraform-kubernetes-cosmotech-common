@@ -34,3 +34,7 @@ variable "vault_secret_name" {
 variable "vault_ingress_enabled" {
   type = bool
 }
+
+variable "vault_unseal_cron_schedule" {
+  type = string
+}

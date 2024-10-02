@@ -58,7 +58,7 @@ module "create-ingress-nginx" {
   nginx_namespace         = var.nginx_namespace
   tls_secret_name         = local.tls_secret_name
 
-  depends_on = [ module.loki ]
+  depends_on = [module.loki]
 }
 
 module "cert-manager" {
@@ -119,6 +119,7 @@ module "create_vault" {
   vault_secret_name     = var.vault_secret_name
   vault_ingress_enabled = var.vault_ingress_enabled
   vault_dns_name        = var.api_dns_name
+  schedule              = var.vault_unseal_cron_schedule
 
   depends_on = [module.cert-manager]
 }
