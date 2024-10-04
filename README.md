@@ -48,6 +48,7 @@
 | <a name="input_argocd_replicas"></a> [argocd\_replicas](#input\_argocd\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_argocd_repositories"></a> [argocd\_repositories](#input\_argocd\_repositories) | n/a | <pre>list(object({<br>    url      = string<br>    private  = bool<br>    token    = string<br>    username = string<br>  }))</pre> | n/a | yes |
 | <a name="input_argocd_setup_job_image_version"></a> [argocd\_setup\_job\_image\_version](#input\_argocd\_setup\_job\_image\_version) | n/a | `string` | n/a | yes |
+| <a name="input_auto_restart_deploy"></a> [auto\_restart\_deploy](#input\_auto\_restart\_deploy) | n/a | `bool` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | n/a | `string` | n/a | yes |
 | <a name="input_is_bare_metal"></a> [is\_bare\_metal](#input\_is\_bare\_metal) | n/a | `bool` | n/a | yes |
 | <a name="input_keycloak_deploy"></a> [keycloak\_deploy](#input\_keycloak\_deploy) | n/a | `bool` | n/a | yes |
@@ -75,6 +76,8 @@
 | <a name="input_vault_secrets_operator_helm_repo_url"></a> [vault\_secrets\_operator\_helm\_repo\_url](#input\_vault\_secrets\_operator\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_replicas"></a> [vault\_secrets\_operator\_replicas](#input\_vault\_secrets\_operator\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_argocd_namespace"></a> [argocd\_namespace](#input\_argocd\_namespace) | n/a | `string` | `"argocd"` | no |
+| <a name="input_auto_restart_start_hours"></a> [auto\_restart\_start\_hours](#input\_auto\_restart\_start\_hours) | n/a | `number` | `5` | no |
+| <a name="input_auto_restart_start_minutes"></a> [auto\_restart\_start\_minutes](#input\_auto\_restart\_start\_minutes) | n/a | `number` | `0` | no |
 | <a name="input_cert_helm_release_name"></a> [cert\_helm\_release\_name](#input\_cert\_helm\_release\_name) | n/a | `string` | `"cert-manager"` | no |
 | <a name="input_cert_helm_repo_url"></a> [cert\_helm\_repo\_url](#input\_cert\_helm\_repo\_url) | n/a | `string` | `"https://charts.jetstack.io"` | no |
 | <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | HELM Chart Version for cert-manager | `string` | `"1.11.0"` | no |
@@ -124,8 +127,6 @@
 | <a name="input_prom_storage_resource_request"></a> [prom\_storage\_resource\_request](#input\_prom\_storage\_resource\_request) | n/a | `string` | `"64Gi"` | no |
 | <a name="input_prometheus_stack_deploy"></a> [prometheus\_stack\_deploy](#input\_prometheus\_stack\_deploy) | n/a | `bool` | `true` | no |
 | <a name="input_redis_admin_password"></a> [redis\_admin\_password](#input\_redis\_admin\_password) | n/a | `string` | `""` | no |
-| <a name="input_start_aks_hours"></a> [start\_aks\_hours](#input\_start\_aks\_hours) | n/a | `number` | `5` | no |
-| <a name="input_start_aks_minutes"></a> [start\_aks\_minutes](#input\_start\_aks\_minutes) | n/a | `number` | `0` | no |
 | <a name="input_tls_certificate_type"></a> [tls\_certificate\_type](#input\_tls\_certificate\_type) | n/a | `string` | `"let_s_encrypt"` | no |
 | <a name="input_tls_secret_name"></a> [tls\_secret\_name](#input\_tls\_secret\_name) | n/a | `string` | `"letsencrypt-prod"` | no |
 | <a name="input_vault_namespace"></a> [vault\_namespace](#input\_vault\_namespace) | n/a | `string` | `"vault"` | no |
