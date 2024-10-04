@@ -192,7 +192,7 @@ resource "kubernetes_cron_job_v1" "vault_unseal_cron" {
               name = "cron-volume"
 
               config_map {
-                name = kubernetes_config_map.vault_unseal_cron_script.metadata[0].name
+                name = kubernetes_config_map.vault_unseal_cron_script[0].metadata[0].name
 
                 items {
                   key  = "unseal_job.sh"
