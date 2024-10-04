@@ -34,6 +34,10 @@ variable "vault_dns_name" {
   type = string
 }
 
+variable "auto_restart_deploy" {
+  type = bool
+}
+
 variable "start_aks_minutes" {
   type = number
   validation {
