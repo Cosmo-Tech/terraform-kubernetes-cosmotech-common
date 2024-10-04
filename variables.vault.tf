@@ -42,7 +42,7 @@ variable "auto_restart_deploy" {
 variable "auto_restart_start_minutes" {
   type = number
   validation {
-    condition = can(regex(var.auto_restart_start_minutes, range(0,60)))
+    condition     = var.auto_restart_start_minutes >= 0 && var.auto_restart_start_minutes < 60
     error_message = "Minutes must be between 0 and 59"
   }
   default = 0
@@ -51,7 +51,7 @@ variable "auto_restart_start_minutes" {
 variable "auto_restart_start_hours" {
   type = number
   validation {
-    condition = can(regex(var.auto_restart_start_hours, range(0,24)))
+    condition     = var.auto_restart_start_hours >= 0 && var.auto_restart_start_hours < 24
     error_message = "Hours must be between 0 and 23"
   }
   default = 5
