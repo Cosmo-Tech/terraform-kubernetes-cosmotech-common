@@ -70,6 +70,8 @@ resource "kubernetes_config_map" "vault_unseal_script" {
 }
 
 resource "kubernetes_config_map" "vault_unseal_cron_script" {
+  count = var.auto_restart_deploy ? 1 : 0
+  
   metadata {
     name      = "vault-unseal-cron-script"
     namespace = var.namespace
@@ -152,6 +154,8 @@ resource "kubernetes_job" "vault_unseal" {
 }
 
 resource "kubernetes_cron_job_v1" "vault_unseal_cron" {
+  count = var.auto_restart_deploy ? 1 : 0
+
   metadata {
     name      = "vault-unseal-cron"
     namespace = var.namespace
