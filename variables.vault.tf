@@ -34,3 +34,25 @@ variable "vault_secret_name" {
 variable "vault_ingress_enabled" {
   type = bool
 }
+
+variable "auto_restart_deploy" {
+  type = bool
+}
+
+variable "auto_restart_start_minutes" {
+  type = number
+  validation {
+    condition = can(regex(var.auto_restart_start_minutes, range(0,60)))
+    error_message = "Minutes must be between 0 and 59"
+  }
+  default = 0
+}
+
+variable "auto_restart_start_hours" {
+  type = number
+  validation {
+    condition = can(regex(var.auto_restart_start_hours, range(0,24)))
+    error_message = "Hours must be between 0 and 23"
+  }
+  default = 5
+}
