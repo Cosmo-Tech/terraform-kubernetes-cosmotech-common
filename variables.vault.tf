@@ -4,7 +4,6 @@ variable "vault_deploy" {
 
 variable "vault_namespace" {
   type    = string
-  default = "vault"
 }
 
 variable "vault_helm_repo_url" {
