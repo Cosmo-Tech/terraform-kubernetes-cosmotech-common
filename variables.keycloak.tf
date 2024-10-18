@@ -3,11 +3,11 @@ variable "keycloak_deploy" {
 }
 
 variable "keycloak_admin_user" {
-  type    = string
+  type = string
 }
 
 variable "keycloak_postgres_user" {
-  type    = string
+  type = string
 }
 
 variable "keycloak_ingress_hostname" {
@@ -15,17 +15,17 @@ variable "keycloak_ingress_hostname" {
 }
 
 variable "keycloak_helm_repo" {
-  type    = string
+  type = string
 }
 
 variable "keycloak_helm_chart" {
-  type    = string
+  type = string
 }
 
 variable "keycloak_helm_chart_version" {
-  type    = string
+  type = string
 }
 
 variable "keycloack_provisioner" {
-  type    = string
+  type = string
 }

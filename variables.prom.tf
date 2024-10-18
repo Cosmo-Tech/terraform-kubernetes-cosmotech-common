@@ -1,5 +1,5 @@
 variable "prometheus_stack_deploy" {
-  type    = bool
+  type = bool
 }
 
 variable "prom_redis_host_namespace" {
@@ -7,53 +7,53 @@ variable "prom_redis_host_namespace" {
 }
 
 variable "prom_storage_resource_request" {
-  type    = string
+  type = string
 }
 
 variable "prom_storage_class_name" {
-  type    = string
+  type = string
 }
 
 variable "prom_replicas_number" {
-  type    = string
+  type = string
 }
 
 variable "prom_retention" {
-  type    = string
+  type = string
 }
 
 variable "prom_redis_port" {
-  type    = number
+  type = number
 }
 
 variable "prom_helm_chart" {
-  type    = string
+  type = string
 }
 
 variable "prom_helm_repo_url" {
-  type    = string
+  type = string
 }
 
 variable "prom_helm_release_name" {
-  type    = string
+  type = string
 }
 
 variable "prom_stack_version" {
-  type    = string
+  type = string
 }
 
 variable "prom_cpu_mem_limits" {
-  type    = string
+  type = string
 }
 
 variable "prom_cpu_mem_request" {
-  type    = string
+  type = string
 }
 
 variable "redis_admin_password" {
-  type    = string
+  type = string
 }
 
 variable "prom_admin_password" {
-  type    = string
+  type = string
 }

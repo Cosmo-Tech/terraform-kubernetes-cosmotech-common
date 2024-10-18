@@ -1,9 +1,9 @@
 variable "cert_helm_repo_url" {
-  type    = string
+  type = string
 }
 
 variable "cert_helm_release_name" {
-  type    = string
+  type = string
 }
 
 variable "cert_manager_version" {
@@ -17,19 +17,19 @@ variable "cluster_issuer_server" {
 }
 
 variable "cluster_issuer_email" {
-  type    = string
+  type = string
 }
 
 variable "cluster_issuer_name" {
-  type    = string
+  type = string
 }
 
 variable "cert_namespace" {
-  type    = string
+  type = string
 }
 
 variable "tls_secret_name" {
-  type    = string
+  type = string
 }
 
 variable "api_dns_name" {
@@ -37,15 +37,15 @@ variable "api_dns_name" {
 }
 
 variable "tls_certificate_type" {
-  type    = string
+  type = string
 }
 
 variable "certificate_cert_content" {
-  type    = string
+  type = string
 }
 
 variable "certificate_key_content" {
-  type    = string
+  type = string
 }
 
 variable "publicip_resource_group" {

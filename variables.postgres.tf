@@ -1,11 +1,11 @@
 variable "postgres_helm_repo" {
-  type    = string
+  type = string
 }
 
 variable "postgres_helm_chart" {
-  type    = string
+  type = string
 }
 
 variable "postgres_helm_chart_version" {
-  type    = string
+  type = string
 }

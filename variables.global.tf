@@ -3,7 +3,7 @@ variable "is_bare_metal" {
 }
 
 variable "monitoring_namespace" {
-  type    = string
+  type = string
 }
 
 variable "cluster_name" {
