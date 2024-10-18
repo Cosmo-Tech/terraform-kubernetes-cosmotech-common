@@ -3,38 +3,31 @@ variable "loki_deploy" {
 }
 
 variable "loki_release_name" {
-  type    = string
-  default = "loki"
+  type = string
 }
 
 variable "loki_persistence_memory" {
-  type    = string
-  default = "4Gi"
+  type = string
 }
 
 variable "loki_retention_period" {
-  type    = string
-  default = "720h"
+  type = string
 }
 
 variable "loki_helm_repo_url" {
-  type    = string
-  default = "https://grafana.github.io/helm-charts"
+  type = string
 }
 
 variable "loki_helm_chart" {
-  type    = string
-  default = "loki-stack"
+  type = string
 }
 
 variable "loki_max_entries_limet_per_query" {
-  type    = number
-  default = 50000
+  type = number
 }
 
 variable "grafana_loki_compatibility_image_tag" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "loki_resources" {
@@ -76,6 +69,5 @@ variable "loki_resources" {
 
 variable "loki_provisioner" {
   type        = string
-  default     = ""
   description = "Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path'"
 }

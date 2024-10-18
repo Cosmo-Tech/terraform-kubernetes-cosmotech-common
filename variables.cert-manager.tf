@@ -1,43 +1,35 @@
 variable "cert_helm_repo_url" {
-  type    = string
-  default = "https://charts.jetstack.io"
+  type = string
 }
 
 variable "cert_helm_release_name" {
-  type    = string
-  default = "cert-manager"
+  type = string
 }
 
 variable "cert_manager_version" {
   type        = string
   description = "HELM Chart Version for cert-manager"
-  default     = "1.11.0"
 }
 
 variable "cluster_issuer_server" {
   description = "The ACME server URL"
   type        = string
-  default     = "https://acme-v02.api.letsencrypt.org/directory"
 }
 
 variable "cluster_issuer_email" {
-  type    = string
-  default = "platform@cosmotech.com"
+  type = string
 }
 
 variable "cluster_issuer_name" {
-  type    = string
-  default = "letsencrypt-prod"
+  type = string
 }
 
 variable "cert_namespace" {
-  type    = string
-  default = "cert-manager"
+  type = string
 }
 
 variable "tls_secret_name" {
-  type    = string
-  default = "letsencrypt-prod"
+  type = string
 }
 
 variable "api_dns_name" {
@@ -45,18 +37,15 @@ variable "api_dns_name" {
 }
 
 variable "tls_certificate_type" {
-  type    = string
-  default = "let_s_encrypt"
+  type = string
 }
 
 variable "certificate_cert_content" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "certificate_key_content" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "publicip_resource_group" {

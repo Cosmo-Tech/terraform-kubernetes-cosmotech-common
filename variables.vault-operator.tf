@@ -3,8 +3,7 @@ variable "vault_secrets_operator_deploy" {
 }
 
 variable "vault_secrets_operator_namespace" {
-  type    = string
-  default = "vault-secrets-operator"
+  type = string
 }
 
 variable "vault_secrets_operator_helm_repo_url" {
@@ -24,8 +23,7 @@ variable "vault_secrets_operator_helm_release_name" {
 }
 
 variable "vault_secrets_operator_vault_address" {
-  type    = string
-  default = "http://vault.vault.svc.cluster.local:8200"
+  type = string
 }
 
 variable "vault_secrets_operator_replicas" {

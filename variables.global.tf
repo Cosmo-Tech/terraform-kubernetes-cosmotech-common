@@ -3,8 +3,7 @@ variable "is_bare_metal" {
 }
 
 variable "monitoring_namespace" {
-  type    = string
-  default = "cosmotech-monitoring"
+  type = string
 }
 
 variable "cluster_name" {

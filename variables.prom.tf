@@ -1,6 +1,5 @@
 variable "prometheus_stack_deploy" {
-  type    = bool
-  default = true
+  type = bool
 }
 
 variable "prom_redis_host_namespace" {
@@ -8,66 +7,53 @@ variable "prom_redis_host_namespace" {
 }
 
 variable "prom_storage_resource_request" {
-  type    = string
-  default = "64Gi"
+  type = string
 }
 
 variable "prom_storage_class_name" {
-  type    = string
-  default = "default"
+  type = string
 }
 
 variable "prom_replicas_number" {
-  type    = string
-  default = "1"
+  type = string
 }
 
 variable "prom_retention" {
-  type    = string
-  default = "100d"
+  type = string
 }
 
 variable "prom_redis_port" {
-  type    = number
-  default = 6379
+  type = number
 }
 
 variable "prom_helm_chart" {
-  type    = string
-  default = "kube-prometheus-stack"
+  type = string
 }
 
 variable "prom_helm_repo_url" {
-  type    = string
-  default = "https://prometheus-community.github.io/helm-charts"
+  type = string
 }
 
 variable "prom_helm_release_name" {
-  type    = string
-  default = "kube-prometheus-stack"
+  type = string
 }
 
 variable "prom_stack_version" {
-  type    = string
-  default = "57.1.0"
+  type = string
 }
 
 variable "prom_cpu_mem_limits" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "prom_cpu_mem_request" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "redis_admin_password" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "prom_admin_password" {
-  type    = string
-  default = ""
+  type = string
 }

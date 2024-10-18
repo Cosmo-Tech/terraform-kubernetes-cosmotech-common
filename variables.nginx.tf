@@ -1,21 +1,17 @@
 variable "nginx_helm_repo_url" {
-  type    = string
-  default = "https://kubernetes.github.io/ingress-nginx"
+  type = string
 }
 
 variable "nginx_helm_release_name" {
-  type    = string
-  default = "ingress-nginx"
+  type = string
 }
 
 variable "nginx_ingress_version" {
-  type    = string
-  default = "4.10.1"
+  type = string
 }
 
 variable "nginx_namespace" {
-  type    = string
-  default = "ingress-nginx"
+  type = string
 }
 
 variable "nginx_deploy" {

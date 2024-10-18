@@ -3,13 +3,11 @@ variable "keycloak_deploy" {
 }
 
 variable "keycloak_admin_user" {
-  type    = string
-  default = "admin-cosmo"
+  type = string
 }
 
 variable "keycloak_postgres_user" {
-  type    = string
-  default = "keycloak_postgres_user"
+  type = string
 }
 
 variable "keycloak_ingress_hostname" {
@@ -17,21 +15,17 @@ variable "keycloak_ingress_hostname" {
 }
 
 variable "keycloak_helm_repo" {
-  type    = string
-  default = "https://charts.bitnami.com/bitnami"
+  type = string
 }
 
 variable "keycloak_helm_chart" {
-  type    = string
-  default = "keycloak"
+  type = string
 }
 
 variable "keycloak_helm_chart_version" {
-  type    = string
-  default = "21.3.1"
+  type = string
 }
 
 variable "keycloack_provisioner" {
-  type    = string
-  default = ""
+  type = string
 }

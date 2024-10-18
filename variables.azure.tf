@@ -3,13 +3,11 @@ variable "tenant_id" {
 }
 
 variable "client_id" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "client_secret" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "subscription_id" {
