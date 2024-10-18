@@ -3,7 +3,7 @@ variable "argocd_deploy" {
 }
 
 variable "argocd_namespace" {
-  type    = string
+  type = string
 }
 
 variable "argocd_helm_repo_url" {

@@ -3,7 +3,7 @@ variable "vault_deploy" {
 }
 
 variable "vault_namespace" {
-  type    = string
+  type = string
 }
 
 variable "vault_helm_repo_url" {
