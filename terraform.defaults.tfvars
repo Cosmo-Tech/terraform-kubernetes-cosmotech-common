@@ -1,9 +1,9 @@
-# ArgoCD
-argocd_namespace = "argocd"
-
 # Azure
 client_id     = ""
 client_secret = ""
+
+# Project
+project_customer_name = "cosmotech"
 
 # Cert-manager
 cert_helm_repo_url       = "https://charts.jetstack.io"
@@ -67,9 +67,6 @@ postgres_helm_repo          = "https://charts.bitnami.com/bitnami"
 postgres_helm_chart         = "postgresql"
 postgres_helm_chart_version = "15.5.1"
 
-# Project
-project_customer_name = "cosmotech"
-
 # Monitoring
 monitoring_namespace          = "cosmotech-monitoring"
 prometheus_stack_deploy       = true
@@ -86,6 +83,9 @@ prom_cpu_mem_limits           = ""
 prom_cpu_mem_request          = ""
 redis_admin_password          = ""
 prom_admin_password           = ""
+
+# ArgoCD
+argocd_namespace = "argocd"
 
 # Vault
 vault_namespace = "vault"
