@@ -44,27 +44,6 @@ variable "loki_resources" {
   If a provisioner is available, set the provisioner variable to the 
   value of the StorageClass for this provisioner.
   EOT
-  default = [{
-
-    name    = "loki"
-    storage = "8Gi"
-    labels = {
-      "cosmotech.com/db" = "loki"
-    }
-    access_modes = ["ReadWriteOnce"]
-    path         = "/mnt/loki-storage"
-    }
-    ,
-    {
-      name    = "grafana"
-      storage = "8Gi"
-      labels = {
-        "cosmotech.com/db" = "grafana"
-      }
-      access_modes = ["ReadWriteOnce"]
-      path         = "/mnt/grafana-storage"
-    }
-  ]
 }
 
 variable "loki_provisioner" {
