@@ -50,6 +50,8 @@
 | <a name="input_argocd_repositories"></a> [argocd\_repositories](#input\_argocd\_repositories) | n/a | <pre>list(object({<br>    url      = string<br>    private  = bool<br>    token    = string<br>    username = string<br>  }))</pre> | n/a | yes |
 | <a name="input_argocd_setup_job_image_version"></a> [argocd\_setup\_job\_image\_version](#input\_argocd\_setup\_job\_image\_version) | n/a | `string` | n/a | yes |
 | <a name="input_auto_restart_deploy"></a> [auto\_restart\_deploy](#input\_auto\_restart\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_auto_restart_start_hours"></a> [auto\_restart\_start\_hours](#input\_auto\_restart\_start\_hours) | n/a | `number` | n/a | yes |
+| <a name="input_auto_restart_start_minutes"></a> [auto\_restart\_start\_minutes](#input\_auto\_restart\_start\_minutes) | n/a | `number` | n/a | yes |
 | <a name="input_cert_helm_release_name"></a> [cert\_helm\_release\_name](#input\_cert\_helm\_release\_name) | n/a | `string` | n/a | yes |
 | <a name="input_cert_helm_repo_url"></a> [cert\_helm\_repo\_url](#input\_cert\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | HELM Chart Version for cert-manager | `string` | n/a | yes |
@@ -80,6 +82,7 @@
 | <a name="input_loki_persistence_memory"></a> [loki\_persistence\_memory](#input\_loki\_persistence\_memory) | n/a | `string` | n/a | yes |
 | <a name="input_loki_provisioner"></a> [loki\_provisioner](#input\_loki\_provisioner) | Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path' | `string` | n/a | yes |
 | <a name="input_loki_release_name"></a> [loki\_release\_name](#input\_loki\_release\_name) | n/a | `string` | n/a | yes |
+| <a name="input_loki_resources"></a> [loki\_resources](#input\_loki\_resources) | Values for the persistent volume and persistent volume claims when in <br>  a bare metal context and provisioner is set to local-path.<br>  If a provisioner is available, set the provisioner variable to the <br>  value of the StorageClass for this provisioner. | <pre>list(object({<br>    name         = string<br>    storage      = string<br>    labels       = map(string)<br>    access_modes = list(string)<br>    path         = string<br>  }))</pre> | n/a | yes |
 | <a name="input_loki_retention_period"></a> [loki\_retention\_period](#input\_loki\_retention\_period) | n/a | `string` | n/a | yes |
 | <a name="input_monitoring_namespace"></a> [monitoring\_namespace](#input\_monitoring\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_nginx_deploy"></a> [nginx\_deploy](#input\_nginx\_deploy) | n/a | `bool` | n/a | yes |
@@ -129,7 +132,4 @@
 | <a name="input_vault_secrets_operator_namespace"></a> [vault\_secrets\_operator\_namespace](#input\_vault\_secrets\_operator\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_replicas"></a> [vault\_secrets\_operator\_replicas](#input\_vault\_secrets\_operator\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_vault_secrets_operator_vault_address"></a> [vault\_secrets\_operator\_vault\_address](#input\_vault\_secrets\_operator\_vault\_address) | n/a | `string` | n/a | yes |
-| <a name="input_auto_restart_start_hours"></a> [auto\_restart\_start\_hours](#input\_auto\_restart\_start\_hours) | n/a | `number` | `5` | no |
-| <a name="input_auto_restart_start_minutes"></a> [auto\_restart\_start\_minutes](#input\_auto\_restart\_start\_minutes) | n/a | `number` | `0` | no |
-| <a name="input_loki_resources"></a> [loki\_resources](#input\_loki\_resources) | Values for the persistent volume and persistent volume claims when in <br>  a bare metal context and provisioner is set to local-path.<br>  If a provisioner is available, set the provisioner variable to the <br>  value of the StorageClass for this provisioner. | <pre>list(object({<br>    name         = string<br>    storage      = string<br>    labels       = map(string)<br>    access_modes = list(string)<br>    path         = string<br>  }))</pre> | <pre>[<br>  {<br>    "access_modes": [<br>      "ReadWriteOnce"<br>    ],<br>    "labels": {<br>      "cosmotech.com/db": "loki"<br>    },<br>    "name": "loki",<br>    "path": "/mnt/loki-storage",<br>    "storage": "8Gi"<br>  },<br>  {<br>    "access_modes": [<br>      "ReadWriteOnce"<br>    ],<br>    "labels": {<br>      "cosmotech.com/db": "grafana"<br>    },<br>    "name": "grafana",<br>    "path": "/mnt/grafana-storage",<br>    "storage": "8Gi"<br>  }<br>]</pre> | no |
 <!-- END_TF_DOCS -->
