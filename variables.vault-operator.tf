@@ -35,14 +35,7 @@ variable "vault_secrets_operator_replicas" {
   type = number
 }
 
-variable "tenant_id" {
+variable "tekton_deploy" {
   type = string
 }
 
-variable "cluster_name" {
-  type = string
-}
-
-variable "customer_name" {
-  type = string
-}
