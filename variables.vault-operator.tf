@@ -29,3 +29,8 @@ variable "vault_secrets_operator_vault_address" {
 variable "vault_secrets_operator_replicas" {
   type = number
 }
+
+variable "tekton_deploy" {
+  type = string
+}
+
