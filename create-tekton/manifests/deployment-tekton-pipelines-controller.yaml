@@ -58,8 +58,6 @@ spec:
                     operator: NotIn
                     values:
                       - windows
-      nodeSelector:
-        "cosmotech.com/tier": "tekton"
       serviceAccountName: tekton-pipelines-controller
       containers:
         - name: tekton-pipelines-controller
