@@ -9,5 +9,5 @@ terraform {
 
 resource "kubectl_manifest" "tekton-pipelines" {
     yaml_body       = file("${path.module}/tekton-pipelines.yaml")
-    validate_schema = false
+    validate_schema = true
 }
