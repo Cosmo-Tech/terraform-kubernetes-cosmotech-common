@@ -26,7 +26,6 @@ metadata:
     pipeline.tekton.dev/release: "v0.65.0"
     # labels below are related to istio and should not be used for resource lookup
     version: "v0.65.0"
-    networking/traffic-allowed: 'yes'
 spec:
   replicas: 1
   selector:
@@ -48,6 +47,7 @@ spec:
         # labels below are related to istio and should not be used for resource lookup
         app: tekton-pipelines-resolvers
         version: "v0.65.0"
+        networking/traffic-allowed: 'yes'
     spec:
       affinity:
         podAntiAffinity:
