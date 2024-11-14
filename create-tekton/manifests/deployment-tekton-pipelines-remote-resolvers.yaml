@@ -26,6 +26,7 @@ metadata:
     pipeline.tekton.dev/release: "v0.65.0"
     # labels below are related to istio and should not be used for resource lookup
     version: "v0.65.0"
+    networking/traffic-allowed: 'yes'
 spec:
   replicas: 1
   selector:
@@ -60,8 +61,14 @@ spec:
                     app.kubernetes.io/part-of: tekton-pipelines
                 topologyKey: kubernetes.io/hostname
               weight: 100
+      tolerations:
+          - key: vendor
+            operator: Equal
+            value: cosmotech
+            effect: NoSchedule
       nodeSelector:
         "cosmotech.com/tier": "tekton"
+        "kubernetes.io/os": "linux"
       serviceAccountName: tekton-pipelines-resolvers
       containers:
         - name: controller
