@@ -21,7 +21,7 @@ metadata:
     app.kubernetes.io/part-of: tekton-pipelines
     pod-security.kubernetes.io/enforce: restricted
 
----
+
 # Copyright 2020-2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,7 +71,7 @@ rules:
   - apiGroups: ["resolution.tekton.dev"]
     resources: ["resolutionrequests", "resolutionrequests/status"]
     verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
----
+
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -98,7 +98,7 @@ rules:
   - apiGroups: ["apps"]
     resources: ["statefulsets"]
     verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
----
+
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -161,7 +161,7 @@ rules:
     # The webhook configured the namespace as the OwnerRef on various cluster-scoped resources,
     # which requires we can update the system namespace finalizers.
     resourceNames: ["tekton-pipelines"]
----
+
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -175,7 +175,7 @@ rules:
     resources: ["tasks", "clustertasks", "taskruns", "pipelines", "pipelineruns", "customruns"]
     verbs: ["get", "list", "watch"]
 
----
+
 # Copyright 2020 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -208,7 +208,7 @@ rules:
     resources: ["configmaps"]
     verbs: ["get"]
     resourceNames: ["config-logging", "config-observability", "feature-flags", "config-leader-election-controller", "config-registry-cert"]
----
+
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -237,7 +237,7 @@ rules:
     resources: ["secrets"]
     verbs: ["get", "update"]
     resourceNames: ["webhook-certs"]
----
+
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -256,7 +256,7 @@ rules:
     resources: ["configmaps"]
     verbs: ["get"]
     resourceNames: ["config-logging", "config-observability", "feature-flags", "config-leader-election-events", "config-registry-cert"]
----
+
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -270,7 +270,7 @@ rules:
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
     verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -289,7 +289,7 @@ rules:
     resourceNames: ["pipelines-info"]
     verbs: ["get"]
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -312,7 +312,7 @@ metadata:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
----
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -322,7 +322,7 @@ metadata:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
----
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -333,7 +333,7 @@ metadata:
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -364,7 +364,7 @@ roleRef:
   kind: ClusterRole
   name: tekton-pipelines-controller-cluster-access
   apiGroup: rbac.authorization.k8s.io
----
+
 # If this ClusterRoleBinding is replaced with a RoleBinding
 # then the ClusterRole would be namespaced. The access described by
 # the tekton-pipelines-controller-tenant-access ClusterRole would
@@ -385,7 +385,7 @@ roleRef:
   kind: ClusterRole
   name: tekton-pipelines-controller-tenant-access
   apiGroup: rbac.authorization.k8s.io
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -402,7 +402,7 @@ roleRef:
   kind: ClusterRole
   name: tekton-pipelines-webhook-cluster-access
   apiGroup: rbac.authorization.k8s.io
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -420,7 +420,7 @@ roleRef:
   name: tekton-events-controller-cluster-access
   apiGroup: rbac.authorization.k8s.io
 
----
+
 # Copyright 2020 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -452,7 +452,7 @@ roleRef:
   kind: Role
   name: tekton-pipelines-controller
   apiGroup: rbac.authorization.k8s.io
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -470,7 +470,7 @@ roleRef:
   kind: Role
   name: tekton-pipelines-webhook
   apiGroup: rbac.authorization.k8s.io
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -488,7 +488,7 @@ roleRef:
   kind: Role
   name: tekton-pipelines-leader-election
   apiGroup: rbac.authorization.k8s.io
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -506,7 +506,7 @@ roleRef:
   kind: Role
   name: tekton-pipelines-leader-election
   apiGroup: rbac.authorization.k8s.io
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -525,7 +525,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: tekton-pipelines-info
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -543,7 +543,7 @@ roleRef:
   kind: Role
   name: tekton-pipelines-events-controller
   apiGroup: rbac.authorization.k8s.io
----
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -562,7 +562,7 @@ roleRef:
   name: tekton-pipelines-leader-election
   apiGroup: rbac.authorization.k8s.io
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -617,7 +617,7 @@ spec:
       - tekton-pipelines
   scope: Cluster
 
----
+
 # Copyright 2020 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -685,7 +685,7 @@ spec:
       - tekton-pipelines
   scope: Namespaced
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -764,7 +764,7 @@ spec:
           name: tekton-pipelines-webhook
           namespace: tekton-pipelines
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -874,7 +874,7 @@ spec:
           name: tekton-pipelines-webhook
           namespace: tekton-pipelines
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -977,7 +977,7 @@ spec:
           name: tekton-pipelines-webhook
           namespace: tekton-pipelines
 
----
+
 # Copyright 2023 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1050,7 +1050,7 @@ spec:
       - tekton-pipelines
   scope: Namespaced
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1132,7 +1132,7 @@ spec:
           name: tekton-pipelines-webhook
           namespace: tekton-pipelines
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1242,7 +1242,7 @@ spec:
           name: tekton-pipelines-webhook
           namespace: tekton-pipelines
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1292,7 +1292,7 @@ spec:
       - tekton-pipelines
   scope: Namespaced
 
----
+
 # Copyright 2020 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1318,7 +1318,7 @@ metadata:
     app.kubernetes.io/part-of: tekton-pipelines
     pipeline.tekton.dev/release: "v0.65.0"
 # The data is populated at install time.
----
+
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
@@ -1337,7 +1337,7 @@ webhooks:
     failurePolicy: Fail
     sideEffects: None
     name: validation.webhook.pipeline.tekton.dev
----
+
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
@@ -1356,7 +1356,7 @@ webhooks:
     failurePolicy: Fail
     sideEffects: None
     name: webhook.pipeline.tekton.dev
----
+
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
@@ -1379,7 +1379,7 @@ webhooks:
       matchLabels:
         app.kubernetes.io/part-of: tekton-pipelines
 
----
+
 # Copyright 2019-2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1424,7 +1424,7 @@ rules:
       - update
       - watch
 
----
+
 # Copyright 2019-2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1463,7 +1463,7 @@ rules:
       - list
       - watch
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1611,7 +1611,7 @@ data:
     #       memory: "256Mi"
     #       cpu: "500m"
 
----
+
 # Copyright 2023 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1662,7 +1662,7 @@ data:
     # "config-defaults" config map
     sink: "https://events.sink/cdevents"
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1806,7 +1806,7 @@ data:
   # Setthing this flag to "true" will enable native Kubernetes Sidecar support
   enable-kubernetes-sidecar: "false"
 
----
+
 # Copyright 2021 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1837,7 +1837,7 @@ data:
   # this ConfigMap.
   version: "v0.65.0"
 
----
+
 # Copyright 2020 Tekton Authors LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1891,7 +1891,7 @@ data:
     # that bucket.
     buckets: "1"
 
----
+
 # Copyright 2023 Tekton Authors LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1945,7 +1945,7 @@ data:
     # that bucket.
     buckets: "1"
 
----
+
 # Copyright 2023 Tekton Authors LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -1999,7 +1999,7 @@ data:
     # that bucket.
     buckets: "1"
 
----
+
 # Copyright 2019 Tekton Authors LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2052,7 +2052,7 @@ data:
   loglevel.controller: "info"
   loglevel.webhook: "info"
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2116,7 +2116,7 @@ data:
     metrics.count.enable-reason: "false"
     metrics.running-pipelinerun.level: ""
 
----
+
 # Copyright 2020 Tekton Authors LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2143,7 +2143,7 @@ metadata:
 #  # Registry's self-signed certificate
 #  cert: |
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2194,7 +2194,7 @@ data:
     # spire-node-alias-prefix specifies the SPIRE node alias prefix to use.
     # spire-node-alias-prefix: "/tekton-node/"
 
----
+
 # Copyright 2023 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2242,7 +2242,7 @@ data:
     # (optional) Name of the k8s secret which contains basic auth credentials
     credentialsSecret: "jaeger-creds"
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2393,7 +2393,7 @@ spec:
         - name: config-registry-cert
           configMap:
             name: config-registry-cert
----
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -2427,7 +2427,7 @@ spec:
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
 
----
+
 # Copyright 2023 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2560,7 +2560,7 @@ spec:
         - name: config-registry-cert
           configMap:
             name: config-registry-cert
----
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -2594,7 +2594,7 @@ spec:
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2619,7 +2619,7 @@ metadata:
     app.kubernetes.io/part-of: tekton-pipelines
     pod-security.kubernetes.io/enforce: restricted
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2655,7 +2655,7 @@ rules:
     resources: ["secrets", "serviceaccounts"]
     verbs: ["get", "list", "watch"]
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2689,7 +2689,7 @@ rules:
     resources: ["leases"]
     verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2714,7 +2714,7 @@ metadata:
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
 
----
+
 # Copyright 2021 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2746,7 +2746,7 @@ roleRef:
   name: tekton-pipelines-resolvers-resolution-request-updates
   apiGroup: rbac.authorization.k8s.io
 
----
+
 # Copyright 2021 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2779,7 +2779,7 @@ roleRef:
   name: tekton-pipelines-resolvers-namespace-rbac
   apiGroup: rbac.authorization.k8s.io
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2809,7 +2809,7 @@ data:
   # The default layer kind in the bundle image.
   default-kind: "task"
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2843,7 +2843,7 @@ data:
   # An optional comma-separated list of namespaces which the resolver is blocked from accessing. Defaults to empty, meaning all namespaces are allowed.
   blocked-namespaces: ""
 
----
+
 # Copyright 2019 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2877,7 +2877,7 @@ data:
   # Setting this flag to "true" enables remote resolution of tasks and pipelines from other namespaces within the cluster.
   enable-cluster-resolver: "true"
 
----
+
 # Copyright 2020 Tekton Authors LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2932,7 +2932,7 @@ data:
     # that bucket.
     buckets: "1"
 
----
+
 # Copyright 2019 Tekton Authors LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -2986,7 +2986,7 @@ data:
   loglevel.controller: "info"
   loglevel.webhook: "info"
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3049,7 +3049,7 @@ data:
     # If metrics.backend-destination is not Stackdriver, this is ignored.
     metrics.allow-stackdriver-custom-metrics: "false"
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3094,7 +3094,7 @@ data:
   # if not specified in the resolver parameters. Optional.
   default-org: ""
 
----
+
 # Copyright 2023 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3122,7 +3122,7 @@ data:
   # The maximum amount of time the http resolver will wait for a response from the server.
   fetch-timeout: "1m"
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3158,7 +3158,7 @@ data:
   # the default hub source to pull the resource from.
   default-type: "artifact"
 
----
+
 # Copyright 2022 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3275,7 +3275,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
 
----
+
 # Copyright 2023 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3322,7 +3322,7 @@ spec:
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
 
----
+
 # Copyright 2020 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3367,7 +3367,7 @@ spec:
           type: Utilization
           averageUtilization: 100
 
----
+
 # Copyright 2020 The Tekton Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -3533,7 +3533,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
----
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -3571,4 +3571,4 @@ spec:
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-pipelines
 
----
+
