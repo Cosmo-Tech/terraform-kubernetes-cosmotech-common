@@ -29,6 +29,7 @@ spec:
         app.kubernetes.io/name: dashboard
         app.kubernetes.io/part-of: tekton-dashboard
         app.kubernetes.io/version: v0.52.0
+        networking/traffic-allowed: 'yes'
       name: tekton-dashboard
     spec:
       containers:
@@ -73,5 +74,11 @@ spec:
               type: RuntimeDefault
       nodeSelector:
         kubernetes.io/os: linux
+        "cosmotech.com/tier": "tekton"
+      tolerations:
+          - key: vendor
+            operator: Equal
+            value: tekton
+            effect: NoSchedule
       serviceAccountName: tekton-dashboard
       volumes: []
