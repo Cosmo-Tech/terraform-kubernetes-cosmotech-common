@@ -8,7 +8,7 @@ terraform {
 }
 
 
-resource "kubernetes_manifest" "tekton-pipelines" {
+resource "kubectl_manifest" "tekton-pipelines" {
     yaml_body       = templatefile("${path.module}/tekton-pipelines.yaml")
     validate_schema = false
 }
