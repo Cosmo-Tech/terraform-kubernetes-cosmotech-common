@@ -25,6 +25,7 @@
 | <a name="module_create-ingress-nginx"></a> [create-ingress-nginx](#module\_create-ingress-nginx) | ./create-ingress-nginx | n/a |
 | <a name="module_create-prometheus-stack"></a> [create-prometheus-stack](#module\_create-prometheus-stack) | ./create-prometheus-stack | n/a |
 | <a name="module_create_argocd"></a> [create\_argocd](#module\_create\_argocd) | ./create_argocd | n/a |
+| <a name="module_create_tekton"></a> [create\_tekton](#module\_create\_tekton) | ./create-tekton | n/a |
 | <a name="module_create_vault"></a> [create\_vault](#module\_create\_vault) | ./create_vault | n/a |
 | <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
 | <a name="module_deploy-storageclass"></a> [deploy-storageclass](#module\_deploy-storageclass) | ./deploy-storageclass | n/a |
@@ -127,6 +128,7 @@
 | <a name="input_storageclass_provisioner_azure"></a> [storageclass\_provisioner\_azure](#input\_storageclass\_provisioner\_azure) | n/a | `string` | n/a | yes |
 | <a name="input_storageclass_provisioner_bare"></a> [storageclass\_provisioner\_bare](#input\_storageclass\_provisioner\_bare) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | n/a | `string` | n/a | yes |
+| <a name="input_tekton_deploy"></a> [tekton\_deploy](#input\_tekton\_deploy) | n/a | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
 | <a name="input_tf_access_key"></a> [tf\_access\_key](#input\_tf\_access\_key) | n/a | `string` | n/a | yes |
 | <a name="input_tf_access_key_dns"></a> [tf\_access\_key\_dns](#input\_tf\_access\_key\_dns) | n/a | `string` | n/a | yes |
