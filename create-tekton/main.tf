@@ -14,4 +14,5 @@ data "kubectl_path_documents" "manifests-tekton-yaml" {
 resource "kubectl_manifest" "tekton-pipelines" {
   for_each  = data.kubectl_path_documents.manifests-tekton-yaml.manifests
   yaml_body = each.value
+  wait_for_rollout = false
 }
