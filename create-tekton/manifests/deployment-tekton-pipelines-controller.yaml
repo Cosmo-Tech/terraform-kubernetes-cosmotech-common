@@ -48,6 +48,7 @@ spec:
         # labels below are related to istio and should not be used for resource lookup
         app: tekton-pipelines-controller
         version: "v0.65.0"
+        networking/traffic-allowed: 'yes'
     spec:
       affinity:
         nodeAffinity:
@@ -58,8 +59,14 @@ spec:
                     operator: NotIn
                     values:
                       - windows
+      tolerations:
+          - key: vendor
+            operator: Equal
+            value: cosmotech
+            effect: NoSchedule
       nodeSelector:
         "cosmotech.com/tier": "tekton"
+        "kubernetes.io/os": "linux"
       serviceAccountName: tekton-pipelines-controller
       containers:
         - name: tekton-pipelines-controller
