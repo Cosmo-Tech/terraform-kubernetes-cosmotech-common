@@ -167,6 +167,6 @@ module "create_vault_secrets_operator" {
 module "create_tekton" {
   source = "./create-tekton"
 
-  count = var.tekton_deploy ? 1 : 0
+  #count = var.tekton_deploy ? 1 : 0
 
 }
