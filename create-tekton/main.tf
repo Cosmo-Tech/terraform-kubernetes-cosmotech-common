@@ -7,7 +7,11 @@ terraform {
   }
 }
 
+data "kubectl_path_documents" "manifests-tekton-yaml" {
+  pattern = "./manifests/*.yaml"
+}
+
 resource "kubectl_manifest" "tekton-pipelines" {
-    yaml_body       = file("${path.module}/tekton-pipelines.yaml")
-    validate_schema = true
+  for_each  = data.kubectl_path_documents.manifests-tekton-yaml.manifests
+  yaml_body = each.value
 }
