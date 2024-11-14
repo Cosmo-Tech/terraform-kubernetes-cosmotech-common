@@ -8,7 +8,7 @@ terraform {
 }
 
 data "kubectl_path_documents" "manifests-tekton-yaml" {
-  pattern = "./manifests/*.yaml"
+  pattern = "${path.module}/manifests/*.yaml"
 }
 
 resource "kubectl_manifest" "tekton-pipelines" {
