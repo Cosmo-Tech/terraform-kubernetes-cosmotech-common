@@ -22,7 +22,6 @@
 | <a name="module_create-ingress-nginx"></a> [create-ingress-nginx](#module\_create-ingress-nginx) | ./create-ingress-nginx | n/a |
 | <a name="module_create-prometheus-stack"></a> [create-prometheus-stack](#module\_create-prometheus-stack) | ./create-prometheus-stack | n/a |
 | <a name="module_create_argocd"></a> [create\_argocd](#module\_create\_argocd) | ./create_argocd | n/a |
-| <a name="module_create_tekton"></a> [create\_tekton](#module\_create\_tekton) | ./create-tekton | n/a |
 | <a name="module_create_vault"></a> [create\_vault](#module\_create\_vault) | ./create_vault | n/a |
 | <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
 | <a name="module_deploy_velero"></a> [deploy\_velero](#module\_deploy\_velero) | ./create_velero | n/a |
