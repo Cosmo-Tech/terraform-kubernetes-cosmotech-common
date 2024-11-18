@@ -141,7 +141,7 @@
 | <a name="input_velero_blob_storage_name"></a> [velero\_blob\_storage\_name](#input\_velero\_blob\_storage\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_bucket_name"></a> [velero\_bucket\_name](#input\_velero\_bucket\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_cloud_provider"></a> [velero\_cloud\_provider](#input\_velero\_cloud\_provider) | n/a | `string` | n/a | yes |
-| <a name="input_velero_deploy"></a> [velero\_deploy](#input\_velero\_deploy) | n/a | `boolx` | n/a | yes |
+| <a name="input_velero_deploy"></a> [velero\_deploy](#input\_velero\_deploy) | n/a | `bool` | n/a | yes |
 | <a name="input_velero_helm_chart"></a> [velero\_helm\_chart](#input\_velero\_helm\_chart) | n/a | `string` | n/a | yes |
 | <a name="input_velero_helm_chart_version"></a> [velero\_helm\_chart\_version](#input\_velero\_helm\_chart\_version) | n/a | `string` | n/a | yes |
 | <a name="input_velero_helm_repo_url"></a> [velero\_helm\_repo\_url](#input\_velero\_helm\_repo\_url) | n/a | `string` | n/a | yes |
