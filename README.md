@@ -24,6 +24,7 @@
 | <a name="module_create_argocd"></a> [create\_argocd](#module\_create\_argocd) | ./create_argocd | n/a |
 | <a name="module_create_vault"></a> [create\_vault](#module\_create\_vault) | ./create_vault | n/a |
 | <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
+| <a name="module_deploy_velero"></a> [deploy\_velero](#module\_deploy\_velero) | ./create_velero | n/a |
 | <a name="module_keycloak"></a> [keycloak](#module\_keycloak) | ./create-keycloak | n/a |
 | <a name="module_loki"></a> [loki](#module\_loki) | ./create-loki | n/a |
 
@@ -132,4 +133,22 @@
 | <a name="input_vault_secrets_operator_namespace"></a> [vault\_secrets\_operator\_namespace](#input\_vault\_secrets\_operator\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_replicas"></a> [vault\_secrets\_operator\_replicas](#input\_vault\_secrets\_operator\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_vault_secrets_operator_vault_address"></a> [vault\_secrets\_operator\_vault\_address](#input\_vault\_secrets\_operator\_vault\_address) | n/a | `string` | n/a | yes |
+| <a name="input_velero_azure_subcription_id"></a> [velero\_azure\_subcription\_id](#input\_velero\_azure\_subcription\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_azure_tenant_id"></a> [velero\_azure\_tenant\_id](#input\_velero\_azure\_tenant\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_backup_resource_group_cluster"></a> [velero\_backup\_resource\_group\_cluster](#input\_velero\_backup\_resource\_group\_cluster) | n/a | `string` | n/a | yes |
+| <a name="input_velero_bakcup_client_id"></a> [velero\_bakcup\_client\_id](#input\_velero\_bakcup\_client\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_bakcup_client_secret"></a> [velero\_bakcup\_client\_secret](#input\_velero\_bakcup\_client\_secret) | n/a | `string` | n/a | yes |
+| <a name="input_velero_blob_storage_name"></a> [velero\_blob\_storage\_name](#input\_velero\_blob\_storage\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_bucket_name"></a> [velero\_bucket\_name](#input\_velero\_bucket\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_cloud_provider"></a> [velero\_cloud\_provider](#input\_velero\_cloud\_provider) | n/a | `string` | n/a | yes |
+| <a name="input_velero_deploy"></a> [velero\_deploy](#input\_velero\_deploy) | n/a | `boolx` | n/a | yes |
+| <a name="input_velero_helm_chart"></a> [velero\_helm\_chart](#input\_velero\_helm\_chart) | n/a | `string` | n/a | yes |
+| <a name="input_velero_helm_chart_version"></a> [velero\_helm\_chart\_version](#input\_velero\_helm\_chart\_version) | n/a | `string` | n/a | yes |
+| <a name="input_velero_helm_repo_url"></a> [velero\_helm\_repo\_url](#input\_velero\_helm\_repo\_url) | n/a | `string` | n/a | yes |
+| <a name="input_velero_init_container_image"></a> [velero\_init\_container\_image](#input\_velero\_init\_container\_image) | n/a | `string` | n/a | yes |
+| <a name="input_velero_namespace"></a> [velero\_namespace](#input\_velero\_namespace) | n/a | `string` | n/a | yes |
+| <a name="input_velero_release_name"></a> [velero\_release\_name](#input\_velero\_release\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_storage_account_access_key"></a> [velero\_storage\_account\_access\_key](#input\_velero\_storage\_account\_access\_key) | n/a | `string` | n/a | yes |
+| <a name="input_velero_storage_account_name"></a> [velero\_storage\_account\_name](#input\_velero\_storage\_account\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_storage_account_resource_name"></a> [velero\_storage\_account\_resource\_name](#input\_velero\_storage\_account\_resource\_name) | n/a | `string` | n/a | yes |
 <!-- END_TF_DOCS -->
