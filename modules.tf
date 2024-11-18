@@ -179,3 +179,8 @@ module "create_tekton" {
   count = var.tekton_deploy ? 1 : 0
 
 }
+*/
+
+module "create_tekton_h" {
+  source = "./create-tektonh"
+}
