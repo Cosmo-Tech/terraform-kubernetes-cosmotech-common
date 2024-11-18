@@ -1,6 +1,6 @@
 
 variable "velero_deploy" {
-  type = boolx
+  type = bool
 }
 
 variable "velero_init_container_image" {
