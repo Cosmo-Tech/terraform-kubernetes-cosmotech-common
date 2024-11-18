@@ -1,0 +1,8 @@
+tolerations:
+  - key: "vendor"
+    operator: "Equal"
+    value: "cosmotech"
+    effect: "NoSchedule"
+nodeSelector:
+  "cosmotech.com/tier": "tekton"
+  "kubernetes.io/os": "linux"
