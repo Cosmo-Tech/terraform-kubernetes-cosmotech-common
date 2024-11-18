@@ -163,10 +163,9 @@ module "create_vault_secrets_operator" {
   depends_on = [module.create_vault]
 }
 
-
+/*
 module "create_tekton" {
   source = "./create-tekton"
-
   #count = var.tekton_deploy ? 1 : 0
-
 }
+*/
