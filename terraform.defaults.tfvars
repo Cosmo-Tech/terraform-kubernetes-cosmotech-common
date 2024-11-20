@@ -98,9 +98,14 @@ auto_restart_start_minutes = 0
 vault_secrets_operator_namespace     = "vault-secrets-operator"
 vault_secrets_operator_vault_address = "http://vault.vault.svc.cluster.local:8200"
 vault_namespace                      = "vault"
+
 tekton_namespace                     = "tekton-pipelines"
 tekton_helm_repo_url                 = "https://lukacsbarni.github.io/tekton/"
 tekton_helm_chart                    = "tekton-pipelines"
 tekton_helm_chart_version            = "0.1.4"
 tekton_helm_release_name             = "tekton-pipelines"
+tekton_dashboard_helm_repo_url       = "https://lukacsbarni.github.io/tekton/"
+tekton_dashboard_helm_chart          = "tekton-dashboard"
+tekton_dashboard_helm_chart_version  = "0.1.4"
+tekton_dashboard_helm_release_name   = "tekton-dashboard"
 
