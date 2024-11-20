@@ -114,6 +114,10 @@
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_redis_admin_password"></a> [redis\_admin\_password](#input\_redis\_admin\_password) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | n/a | `string` | n/a | yes |
+| <a name="input_tekton_dashboard_helm_chart"></a> [tekton\_dashboard\_helm\_chart](#input\_tekton\_dashboard\_helm\_chart) | n/a | `string` | n/a | yes |
+| <a name="input_tekton_dashboard_helm_chart_version"></a> [tekton\_dashboard\_helm\_chart\_version](#input\_tekton\_dashboard\_helm\_chart\_version) | n/a | `string` | n/a | yes |
+| <a name="input_tekton_dashboard_helm_release_name"></a> [tekton\_dashboard\_helm\_release\_name](#input\_tekton\_dashboard\_helm\_release\_name) | n/a | `string` | n/a | yes |
+| <a name="input_tekton_dashboard_helm_repo_url"></a> [tekton\_dashboard\_helm\_repo\_url](#input\_tekton\_dashboard\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_tekton_helm_chart"></a> [tekton\_helm\_chart](#input\_tekton\_helm\_chart) | n/a | `string` | n/a | yes |
 | <a name="input_tekton_helm_chart_version"></a> [tekton\_helm\_chart\_version](#input\_tekton\_helm\_chart\_version) | n/a | `string` | n/a | yes |
 | <a name="input_tekton_helm_release_name"></a> [tekton\_helm\_release\_name](#input\_tekton\_helm\_release\_name) | n/a | `string` | n/a | yes |
