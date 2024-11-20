@@ -31,7 +31,7 @@ resource "helm_release" "tekton-pipelines" {
 }
 
 resource "helm_release" "tekton-dashboard" {
-  name         = local.dashboard_helm_release_name
+  name         = local.dashboard_name
   repository   = var.dashboard_helm_repo_url
   chart        = var.dashboard_helm_chart
   version      = var.dashboard_helm_chart_version
