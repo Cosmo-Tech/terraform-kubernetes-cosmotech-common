@@ -172,10 +172,10 @@ module "create_tekton" {
 
 module "create_tekton_h" {
   source = "./create-tektonh"
-  
-  tekton_namespace               = var.tekton_namespace
-  tekton_helm_repo_url           = var.tekton_helm_repo_url
-  tekton_helm_chart              = var.tekton_helm_chart
-  tekton_helm_chart_version      = var.tekton_helm_chart_version
-  tekton_helm_release_name       = var.cert_helm_release_name
+
+  namespace               = var.tekton_namespace
+  helm_repo_url           = var.tekton_helm_repo_url
+  helm_chart              = var.tekton_helm_chart
+  helm_chart_version      = var.tekton_helm_chart_version
+  helm_release_name       = var.tekton_helm_release_name
 }
