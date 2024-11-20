@@ -1,7 +1,7 @@
 tolerations:
   - key: "vendor"
     operator: "Equal"
-    value: "cosmotech"
+    value: "tekton"
     effect: "NoSchedule"
 nodeSelector:
   "cosmotech.com/tier": "tekton"
