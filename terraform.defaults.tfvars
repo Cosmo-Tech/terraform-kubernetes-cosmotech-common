@@ -101,6 +101,6 @@ vault_namespace                      = "vault"
 tekton_namespace                     = "tekton-pipelines"
 tekton_helm_repo_url                 = "https://lukacsbarni.github.io/tekton/"
 tekton_helm_chart                    = "tekton-pipelines"
-tekton_helm_chart_version            = "0.1.2"
+tekton_helm_chart_version            = "0.1.4"
 tekton_helm_release_name             = "tekton-pipelines"
 
