@@ -6,3 +6,4 @@ tolerations:
 nodeSelector:
   "cosmotech.com/tier": "tekton"
   "kubernetes.io/os": "linux"
+serviceAccountName: tekton-triggers-core-interceptors
