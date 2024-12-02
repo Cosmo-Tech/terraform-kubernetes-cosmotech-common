@@ -188,12 +188,6 @@ module "deploy_velero" {
 
 }
 
-/*
-module "create_tekton" {
-  source = "./create-tekton"
-  #count = var.tekton_deploy ? 1 : 0
-}
-*/
 
 module "create_tekton" {
   source = "./create-tekton"
