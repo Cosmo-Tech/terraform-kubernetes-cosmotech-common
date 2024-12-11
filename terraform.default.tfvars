@@ -133,6 +133,7 @@ vault_secrets_operator_namespace          = "vault-secrets-operator"
 vault_secrets_operator_vault_address      = "http://vault.vault.svc.cluster.local:8200"
 vault_secrets_operator_replicas           = 1
 
+
 # velero
 velero_deploy                        = false
 velero_init_container_image          = "velero/velero-plugin-for-microsoft-azure:v1.11.0"
