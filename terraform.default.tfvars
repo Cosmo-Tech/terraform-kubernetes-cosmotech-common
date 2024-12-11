@@ -135,10 +135,19 @@ auto_restart_start_minutes = 0
 # Vault secrets operator
 vault_secrets_operator_namespace     = "vault-secrets-operator"
 vault_secrets_operator_vault_address = "http://vault.vault.svc.cluster.local:8200"
-vault_namespace                      = "vault"
-tekton_namespace                     = "tekton-pipelines"
-tekton_helm_repo_url                 = "https://lukacsbarni.github.io/tekton/"
-tekton_helm_chart                    = "tekton-pipelines"
-tekton_helm_chart_version            = "0.1.2"
-tekton_helm_release_name             = "tekton-pieplines"
 
+# velero
+velero_deploy                        = false
+velero_init_container_image          = "velero/velero-plugin-for-microsoft-azure:v1.11.0"
+velero_blob_storage_name             = "backups"
+velero_cloud_provider                = "azure"
+velero_bucket_name                   = "velero"
+velero_release_name                  = "velero"
+velero_helm_repo_url                 = "https://vmware-tanzu.github.io/helm-charts"
+velero_helm_chart                    = "velero"
+velero_helm_chart_version            = "8.0.0"
+velero_namespace                     = "velero"
+velero_storage_account_name          = ""
+velero_storage_account_resource_name = ""
+velero_azure_subcription_id          = ""
+velero_azure_tenant_id               = ""
