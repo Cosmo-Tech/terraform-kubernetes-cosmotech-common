@@ -27,11 +27,11 @@ variable "velero_storage_account_resource_name" {
   type = string
 }
 
-variable "velero_bakcup_client_id" {
+variable "velero_backup_client_id" {
   type = string
 }
 
-variable "velero_bakcup_client_secret" {
+variable "velero_backup_client_secret" {
   type = string
 }
 
