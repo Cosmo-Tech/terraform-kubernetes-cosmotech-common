@@ -98,6 +98,7 @@ auto_restart_start_minutes = 0
 vault_secrets_operator_namespace     = "vault-secrets-operator"
 vault_secrets_operator_vault_address = "http://vault.vault.svc.cluster.local:8200"
 
+
 # velero
 velero_deploy                        = false
 velero_init_container_image          = "velero/velero-plugin-for-microsoft-azure:v1.11.0"
@@ -113,24 +114,3 @@ velero_storage_account_name          = ""
 velero_storage_account_resource_name = ""
 velero_azure_subcription_id          = ""
 velero_azure_tenant_id               = ""
-=======
-vault_namespace                      = "vault"
-
-#Tekton variables
-tekton_namespace                        = "tekton-pipelines"
-tekton_helm_repo_url                    = "https://lukacsbarni.github.io/tekton/"
-tekton_helm_chart                       = "tekton-pipelines"
-tekton_helm_chart_version               = "0.1.5"
-tekton_helm_release_name                = "tekton-pipelines"
-tekton_dashboard_helm_repo_url          = "https://lukacsbarni.github.io/tekton/"
-tekton_dashboard_helm_chart             = "tekton-dashboard"
-tekton_dashboard_helm_chart_version     = "0.1.5"
-tekton_dashboard_helm_release_name      = "tekton-dashboard"
-tekton_triggers_helm_repo_url           = "https://lukacsbarni.github.io/tekton/"
-tekton_triggers_helm_chart              = "tekton-triggers"
-tekton_triggers_helm_chart_version      = "0.1.5"
-tekton_triggers_helm_release_name       = "tekton-triggers"
-tekton_interceptors_helm_repo_url       = "https://lukacsbarni.github.io/tekton/"
-tekton_interceptors_helm_chart          = "tekton-interceptors"
-tekton_interceptors_helm_chart_version  = "0.1.5"
-tekton_interceptors_helm_release_name   = "tekton-interceptors"

@@ -7,14 +7,12 @@ spec:
   secretName: ${TLS_SECRET_NAME}
   dnsNames:
     - ${COSMOTECH_API_DNS_NAME}
-    - tekton.api.cosmotech.com
   acme:
     config:
       - http01:
           ingressClass: nginx
         domains:
           - ${COSMOTECH_API_DNS_NAME}
-          - tekton.api.cosmotech.com
   issuerRef:
     name: ${CERT_MANAGER_ACME}
     kind: ClusterIssuer
