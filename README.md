@@ -22,9 +22,9 @@
 | <a name="module_create-ingress-nginx"></a> [create-ingress-nginx](#module\_create-ingress-nginx) | ./create-ingress-nginx | n/a |
 | <a name="module_create-prometheus-stack"></a> [create-prometheus-stack](#module\_create-prometheus-stack) | ./create-prometheus-stack | n/a |
 | <a name="module_create_argocd"></a> [create\_argocd](#module\_create\_argocd) | ./create_argocd | n/a |
-| <a name="module_create_tekton"></a> [create\_tekton](#module\_create\_tekton) | ./create-tekton | n/a |
 | <a name="module_create_vault"></a> [create\_vault](#module\_create\_vault) | ./create_vault | n/a |
 | <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
+| <a name="module_deploy_velero"></a> [deploy\_velero](#module\_deploy\_velero) | ./create_velero | n/a |
 | <a name="module_keycloak"></a> [keycloak](#module\_keycloak) | ./create-keycloak | n/a |
 | <a name="module_loki"></a> [loki](#module\_loki) | ./create-loki | n/a |
 
@@ -51,6 +51,8 @@
 | <a name="input_argocd_repositories"></a> [argocd\_repositories](#input\_argocd\_repositories) | n/a | <pre>list(object({<br>    url      = string<br>    private  = bool<br>    token    = string<br>    username = string<br>  }))</pre> | n/a | yes |
 | <a name="input_argocd_setup_job_image_version"></a> [argocd\_setup\_job\_image\_version](#input\_argocd\_setup\_job\_image\_version) | n/a | `string` | n/a | yes |
 | <a name="input_auto_restart_deploy"></a> [auto\_restart\_deploy](#input\_auto\_restart\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_auto_restart_start_hours"></a> [auto\_restart\_start\_hours](#input\_auto\_restart\_start\_hours) | n/a | `number` | n/a | yes |
+| <a name="input_auto_restart_start_minutes"></a> [auto\_restart\_start\_minutes](#input\_auto\_restart\_start\_minutes) | n/a | `number` | n/a | yes |
 | <a name="input_cert_helm_release_name"></a> [cert\_helm\_release\_name](#input\_cert\_helm\_release\_name) | n/a | `string` | n/a | yes |
 | <a name="input_cert_helm_repo_url"></a> [cert\_helm\_repo\_url](#input\_cert\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | HELM Chart Version for cert-manager | `string` | n/a | yes |
@@ -81,6 +83,7 @@
 | <a name="input_loki_persistence_memory"></a> [loki\_persistence\_memory](#input\_loki\_persistence\_memory) | n/a | `string` | n/a | yes |
 | <a name="input_loki_provisioner"></a> [loki\_provisioner](#input\_loki\_provisioner) | Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path' | `string` | n/a | yes |
 | <a name="input_loki_release_name"></a> [loki\_release\_name](#input\_loki\_release\_name) | n/a | `string` | n/a | yes |
+| <a name="input_loki_resources"></a> [loki\_resources](#input\_loki\_resources) | Values for the persistent volume and persistent volume claims when in <br>  a bare metal context and provisioner is set to local-path.<br>  If a provisioner is available, set the provisioner variable to the <br>  value of the StorageClass for this provisioner. | <pre>list(object({<br>    name         = string<br>    storage      = string<br>    labels       = map(string)<br>    access_modes = list(string)<br>    path         = string<br>  }))</pre> | n/a | yes |
 | <a name="input_loki_retention_period"></a> [loki\_retention\_period](#input\_loki\_retention\_period) | n/a | `string` | n/a | yes |
 | <a name="input_monitoring_namespace"></a> [monitoring\_namespace](#input\_monitoring\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_nginx_deploy"></a> [nginx\_deploy](#input\_nginx\_deploy) | n/a | `bool` | n/a | yes |
@@ -110,19 +113,6 @@
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_redis_admin_password"></a> [redis\_admin\_password](#input\_redis\_admin\_password) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_helm_chart"></a> [tekton\_helm\_chart](#input\_tekton\_helm\_chart) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_helm_chart_version"></a> [tekton\_helm\_chart\_version](#input\_tekton\_helm\_chart\_version) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_helm_release_name"></a> [tekton\_helm\_release\_name](#input\_tekton\_helm\_release\_name) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_helm_repo_url"></a> [tekton\_helm\_repo\_url](#input\_tekton\_helm\_repo\_url) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_interceptors_helm_chart"></a> [tekton\_interceptors\_helm\_chart](#input\_tekton\_interceptors\_helm\_chart) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_interceptors_helm_chart_version"></a> [tekton\_interceptors\_helm\_chart\_version](#input\_tekton\_interceptors\_helm\_chart\_version) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_interceptors_helm_release_name"></a> [tekton\_interceptors\_helm\_release\_name](#input\_tekton\_interceptors\_helm\_release\_name) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_interceptors_helm_repo_url"></a> [tekton\_interceptors\_helm\_repo\_url](#input\_tekton\_interceptors\_helm\_repo\_url) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_namespace"></a> [tekton\_namespace](#input\_tekton\_namespace) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_triggers_helm_chart"></a> [tekton\_triggers\_helm\_chart](#input\_tekton\_triggers\_helm\_chart) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_triggers_helm_chart_version"></a> [tekton\_triggers\_helm\_chart\_version](#input\_tekton\_triggers\_helm\_chart\_version) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_triggers_helm_release_name"></a> [tekton\_triggers\_helm\_release\_name](#input\_tekton\_triggers\_helm\_release\_name) | n/a | `string` | n/a | yes |
-| <a name="input_tekton_triggers_helm_repo_url"></a> [tekton\_triggers\_helm\_repo\_url](#input\_tekton\_triggers\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
 | <a name="input_tls_certificate_type"></a> [tls\_certificate\_type](#input\_tls\_certificate\_type) | n/a | `string` | n/a | yes |
 | <a name="input_tls_secret_name"></a> [tls\_secret\_name](#input\_tls\_secret\_name) | n/a | `string` | n/a | yes |
@@ -143,7 +133,22 @@
 | <a name="input_vault_secrets_operator_namespace"></a> [vault\_secrets\_operator\_namespace](#input\_vault\_secrets\_operator\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_replicas"></a> [vault\_secrets\_operator\_replicas](#input\_vault\_secrets\_operator\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_vault_secrets_operator_vault_address"></a> [vault\_secrets\_operator\_vault\_address](#input\_vault\_secrets\_operator\_vault\_address) | n/a | `string` | n/a | yes |
-| <a name="input_auto_restart_start_hours"></a> [auto\_restart\_start\_hours](#input\_auto\_restart\_start\_hours) | n/a | `number` | `5` | no |
-| <a name="input_auto_restart_start_minutes"></a> [auto\_restart\_start\_minutes](#input\_auto\_restart\_start\_minutes) | n/a | `number` | `0` | no |
-| <a name="input_loki_resources"></a> [loki\_resources](#input\_loki\_resources) | Values for the persistent volume and persistent volume claims when in <br>  a bare metal context and provisioner is set to local-path.<br>  If a provisioner is available, set the provisioner variable to the <br>  value of the StorageClass for this provisioner. | <pre>list(object({<br>    name         = string<br>    storage      = string<br>    labels       = map(string)<br>    access_modes = list(string)<br>    path         = string<br>  }))</pre> | <pre>[<br>  {<br>    "access_modes": [<br>      "ReadWriteOnce"<br>    ],<br>    "labels": {<br>      "cosmotech.com/db": "loki"<br>    },<br>    "name": "loki",<br>    "path": "/mnt/loki-storage",<br>    "storage": "8Gi"<br>  },<br>  {<br>    "access_modes": [<br>      "ReadWriteOnce"<br>    ],<br>    "labels": {<br>      "cosmotech.com/db": "grafana"<br>    },<br>    "name": "grafana",<br>    "path": "/mnt/grafana-storage",<br>    "storage": "8Gi"<br>  }<br>]</pre> | no |
+| <a name="input_velero_azure_subcription_id"></a> [velero\_azure\_subcription\_id](#input\_velero\_azure\_subcription\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_azure_tenant_id"></a> [velero\_azure\_tenant\_id](#input\_velero\_azure\_tenant\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_backup_resource_group_cluster"></a> [velero\_backup\_resource\_group\_cluster](#input\_velero\_backup\_resource\_group\_cluster) | n/a | `string` | n/a | yes |
+| <a name="input_velero_bakcup_client_id"></a> [velero\_bakcup\_client\_id](#input\_velero\_bakcup\_client\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_bakcup_client_secret"></a> [velero\_bakcup\_client\_secret](#input\_velero\_bakcup\_client\_secret) | n/a | `string` | n/a | yes |
+| <a name="input_velero_blob_storage_name"></a> [velero\_blob\_storage\_name](#input\_velero\_blob\_storage\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_bucket_name"></a> [velero\_bucket\_name](#input\_velero\_bucket\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_cloud_provider"></a> [velero\_cloud\_provider](#input\_velero\_cloud\_provider) | n/a | `string` | n/a | yes |
+| <a name="input_velero_deploy"></a> [velero\_deploy](#input\_velero\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_velero_helm_chart"></a> [velero\_helm\_chart](#input\_velero\_helm\_chart) | n/a | `string` | n/a | yes |
+| <a name="input_velero_helm_chart_version"></a> [velero\_helm\_chart\_version](#input\_velero\_helm\_chart\_version) | n/a | `string` | n/a | yes |
+| <a name="input_velero_helm_repo_url"></a> [velero\_helm\_repo\_url](#input\_velero\_helm\_repo\_url) | n/a | `string` | n/a | yes |
+| <a name="input_velero_init_container_image"></a> [velero\_init\_container\_image](#input\_velero\_init\_container\_image) | n/a | `string` | n/a | yes |
+| <a name="input_velero_namespace"></a> [velero\_namespace](#input\_velero\_namespace) | n/a | `string` | n/a | yes |
+| <a name="input_velero_release_name"></a> [velero\_release\_name](#input\_velero\_release\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_storage_account_access_key"></a> [velero\_storage\_account\_access\_key](#input\_velero\_storage\_account\_access\_key) | n/a | `string` | n/a | yes |
+| <a name="input_velero_storage_account_name"></a> [velero\_storage\_account\_name](#input\_velero\_storage\_account\_name) | n/a | `string` | n/a | yes |
+| <a name="input_velero_storage_account_resource_name"></a> [velero\_storage\_account\_resource\_name](#input\_velero\_storage\_account\_resource\_name) | n/a | `string` | n/a | yes |
 <!-- END_TF_DOCS -->
