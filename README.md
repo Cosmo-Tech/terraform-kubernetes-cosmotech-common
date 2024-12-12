@@ -135,9 +135,9 @@
 | <a name="input_vault_secrets_operator_vault_address"></a> [vault\_secrets\_operator\_vault\_address](#input\_vault\_secrets\_operator\_vault\_address) | n/a | `string` | n/a | yes |
 | <a name="input_velero_azure_subcription_id"></a> [velero\_azure\_subcription\_id](#input\_velero\_azure\_subcription\_id) | n/a | `string` | n/a | yes |
 | <a name="input_velero_azure_tenant_id"></a> [velero\_azure\_tenant\_id](#input\_velero\_azure\_tenant\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_backup_client_id"></a> [velero\_backup\_client\_id](#input\_velero\_backup\_client\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_backup_client_secret"></a> [velero\_backup\_client\_secret](#input\_velero\_backup\_client\_secret) | n/a | `string` | n/a | yes |
 | <a name="input_velero_backup_resource_group_cluster"></a> [velero\_backup\_resource\_group\_cluster](#input\_velero\_backup\_resource\_group\_cluster) | n/a | `string` | n/a | yes |
-| <a name="input_velero_bakcup_client_id"></a> [velero\_bakcup\_client\_id](#input\_velero\_bakcup\_client\_id) | n/a | `string` | n/a | yes |
-| <a name="input_velero_bakcup_client_secret"></a> [velero\_bakcup\_client\_secret](#input\_velero\_bakcup\_client\_secret) | n/a | `string` | n/a | yes |
 | <a name="input_velero_blob_storage_name"></a> [velero\_blob\_storage\_name](#input\_velero\_blob\_storage\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_bucket_name"></a> [velero\_bucket\_name](#input\_velero\_bucket\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_cloud_provider"></a> [velero\_cloud\_provider](#input\_velero\_cloud\_provider) | n/a | `string` | n/a | yes |
