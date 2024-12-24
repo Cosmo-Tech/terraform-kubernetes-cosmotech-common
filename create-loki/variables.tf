@@ -27,9 +27,9 @@ variable "helm_repo_url" {
   default = "https://grafana.github.io/helm-charts"
 }
 
-variable "helm_chart" {
+variable "loki_helm_chart" {
   type    = string
-  default = "loki-stack"
+  default = "loki"
 }
 
 variable "loki_max_entries_limet_per_query" {
@@ -41,13 +41,22 @@ variable "grafana_loki_compatibility_image_tag" {
   type = string
 }
 
-variable "is_bare_metal" {
-  type = bool
+variable "promtail_release_name" {
+  type    = string
+  default = "promtail"
 }
 
-variable "resources" {
+variable "promtail_helm_chart" {
+  type    = string
+  default = "promtail"
 }
 
-variable "provisioner" {
-  type = string
+variable "promtail_chart_version" {
+  type    = string
+  default = "6.16.4"
+}
+
+variable "loki_chart_version" {
+  type    = string
+  default = "6.7.1"
 }

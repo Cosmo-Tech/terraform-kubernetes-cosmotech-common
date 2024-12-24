@@ -53,12 +53,10 @@ module "loki" {
   loki_persistence_memory              = var.loki_persistence_memory
   loki_retention_period                = var.loki_retention_period
   helm_repo_url                        = var.helm_repo_url
-  helm_chart                           = var.helm_chart
+  loki_helm_chart                      = var.loki_helm_chart
+  promtail_helm_chart                  = var.promtail_helm_chart
   loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
   grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
-  is_bare_metal                        = var.is_bare_metal
-  provisioner                          = var.provisioner
-  resources                            = var.resources
 }
 
 module "keycloak" {

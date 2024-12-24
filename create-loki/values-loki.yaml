@@ -1,0 +1,48 @@
+loki:
+  isDefault: false
+  tolerations:
+    - key: "vendor"
+      operator: "Equal"
+      value: "cosmotech"
+      effect: "NoSchedule"
+  nodeSelector:
+    "cosmotech.com/tier": "monitoring"
+
+  auth_enabled: false
+
+  commonConfig:
+    path_prefix: /var/loki
+    replication_factor: 1
+    compactor_address: '{{ include "loki.compactorAddress" . }}'  
+
+  storage:
+    type: 'filesystem'
+  
+  schemaConfig:
+    configs:
+    - from: 2024-01-01
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+
+  limits_config:
+    max_entries_limit_per_query: ${LOKI_MAX_ENTRIES_LIMIT_PER_QUERY}
+
+write:
+  replicas: 0
+read:
+  replicas: 0
+backend:
+  replicas: 0
+
+table_manager:
+  enabled: true
+  retention_deletes_enabled: true
+  retention_period: "${LOKI_RETENTION_PERIOD}"
+
+deploymentMode: SingleBinary
+singleBinary:
+  replicas: 1
