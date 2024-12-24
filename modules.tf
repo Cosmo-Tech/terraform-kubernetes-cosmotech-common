@@ -69,3 +69,10 @@ module "keycloak" {
   is_bare_metal             = var.is_bare_metal
   provisioner               = var.provisioner
 }
+
+module "create-argo-crds" {
+  source = "./create-argo-crds"
+
+  argo_workflows_app_version = var.argo_workflows_app_version
+  argo_workflows_crds_list   = var.argo_workflows_crds_list
+}

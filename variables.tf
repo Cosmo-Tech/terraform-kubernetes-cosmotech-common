@@ -161,3 +161,29 @@ variable "provisioner" {
 variable "create_keycloak" {
   type = bool
 }
+
+variable "argo_workflows_app_version" {
+  type        = string
+  default     = "v3.5.8"
+  description = "The argo-workflows application version to install (not the Helm chart version !)"
+}
+
+variable "argo_workflows_crds_list" {
+  type        = list(string)
+  description = <<EOT
+  List of Argo Workflows CRDs to install. Should match the list of 
+  CRDs for the specific version of the application.
+  The pattern of the URL to check is something like:
+  "https://raw.githubusercontent.com/argoproj/argo-workflows/<APP_VERSION>/manifests/base/crds/minimal"
+  EOT
+  default = [
+    "argoproj.io_clusterworkflowtemplates.yaml",
+    "argoproj.io_cronworkflows.yaml",
+    "argoproj.io_workflowartifactgctasks.yaml",
+    "argoproj.io_workfloweventbindings.yaml",
+    "argoproj.io_workflows.yaml",
+    "argoproj.io_workflowtaskresults.yaml",
+    "argoproj.io_workflowtasksets.yaml",
+    "argoproj.io_workflowtemplates.yaml"
+  ]
+}
