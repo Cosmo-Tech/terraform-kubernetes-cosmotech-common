@@ -22,6 +22,10 @@ variable "loki_helm_chart" {
   type = string
 }
 
+variable "loki_helm_chart_version" {
+  type = string
+}
+
 variable "loki_max_entries_limet_per_query" {
   type = number
 }

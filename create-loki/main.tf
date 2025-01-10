@@ -27,9 +27,10 @@ resource "time_sleep" "wait_termination" {
 
 resource "helm_release" "loki" {
   name         = var.loki_release_name
-  repository   = var.helm_repo_url
-  chart        = var.helm_chart
+  repository   = var.loki_helm_repo_url
+  chart        = var.loki_helm_chart
   namespace    = var.monitoring_namespace
+  version      = var.loki_helm_chart_version
   reset_values = true
   values = [
     templatefile("${path.module}/${local.values}.yaml", local.values_loki)
