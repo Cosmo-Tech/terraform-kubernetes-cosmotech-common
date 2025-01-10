@@ -114,3 +114,16 @@ velero_storage_account_name          = ""
 velero_storage_account_resource_name = ""
 velero_azure_subcription_id          = ""
 velero_azure_tenant_id               = ""
+
+
+# remote add
+tf_resource_group_name    = ""
+tf_storage_account_name   = ""
+tf_access_key             = ""
+tf_container_name         = ""
+tf_blob_name              = ""
+tf_blob_name_core_infra   = ""
+tf_blob_name_tenant_infra = ""
+
+# admin user or not
+kubernetes_cluster_admin_activate = false

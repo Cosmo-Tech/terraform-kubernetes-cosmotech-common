@@ -17,4 +17,3 @@ variable "subscription_id" {
 variable "kubernetes_resource_group" {
   type = string
 }
-
