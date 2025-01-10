@@ -32,6 +32,7 @@ loki_persistence_memory              = "4Gi"
 loki_retention_period                = "720h"
 loki_helm_repo_url                   = "https://grafana.github.io/helm-charts"
 loki_helm_chart                      = "loki-stack"
+loki_helm_chart_version              = "2.10.2"
 loki_max_entries_limet_per_query     = 50000
 grafana_loki_compatibility_image_tag = ""
 loki_provisioner                     = ""
@@ -91,6 +92,7 @@ argocd_namespace = "argocd"
 vault_namespace = "vault"
 
 # Vault auto unseal
+auto_restart_deploy        = false
 auto_restart_start_hours   = 5
 auto_restart_start_minutes = 0
 
@@ -116,14 +118,21 @@ velero_azure_subcription_id          = ""
 velero_azure_tenant_id               = ""
 
 
-# remote add
-tf_resource_group_name    = ""
-tf_storage_account_name   = ""
-tf_access_key             = ""
-tf_container_name         = ""
-tf_blob_name              = ""
-tf_blob_name_core_infra   = ""
-tf_blob_name_tenant_infra = ""
+# remote 
+tf_resource_group_name  = ""
+tf_storage_account_name = ""
+tf_access_key           = ""
+tf_container_name       = ""
+tf_blob_name            = ""
+tf_blob_name_core_ip    = ""
+tf_blob_name_core_infra = ""
+
+# remote dns
+tf_resource_group_name_dns  = ""
+tf_storage_account_name_dns = ""
+tf_container_name_dns       = ""
+tf_blob_name_core_dns       = ""
+tf_access_key_dns           = ""
 
 # admin user or not
 kubernetes_cluster_admin_activate = false

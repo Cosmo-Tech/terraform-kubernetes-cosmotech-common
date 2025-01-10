@@ -13,11 +13,11 @@ variable "loki_retention_period" {
   type    = string
 }
 
-variable "helm_repo_url" {
+variable "loki_helm_repo_url" {
   type    = string
 }
 
-variable "helm_chart" {
+variable "loki_helm_chart" {
   type    = string
 }
 
@@ -37,5 +37,9 @@ variable "resources" {
 }
 
 variable "provisioner" {
+  type = string
+}
+
+variable "loki_helm_chart_version" {
   type = string
 }
