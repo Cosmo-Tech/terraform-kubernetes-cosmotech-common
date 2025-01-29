@@ -46,8 +46,7 @@ promtail:
                 message:
                 namespace:
       - match:
-          action: keep
-          pipeline_name: kubectlr
+          pipeline_name: tekton-step-kubectl
           selector: '{app="step-kubectl"}'
       - match:
           action: drop
