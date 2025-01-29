@@ -45,6 +45,18 @@ promtail:
                 tenant_id:
                 message:
                 namespace:
+        - match:
+          action: keep
+          pipeline_name: tekton-step-kubectl
+          selector: '{app="step-kubectl"}'
+      - match:
+          action: keep
+          pipeline_name: tekton-step-lint-chart
+          selector: '{app="step-lint-chart"}'
+      - match:
+          action: keep
+          pipeline_name: tekton-step-deploy-chart
+          selector: '{app="step-deploy-chart"}'
       - match:
           action: drop
           pipeline_name: keep only workflows logs
