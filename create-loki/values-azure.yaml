@@ -46,8 +46,21 @@ promtail:
                 message:
                 namespace:
       - match:
-          pipeline_name: tekton-step-kubectl
+          pipeline_name: step-kubectl
           selector: '{app="step-kubectl"}'
+          stages:
+            - json:
+                expressions:
+                  output: log
+            - json:
+                source: output
+                expressions:
+                  message: message
+                  level: log.level
+            - labels:
+                tenant_id:
+                message:
+                namespace:
       - match:
           action: drop
           pipeline_name: keep only workflows logs
