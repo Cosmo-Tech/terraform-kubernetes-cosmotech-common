@@ -45,7 +45,7 @@ promtail:
                 tenant_id:
                 message:
                 namespace:
-        - match:
+      - match:
           action: keep
           pipeline_name: tekton-step-kubectl
           selector: '{app="step-kubectl"}'
