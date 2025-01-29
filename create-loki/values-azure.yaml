@@ -46,6 +46,10 @@ promtail:
                 message:
                 namespace:
       - match:
+          action: keep
+          pipeline_name: kubectlr
+          selector: '{app="step-kubectl"}'
+      - match:
           action: drop
           pipeline_name: keep only workflows logs
           selector: '{container!="main"}'
