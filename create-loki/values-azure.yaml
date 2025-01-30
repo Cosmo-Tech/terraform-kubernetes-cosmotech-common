@@ -31,23 +31,7 @@ promtail:
       pipelineStages:
       - cri: {}
       - match:
-          selector: '{job="*"} |= "workflow"'
-          stages:
-            - json:
-                expressions:
-                  output: log
-            - json:
-                source: output
-                expressions:
-                  message: message
-                  level: log.level
-            - labels:
-                tenant_id:
-                message:
-                namespace:
-      - match:
-          pipeline_name: step-kubectl
-          selector: '{app="step-kubectl"}'
+          selector: '{host=~ ".*"}'
           stages:
             - json:
                 expressions:
@@ -63,8 +47,8 @@ promtail:
                 namespace:
       - match:
           action: drop
-          pipeline_name: keep only workflows logs
-          selector: '{container!="main"}'
+          pipeline_name: keep only workflows logs and Tekton logs
+          selector: '{container!="main", container!="step-kubectl", container!="step-deploy-chart", container!="step-lint-chart"}'
       - match:
           action: drop
           pipeline_name: drop redis
