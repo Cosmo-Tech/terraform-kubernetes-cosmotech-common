@@ -6,7 +6,7 @@ locals {
     "MONITORING_NAMESPACE"          = var.monitoring_namespace
     "COSMOTECH_API_DNS_NAME"        = var.api_dns_name
     "TLS_SECRET_NAME"               = var.tls_secret_name
-    "REDIS_HOST"                    = "cosmotechredis-master.${var.redis_host_namespace}.svc.cluster.local"
+    "REDIS_HOST"                    = "cosmotechredis-${var.redis_host_namespace}-master.${var.redis_host_namespace}.svc.cluster.local"
     "REDIS_PORT"                    = var.redis_port
     "REDIS_ADMIN_PASSWORD"          = local.local_redis_admin_password
     "PROM_ADMIN_PASSWORD"           = local.local_prom_admin_password
@@ -56,4 +56,14 @@ resource "helm_release" "prometheus-stack" {
   depends_on = [
     kubernetes_namespace.monitoring_namespace
   ]
+}
+
+resource "kubernetes_secret" "prom_first_datasource" {
+  metadata {
+    name = "prom-redis-datasource"
+    namespace = "default"
+  }
+  data = {
+    password = random_password.redis_admin_password
+  }
 }

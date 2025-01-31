@@ -69,8 +69,8 @@ postgres_helm_chart         = "postgresql"
 postgres_helm_chart_version = "15.5.1"
 
 # Monitoring
-monitoring_namespace          = "cosmotech-monitoring"
 prometheus_stack_deploy       = true
+monitoring_namespace          = "cosmotech-monitoring"
 prom_storage_resource_request = "64Gi"
 prom_storage_class_name       = "default"
 prom_replicas_number          = 1
@@ -84,6 +84,7 @@ prom_cpu_mem_limits           = ""
 prom_cpu_mem_request          = ""
 redis_admin_password          = ""
 prom_admin_password           = ""
+prom_redis_host_namespace     = ""
 
 # ArgoCD
 argocd_namespace = "argocd"
