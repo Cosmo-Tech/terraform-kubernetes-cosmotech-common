@@ -1,0 +1,3 @@
+variable "storageclass_azure_deploy" {
+  type = string
+}
