@@ -27,6 +27,7 @@
 | <a name="module_create_argocd"></a> [create\_argocd](#module\_create\_argocd) | ./create_argocd | n/a |
 | <a name="module_create_vault"></a> [create\_vault](#module\_create\_vault) | ./create_vault | n/a |
 | <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
+| <a name="module_deploy-storageclass"></a> [deploy-storageclass](#module\_deploy-storageclass) | ./deploy-storageclass | n/a |
 | <a name="module_deploy_velero"></a> [deploy\_velero](#module\_deploy\_velero) | ./create_velero | n/a |
 | <a name="module_keycloak"></a> [keycloak](#module\_keycloak) | ./create-keycloak | n/a |
 | <a name="module_loki"></a> [loki](#module\_loki) | ./create-loki | n/a |
@@ -121,6 +122,7 @@
 | <a name="input_publicip_address"></a> [publicip\_address](#input\_publicip\_address) | n/a | `string` | n/a | yes |
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_redis_admin_password"></a> [redis\_admin\_password](#input\_redis\_admin\_password) | n/a | `string` | n/a | yes |
+| <a name="input_storageclass_azure_deploy"></a> [storageclass\_azure\_deploy](#input\_storageclass\_azure\_deploy) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | n/a | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
 | <a name="input_tf_access_key"></a> [tf\_access\_key](#input\_tf\_access\_key) | n/a | `string` | n/a | yes |
