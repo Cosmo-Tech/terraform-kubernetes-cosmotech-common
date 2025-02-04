@@ -137,3 +137,6 @@ tf_access_key_dns           = ""
 
 # admin user or not
 kubernetes_cluster_admin_activate = false
+
+# storage class
+storageclass_azure_deploy = true
