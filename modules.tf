@@ -1,3 +1,8 @@
+module "deploy-storageclass" {
+  source                    = "./deploy-storageclass"
+  storageclass_azure_deploy = var.storageclass_azure_deploy
+}
+
 module "create-prometheus-stack" {
   source = "./create-prometheus-stack"
 
