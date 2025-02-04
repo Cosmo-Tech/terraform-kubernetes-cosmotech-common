@@ -64,6 +64,6 @@ resource "kubernetes_secret" "prom_first_datasource" {
     namespace = "default"
   }
   data = {
-    password = random_password.redis_admin_password
+    password = random_password.redis_admin_password.result
   }
 }
