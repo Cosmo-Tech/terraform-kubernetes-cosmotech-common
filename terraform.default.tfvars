@@ -87,23 +87,50 @@ prom_admin_password           = ""
 prom_redis_host_namespace     = ""
 
 # ArgoCD
-argocd_namespace      = "argocd"
-argocd_create_ingress = false
-argocd_deploy = false
-argocd_helm_chart = ""
+argocd_deploy                  = false
+argocd_helm_chart              = "argo-cd"
+argocd_helm_chart_version      = "7.5.0"
+argocd_helm_release_name       = "argocd"
+argocd_helm_repo_url           = "https://argoproj.github.io/argo-helm"
+argocd_replicas                = 3
+argocd_create_ingress          = false
+argocd_namespace               = "argocd"
+argocd_project                 = "phoenix"
+argocd_setup_job_image_version = "v2.0.5"
+argocd_repositories = [
+  {
+    url      = "https://github.com/Cosmo-Tech/cosmotech-api.git"
+    private  = false
+    username = ""
+    token    = ""
+  }
+]
 
-# Vault
-vault_namespace = "vault"
+# vault
+vault_deploy             = true
+vault_helm_chart         = "vault"
+vault_helm_chart_version = "0.28.1"
+vault_helm_release_name  = "vault"
+vault_helm_repo_url      = "https://helm.releases.hashicorp.com"
+vault_namespace          = "vault"
+vault_replicas           = 1
+vault_secret_name        = "vault-token-secret"
+vault_ingress_enabled    = true
+
+# VSOPS
+vault_secrets_operator_deploy             = false
+vault_secrets_operator_helm_chart         = "vault-secrets-operator"
+vault_secrets_operator_helm_chart_version = "0.8.1"
+vault_secrets_operator_helm_release_name  = "vault-secrets-operator"
+vault_secrets_operator_helm_repo_url      = "https://helm.releases.hashicorp.com"
+vault_secrets_operator_namespace          = "vault-secrets-operator"
+vault_secrets_operator_vault_address      = "http://vault.vault.svc.cluster.local:8200"
+vault_secrets_operator_replicas           = 1
 
 # Vault auto unseal
 auto_restart_deploy        = false
 auto_restart_start_hours   = 5
 auto_restart_start_minutes = 0
-
-# Vault secrets operator
-vault_secrets_operator_namespace     = "vault-secrets-operator"
-vault_secrets_operator_vault_address = "http://vault.vault.svc.cluster.local:8200"
-
 
 # velero
 velero_deploy                        = false
@@ -120,7 +147,6 @@ velero_storage_account_name          = ""
 velero_storage_account_resource_name = ""
 velero_azure_subcription_id          = ""
 velero_azure_tenant_id               = ""
-
 
 # remote 
 tf_resource_group_name  = ""
@@ -143,3 +169,8 @@ kubernetes_cluster_admin_activate = false
 
 # storage class
 storageclass_azure_deploy = true
+
+nginx_deploy    = true
+loki_deploy     = true
+keycloak_deploy = false
+is_bare_metal   = false
