@@ -87,7 +87,10 @@ prom_admin_password           = ""
 prom_redis_host_namespace     = ""
 
 # ArgoCD
-argocd_namespace = "argocd"
+argocd_namespace      = "argocd"
+argocd_create_ingress = false
+argocd_deploy = false
+argocd_helm_chart = ""
 
 # Vault
 vault_namespace = "vault"
