@@ -4,9 +4,9 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.9 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.15.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 2.0.4 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.32.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.17.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 2.1.3 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.35.1 |
 | <a name="requirement_template"></a> [template](#requirement\_template) | 2.2.0 |
 
 ## Providers
@@ -123,6 +123,9 @@
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_redis_admin_password"></a> [redis\_admin\_password](#input\_redis\_admin\_password) | n/a | `string` | n/a | yes |
 | <a name="input_storageclass_azure_deploy"></a> [storageclass\_azure\_deploy](#input\_storageclass\_azure\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_storageclass_bare_deploy"></a> [storageclass\_bare\_deploy](#input\_storageclass\_bare\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_storageclass_provisioner_azure"></a> [storageclass\_provisioner\_azure](#input\_storageclass\_provisioner\_azure) | n/a | `string` | n/a | yes |
+| <a name="input_storageclass_provisioner_bare"></a> [storageclass\_provisioner\_bare](#input\_storageclass\_provisioner\_bare) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | n/a | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
 | <a name="input_tf_access_key"></a> [tf\_access\_key](#input\_tf\_access\_key) | n/a | `string` | n/a | yes |
