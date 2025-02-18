@@ -1,6 +1,9 @@
 module "deploy-storageclass" {
-  source                    = "./deploy-storageclass"
-  storageclass_azure_deploy = var.storageclass_azure_deploy
+  source                         = "./deploy-storageclass"
+  storageclass_azure_deploy      = var.storageclass_azure_deploy
+  storageclass_bare_deploy       = var.storageclass_bare_deploy
+  storageclass_provisioner_azure = var.storageclass_provisioner_azure
+  storageclass_provisioner_bare  = var.storageclass_provisioner_bare
 }
 
 module "create-prometheus-stack" {
