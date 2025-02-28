@@ -11,3 +11,4 @@ providers.azure.tf
 !*/*/*.sh
 !*/*.sh
 !terraform.default.tfvars
+!terraform.auto.tfvars
