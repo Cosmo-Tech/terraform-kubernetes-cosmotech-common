@@ -4,15 +4,18 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.9 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.15.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 2.0.4 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.32.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.12.1 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 2.1.3 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.35.1 |
+| <a name="requirement_template"></a> [template](#requirement\_template) | 2.2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+| <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
+| <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
 
@@ -24,6 +27,7 @@
 | <a name="module_create_argocd"></a> [create\_argocd](#module\_create\_argocd) | ./create_argocd | n/a |
 | <a name="module_create_vault"></a> [create\_vault](#module\_create\_vault) | ./create_vault | n/a |
 | <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
+| <a name="module_deploy-storageclass"></a> [deploy-storageclass](#module\_deploy-storageclass) | ./deploy-storageclass | n/a |
 | <a name="module_deploy_velero"></a> [deploy\_velero](#module\_deploy\_velero) | ./create_velero | n/a |
 | <a name="module_keycloak"></a> [keycloak](#module\_keycloak) | ./create-keycloak | n/a |
 | <a name="module_loki"></a> [loki](#module\_loki) | ./create-loki | n/a |
@@ -33,6 +37,10 @@
 | Name | Type |
 |------|------|
 | [azurerm_kubernetes_cluster.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/kubernetes_cluster) | data source |
+| [template_file.example](https://registry.terraform.io/providers/hashicorp/template/2.2.0/docs/data-sources/file) | data source |
+| [terraform_remote_state.core_dns](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.core_infra](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.core_ip](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs
 
@@ -75,9 +83,11 @@
 | <a name="input_keycloak_helm_repo"></a> [keycloak\_helm\_repo](#input\_keycloak\_helm\_repo) | n/a | `string` | n/a | yes |
 | <a name="input_keycloak_ingress_hostname"></a> [keycloak\_ingress\_hostname](#input\_keycloak\_ingress\_hostname) | n/a | `string` | n/a | yes |
 | <a name="input_keycloak_postgres_user"></a> [keycloak\_postgres\_user](#input\_keycloak\_postgres\_user) | n/a | `string` | n/a | yes |
+| <a name="input_kubernetes_cluster_admin_activate"></a> [kubernetes\_cluster\_admin\_activate](#input\_kubernetes\_cluster\_admin\_activate) | n/a | `bool` | n/a | yes |
 | <a name="input_kubernetes_resource_group"></a> [kubernetes\_resource\_group](#input\_kubernetes\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_loki_deploy"></a> [loki\_deploy](#input\_loki\_deploy) | n/a | `bool` | n/a | yes |
 | <a name="input_loki_helm_chart"></a> [loki\_helm\_chart](#input\_loki\_helm\_chart) | n/a | `string` | n/a | yes |
+| <a name="input_loki_helm_chart_version"></a> [loki\_helm\_chart\_version](#input\_loki\_helm\_chart\_version) | n/a | `string` | n/a | yes |
 | <a name="input_loki_helm_repo_url"></a> [loki\_helm\_repo\_url](#input\_loki\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_loki_max_entries_limet_per_query"></a> [loki\_max\_entries\_limet\_per\_query](#input\_loki\_max\_entries\_limet\_per\_query) | n/a | `number` | n/a | yes |
 | <a name="input_loki_persistence_memory"></a> [loki\_persistence\_memory](#input\_loki\_persistence\_memory) | n/a | `string` | n/a | yes |
@@ -112,8 +122,25 @@
 | <a name="input_publicip_address"></a> [publicip\_address](#input\_publicip\_address) | n/a | `string` | n/a | yes |
 | <a name="input_publicip_resource_group"></a> [publicip\_resource\_group](#input\_publicip\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_redis_admin_password"></a> [redis\_admin\_password](#input\_redis\_admin\_password) | n/a | `string` | n/a | yes |
+| <a name="input_storageclass_azure_deploy"></a> [storageclass\_azure\_deploy](#input\_storageclass\_azure\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_storageclass_bare_deploy"></a> [storageclass\_bare\_deploy](#input\_storageclass\_bare\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_storageclass_provisioner_azure"></a> [storageclass\_provisioner\_azure](#input\_storageclass\_provisioner\_azure) | n/a | `string` | n/a | yes |
+| <a name="input_storageclass_provisioner_bare"></a> [storageclass\_provisioner\_bare](#input\_storageclass\_provisioner\_bare) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | n/a | `string` | n/a | yes |
+| <a name="input_tekton_deploy"></a> [tekton\_deploy](#input\_tekton\_deploy) | n/a | `string` | n/a | yes |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `string` | n/a | yes |
+| <a name="input_tf_access_key"></a> [tf\_access\_key](#input\_tf\_access\_key) | n/a | `string` | n/a | yes |
+| <a name="input_tf_access_key_dns"></a> [tf\_access\_key\_dns](#input\_tf\_access\_key\_dns) | n/a | `string` | n/a | yes |
+| <a name="input_tf_blob_name"></a> [tf\_blob\_name](#input\_tf\_blob\_name) | n/a | `string` | n/a | yes |
+| <a name="input_tf_blob_name_core_dns"></a> [tf\_blob\_name\_core\_dns](#input\_tf\_blob\_name\_core\_dns) | n/a | `string` | n/a | yes |
+| <a name="input_tf_blob_name_core_infra"></a> [tf\_blob\_name\_core\_infra](#input\_tf\_blob\_name\_core\_infra) | n/a | `string` | n/a | yes |
+| <a name="input_tf_blob_name_core_ip"></a> [tf\_blob\_name\_core\_ip](#input\_tf\_blob\_name\_core\_ip) | n/a | `string` | n/a | yes |
+| <a name="input_tf_container_name"></a> [tf\_container\_name](#input\_tf\_container\_name) | n/a | `string` | n/a | yes |
+| <a name="input_tf_container_name_dns"></a> [tf\_container\_name\_dns](#input\_tf\_container\_name\_dns) | n/a | `string` | n/a | yes |
+| <a name="input_tf_resource_group_name"></a> [tf\_resource\_group\_name](#input\_tf\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_tf_resource_group_name_dns"></a> [tf\_resource\_group\_name\_dns](#input\_tf\_resource\_group\_name\_dns) | n/a | `string` | n/a | yes |
+| <a name="input_tf_storage_account_name"></a> [tf\_storage\_account\_name](#input\_tf\_storage\_account\_name) | n/a | `string` | n/a | yes |
+| <a name="input_tf_storage_account_name_dns"></a> [tf\_storage\_account\_name\_dns](#input\_tf\_storage\_account\_name\_dns) | n/a | `string` | n/a | yes |
 | <a name="input_tls_certificate_type"></a> [tls\_certificate\_type](#input\_tls\_certificate\_type) | n/a | `string` | n/a | yes |
 | <a name="input_tls_secret_name"></a> [tls\_secret\_name](#input\_tls\_secret\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_deploy"></a> [vault\_deploy](#input\_vault\_deploy) | n/a | `bool` | n/a | yes |
@@ -135,9 +162,9 @@
 | <a name="input_vault_secrets_operator_vault_address"></a> [vault\_secrets\_operator\_vault\_address](#input\_vault\_secrets\_operator\_vault\_address) | n/a | `string` | n/a | yes |
 | <a name="input_velero_azure_subcription_id"></a> [velero\_azure\_subcription\_id](#input\_velero\_azure\_subcription\_id) | n/a | `string` | n/a | yes |
 | <a name="input_velero_azure_tenant_id"></a> [velero\_azure\_tenant\_id](#input\_velero\_azure\_tenant\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_backup_client_id"></a> [velero\_backup\_client\_id](#input\_velero\_backup\_client\_id) | n/a | `string` | n/a | yes |
+| <a name="input_velero_backup_client_secret"></a> [velero\_backup\_client\_secret](#input\_velero\_backup\_client\_secret) | n/a | `string` | n/a | yes |
 | <a name="input_velero_backup_resource_group_cluster"></a> [velero\_backup\_resource\_group\_cluster](#input\_velero\_backup\_resource\_group\_cluster) | n/a | `string` | n/a | yes |
-| <a name="input_velero_bakcup_client_id"></a> [velero\_bakcup\_client\_id](#input\_velero\_bakcup\_client\_id) | n/a | `string` | n/a | yes |
-| <a name="input_velero_bakcup_client_secret"></a> [velero\_bakcup\_client\_secret](#input\_velero\_bakcup\_client\_secret) | n/a | `string` | n/a | yes |
 | <a name="input_velero_blob_storage_name"></a> [velero\_blob\_storage\_name](#input\_velero\_blob\_storage\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_bucket_name"></a> [velero\_bucket\_name](#input\_velero\_bucket\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_cloud_provider"></a> [velero\_cloud\_provider](#input\_velero\_cloud\_provider) | n/a | `string` | n/a | yes |
@@ -151,4 +178,10 @@
 | <a name="input_velero_storage_account_access_key"></a> [velero\_storage\_account\_access\_key](#input\_velero\_storage\_account\_access\_key) | n/a | `string` | n/a | yes |
 | <a name="input_velero_storage_account_name"></a> [velero\_storage\_account\_name](#input\_velero\_storage\_account\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_storage_account_resource_name"></a> [velero\_storage\_account\_resource\_name](#input\_velero\_storage\_account\_resource\_name) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_rendered"></a> [rendered](#output\_rendered) | n/a |
 <!-- END_TF_DOCS -->
