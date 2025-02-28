@@ -5,4 +5,7 @@ modules.json
 terraform.*
 tfplan*
 *.sh
-!/*/*.sh
+!*/*/*.sh
+!*/*.sh
+!terraform.default.tfvars
+!terraform.auto.tfvars
