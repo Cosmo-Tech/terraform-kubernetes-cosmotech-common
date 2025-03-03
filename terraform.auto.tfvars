@@ -2,6 +2,11 @@
 client_id     = ""
 client_secret = ""
 
+host                   = ""
+client_certificate     = ""
+client_key             = ""
+cluster_ca_certificate = ""
+
 # Project
 project_customer_name = "cosmotech"
 
