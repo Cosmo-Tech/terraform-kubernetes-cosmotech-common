@@ -29,3 +29,7 @@ variable "keycloak_helm_chart_version" {
 variable "keycloack_provisioner" {
   type = string
 }
+
+variable "keycloak_namespace" {
+  type = string
+}
