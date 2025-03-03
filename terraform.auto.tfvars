@@ -30,6 +30,8 @@ keycloak_helm_repo          = "https://charts.bitnami.com/bitnami"
 keycloak_helm_chart         = "keycloak"
 keycloak_helm_chart_version = "21.3.1"
 keycloack_provisioner       = ""
+keycloak_ingress_hostname   = ""
+keycloak_namespace          = "keycloak"
 
 # Loki
 loki_release_name                    = "loki"

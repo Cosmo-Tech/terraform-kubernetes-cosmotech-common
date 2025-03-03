@@ -1,11 +1,9 @@
 locals {
-  namespace = "keycloak"
-
-  pvc_name = "${local.namespace}-pvc"
-  pv_name  = "${local.namespace}-pv"
+  pvc_name = "${var.keycloak_namespace}-pvc"
+  pv_name  = "${var.keycloak_namespace}-pv"
 
   keycloak_values = {
-    "NAMESPACE"                          = local.namespace
+    "NAMESPACE"                          = var.keycloak_namespace
     "SECRET"                             = "keycloak-config"
     "ADMIN_USER"                         = var.keycloak_admin_user
     "ADMIN_PASSWORD_SECRET_KEY"          = "keycloak_admin_password"
@@ -18,27 +16,16 @@ locals {
   }
 }
 
-resource "kubernetes_namespace" "keycloak_namespace" {
-  metadata {
-    name = local.namespace
-  }
-  timeouts {
-    delete = "5m"
-  }
-}
-
 resource "helm_release" "keycloak-postgresql" {
   name       = "keycloak-postgresql"
   repository = var.postgres_helm_repo
   chart      = var.postgres_helm_chart
   version    = var.postgres_helm_chart_version
-  namespace  = local.namespace
+  namespace  = var.keycloak_namespace
 
   values = [
     templatefile("${path.module}/values-postgresql.yaml", local.keycloak_values)
   ]
-
-  depends_on = [kubernetes_namespace.keycloak_namespace]
 }
 
 resource "helm_release" "keycloak" {
@@ -46,46 +33,11 @@ resource "helm_release" "keycloak" {
   repository = var.keycloak_helm_repo
   chart      = var.keycloak_helm_chart
   version    = var.keycloak_helm_chart_version
-  namespace  = local.namespace
+  namespace  = var.keycloak_namespace
 
   values = [
     templatefile("${path.module}/values-keycloak.yaml", local.keycloak_values)
   ]
 
-  depends_on = [kubernetes_namespace.keycloak_namespace, helm_release.keycloak-postgresql]
-}
-
-resource "random_password" "keycloak_admin_password" {
-  length  = 30
-  special = false
-}
-
-resource "random_password" "keycloak_postgresql_password" {
-  length  = 30
-  special = false
-}
-
-resource "random_password" "keycloak_postgresql_admin_password" {
-  length  = 30
-  special = false
-}
-
-resource "kubernetes_secret" "keycloak_config" {
-  metadata {
-    name      = "keycloak-config"
-    namespace = local.namespace
-    labels = {
-      "app" = "keycloak"
-    }
-  }
-
-  data = {
-    keycloak_admin_user              = local.keycloak_values.ADMIN_USER
-    keycloak_admin_password          = random_password.keycloak_admin_password.result
-    keycloak_postgres_user           = local.keycloak_values.POSTGRES_USER
-    keycloak_postgres_password       = random_password.keycloak_postgresql_password.result
-    keycloak_postgres_admin_password = random_password.keycloak_postgresql_admin_password.result
-  }
-
-  type = "Opaque"
+  depends_on = [helm_release.keycloak-postgresql]
 }

@@ -31,6 +31,5 @@ tolerations:
   operator: "Equal"
   value: "cosmotech"
   effect: "NoSchedule"
-commonLabels: {
+commonLabels:
   "networking/traffic-allowed": "yes"
-}

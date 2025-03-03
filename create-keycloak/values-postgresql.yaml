@@ -9,12 +9,12 @@ global:
         adminPasswordKey: ${POSTGRES_ADMIN_PASSWORD_SECRET_KEY}
 primary:
   persistence:
-      enabled: true
-      existingClaim: ${PVC_NAME}
+    enabled: true
+    existingClaim: ${PVC_NAME}
   nodeSelector:
     "cosmotech.com/tier": "db"
   tolerations:
-  - key: "vendor"
-    operator: "Equal"
-    value: "cosmotech"
-    effect: "NoSchedule"
+    - key: "vendor"
+      operator: "Equal"
+      value: "cosmotech"
+      effect: "NoSchedule"
