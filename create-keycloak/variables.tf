@@ -45,3 +45,7 @@ variable "provisioner" {
 variable "keycloak_namespace" {
   type = string
 }
+
+variable "pvc_postgres_keycloak_existing_name" {
+  type = string
+}
