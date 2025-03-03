@@ -1,7 +1,4 @@
 locals {
-  pvc_name = "${var.keycloak_namespace}-pvc"
-  pv_name  = "${var.keycloak_namespace}-pv"
-
   keycloak_values = {
     "NAMESPACE"                          = var.keycloak_namespace
     "SECRET"                             = "keycloak-config"
@@ -11,8 +8,8 @@ locals {
     "POSTGRES_USER"                      = var.keycloak_postgres_user
     "POSTGRES_PASSWORD_SECRET_KEY"       = "keycloak_postgres_password"
     "POSTGRES_ADMIN_PASSWORD_SECRET_KEY" = "keycloak_postgres_admin_password"
-    "PVC_NAME"                           = var.is_bare_metal ? local.pvc_name : ""
     "STORAGE_CLASS"                      = var.provisioner
+    "PVC_NAME"                           = var.pvc_postgres_keycloak_existing_name
   }
 }
 
