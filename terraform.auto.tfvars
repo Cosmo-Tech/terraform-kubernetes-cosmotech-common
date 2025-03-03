@@ -70,10 +70,16 @@ nginx_helm_release_name = "ingress-nginx"
 nginx_ingress_version   = "4.10.1"
 nginx_namespace         = "ingress-nginx"
 
-# Postgres
+# Postgres for keycloak
 postgres_helm_repo          = "https://charts.bitnami.com/bitnami"
 postgres_helm_chart         = "postgresql"
 postgres_helm_chart_version = "15.5.1"
+
+pvc_keycloak_postgres_deploy             = false
+pvc_keycloak_postgres_storage_accessmode = "ReadWriteOnce"
+pvc_keycloak_postgres_storage_class_name = "default"
+pvc_keycloak_postgres_storage_gbi        = "32Gi"
+pvc_postgres_keycloak_existing_name      = "pvc-disk-postgres-core-keycloak"
 
 # Monitoring
 prometheus_stack_deploy       = true
