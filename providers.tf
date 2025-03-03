@@ -30,33 +30,27 @@ provider "azurerm" {
   tenant_id                       = var.tenant_id
 }
 
-provider "azuread" {
-  tenant_id     = var.tenant_id
-  client_id     = var.client_id
-  client_secret = var.client_secret
-}
-
 provider "kubernetes" {
-  host                   = local.host
-  client_certificate     = local.client_certificate
-  client_key             = local.client_key
-  cluster_ca_certificate = local.cluster_ca_certificate
+  host                   = var.host
+  client_certificate     = var.client_certificate
+  client_key             = var.client_key
+  cluster_ca_certificate = var.cluster_ca_certificate
 }
 
 provider "helm" {
   kubernetes {
-    host                   = local.host
-    client_certificate     = local.client_certificate
-    client_key             = local.client_key
-    cluster_ca_certificate = local.cluster_ca_certificate
+    host                   = var.host
+    client_certificate     = var.client_certificate
+    client_key             = var.client_key
+    cluster_ca_certificate = var.cluster_ca_certificate
   }
 }
 
 provider "kubectl" {
-  host                   = local.host
-  client_certificate     = local.client_certificate
-  client_key             = local.client_key
-  cluster_ca_certificate = local.cluster_ca_certificate
+  host                   = var.host
+  client_certificate     = var.client_certificate
+  client_key             = var.client_key
+  cluster_ca_certificate = var.cluster_ca_certificate
 
   load_config_file = false
 }
