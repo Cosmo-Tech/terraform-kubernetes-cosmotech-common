@@ -99,6 +99,7 @@ module "keycloak" {
 
   count = var.keycloak_deploy ? 1 : 0
 
+  keycloak_namespace          = var.keycloak_namespace
   keycloak_ingress_hostname   = var.keycloak_ingress_hostname
   is_bare_metal               = var.is_bare_metal
   provisioner                 = var.keycloack_provisioner
