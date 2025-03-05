@@ -162,3 +162,53 @@ velero_storage_account_name          = ""
 velero_storage_account_resource_name = ""
 velero_azure_subcription_id          = ""
 velero_azure_tenant_id               = ""
+
+# remote 
+tf_resource_group_name  = ""
+tf_storage_account_name = ""
+tf_access_key           = ""
+tf_container_name       = ""
+tf_blob_name            = ""
+tf_blob_name_core_ip    = ""
+tf_blob_name_core_infra = ""
+
+# remote dns
+tf_resource_group_name_dns  = ""
+tf_storage_account_name_dns = ""
+tf_container_name_dns       = ""
+tf_blob_name_core_dns       = ""
+tf_access_key_dns           = ""
+
+# admin user or not
+kubernetes_cluster_admin_activate = false
+
+# storage class
+storageclass_azure_deploy      = false
+storageclass_provisioner_azure = "disk.csi.azure.com"
+storageclass_bare_deploy       = false
+storageclass_provisioner_bare  = "longhorn"
+
+nginx_deploy    = true
+loki_deploy     = true
+keycloak_deploy = false
+is_bare_metal   = false
+
+# tekton 
+tekton_deploy                          = false
+tekton_namespace                       = "tekton-pipelines"
+tekton_helm_repo_url                   = "https://cosmo-tech.github.io/tekton/"
+tekton_helm_chart                      = "tekton-pipelines"
+tekton_helm_chart_version              = "0.1.21"
+tekton_helm_release_name               = "tekton-pipelines"
+tekton_dashboard_helm_repo_url         = "https://cosmo-tech.github.io/tekton/"
+tekton_dashboard_helm_chart            = "tekton-dashboard"
+tekton_dashboard_helm_chart_version    = "0.1.21"
+tekton_dashboard_helm_release_name     = "tekton-dashboard"
+tekton_triggers_helm_repo_url          = "https://cosmo-tech.github.io/tekton/"
+tekton_triggers_helm_chart             = "tekton-triggers"
+tekton_triggers_helm_chart_version     = "0.1.21"
+tekton_triggers_helm_release_name      = "tekton-triggers"
+tekton_interceptors_helm_repo_url      = "https://cosmo-tech.github.io/tekton/"
+tekton_interceptors_helm_chart         = "tekton-interceptors"
+tekton_interceptors_helm_chart_version = "0.1.21"
+tekton_interceptors_helm_release_name  = "tekton-interceptors"
