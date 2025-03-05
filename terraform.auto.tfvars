@@ -190,3 +190,23 @@ nginx_deploy    = true
 loki_deploy     = true
 keycloak_deploy = false
 is_bare_metal   = false
+
+# tekton 
+tekton_deploy                          = false
+tekton_namespace                       = "tekton-pipelines"
+tekton_helm_repo_url                   = "https://cosmo-tech.github.io/tekton/"
+tekton_helm_chart                      = "tekton-pipelines"
+tekton_helm_chart_version              = "0.1.21"
+tekton_helm_release_name               = "tekton-pipelines"
+tekton_dashboard_helm_repo_url         = "https://cosmo-tech.github.io/tekton/"
+tekton_dashboard_helm_chart            = "tekton-dashboard"
+tekton_dashboard_helm_chart_version    = "0.1.21"
+tekton_dashboard_helm_release_name     = "tekton-dashboard"
+tekton_triggers_helm_repo_url          = "https://cosmo-tech.github.io/tekton/"
+tekton_triggers_helm_chart             = "tekton-triggers"
+tekton_triggers_helm_chart_version     = "0.1.21"
+tekton_triggers_helm_release_name      = "tekton-triggers"
+tekton_interceptors_helm_repo_url      = "https://cosmo-tech.github.io/tekton/"
+tekton_interceptors_helm_chart         = "tekton-interceptors"
+tekton_interceptors_helm_chart_version = "0.1.21"
+tekton_interceptors_helm_release_name  = "tekton-interceptors"
