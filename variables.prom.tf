@@ -57,3 +57,7 @@ variable "redis_admin_password" {
 variable "prom_admin_password" {
   type = string
 }
+
+variable "prom_pvc_existing_name" {
+  type = string
+}

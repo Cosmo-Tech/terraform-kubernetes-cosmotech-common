@@ -207,6 +207,7 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
+          volumeName: ${PROM_PVC_EXISTING_NAME}
           storageClassName: ${PROM_STORAGE_CLASS_NAME}
           accessModes:
           - ReadWriteOnce

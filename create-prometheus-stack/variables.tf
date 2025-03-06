@@ -65,3 +65,7 @@ variable "helm_release_name" {
 variable "prometheus_stack_version" {
   type    = string
 }
+
+variable "prom_pvc_existing_name" {
+  type = string
+}
