@@ -17,8 +17,6 @@ module "create-prometheus-stack" {
   tls_secret_name               = local.tls_secret_name
   redis_admin_password          = var.redis_admin_password
   prom_admin_password           = var.prom_admin_password
-  prom_cpu_mem_limits           = var.prom_cpu_mem_limits
-  prom_cpu_mem_request          = var.prom_cpu_mem_request
   helm_chart                    = var.prom_helm_chart
   helm_repo_url                 = var.prom_helm_repo_url
   helm_release_name             = var.prom_helm_release_name
@@ -28,8 +26,9 @@ module "create-prometheus-stack" {
   redis_port                    = var.prom_redis_port
   prom_retention                = var.prom_retention
   prom_storage_resource_request = var.prom_storage_resource_request
-  prom_pvc_existing_name = var.prom_pvc_existing_name
-
+  prom_pvc_existing_name        = var.prom_pvc_existing_name
+  prom_alert_manager_resources  = var.prom_alert_manager_resources
+  prom_resources                = var.prom_resources
 }
 
 module "loki" {

@@ -82,8 +82,19 @@ pvc_keycloak_postgres_storage_gbi        = "32Gi"
 pvc_postgres_keycloak_existing_name      = "pvc-disk-postgres-core-keycloak"
 
 # Monitoring
-prometheus_stack_deploy       = true
-monitoring_namespace          = "cosmotech-monitoring"
+prometheus_stack_deploy = true
+monitoring_namespace    = "cosmotech-monitoring"
+redis_admin_password    = ""
+prom_alert_manager_resources = {
+  limits = {
+    cpu    = "1"
+    memory = "1Gi"
+  }
+  requests = {
+    cpu    = "1"
+    memory = "500Mi"
+  }
+}
 prom_storage_resource_request = "64Gi"
 prom_storage_class_name       = "default"
 prom_replicas_number          = 1
@@ -93,12 +104,19 @@ prom_helm_chart               = "kube-prometheus-stack"
 prom_helm_repo_url            = "https://prometheus-community.github.io/helm-charts"
 prom_helm_release_name        = "kube-prometheus-stack"
 prom_stack_version            = "57.1.0"
-prom_cpu_mem_limits           = ""
-prom_cpu_mem_request          = ""
-redis_admin_password          = ""
 prom_admin_password           = ""
 prom_redis_host_namespace     = ""
-prom_pvc_existing_name = "pvc-disk-prometheus-core"
+prom_pvc_existing_name        = "pvc-disk-prometheus-core"
+prom_resources = {
+  limits = {
+    cpu    = "1"
+    memory = "1Gi"
+  }
+  requests = {
+    cpu    = "1"
+    memory = "500Mi"
+  }
+}
 
 # ArgoCD
 argocd_deploy                  = false
