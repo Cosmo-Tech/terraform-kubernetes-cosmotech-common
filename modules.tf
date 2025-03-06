@@ -28,6 +28,7 @@ module "create-prometheus-stack" {
   redis_port                    = var.prom_redis_port
   prom_retention                = var.prom_retention
   prom_storage_resource_request = var.prom_storage_resource_request
+  prom_pvc_existing_name = var.prom_pvc_existing_name
 
 }
 

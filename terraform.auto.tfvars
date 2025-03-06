@@ -98,6 +98,7 @@ prom_cpu_mem_request          = ""
 redis_admin_password          = ""
 prom_admin_password           = ""
 prom_redis_host_namespace     = ""
+prom_pvc_existing_name = "pvc-disk-prometheus-core"
 
 # ArgoCD
 argocd_deploy                  = false

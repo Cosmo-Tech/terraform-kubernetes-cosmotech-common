@@ -16,6 +16,7 @@ locals {
     "PROM_CPU_MEM_LIMITS"           = var.prom_cpu_mem_limits
     "PROM_CPU_MEM_REQUESTS"         = var.prom_cpu_mem_request
     "PROM_RETENTION"                = var.prom_retention
+    "PROM_PVC_EXISTING_NAME" = var.prom_pvc_existing_name
   }
 }
 
