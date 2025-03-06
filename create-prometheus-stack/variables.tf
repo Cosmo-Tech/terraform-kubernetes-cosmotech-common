@@ -58,7 +58,7 @@ variable "prometheus_stack_version" {
   type = string
 }
 
-variable "prom_pvc_existing_name" {
+variable "prom_pv_existing_name" {
   type = string
 }
 

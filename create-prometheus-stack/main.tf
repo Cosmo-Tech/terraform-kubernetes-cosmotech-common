@@ -16,7 +16,7 @@ locals {
     "PROM_STORAGE_CLASS_NAME"       = var.prom_storage_class_name
     "PROM_RESOURCES"                = jsonencode(var.prom_resources)
     "PROM_RETENTION"                = var.prom_retention
-    "PROM_PVC_EXISTING_NAME"        = var.prom_pvc_existing_name
+    "PROM_PV_EXISTING_NAME"        = var.prom_pv_existing_name
   }
 }
 
