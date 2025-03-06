@@ -4,10 +4,11 @@ locals {
     "LOKI_RETENTION_PERIOD"            = var.loki_retention_period
     "LOKI_PERSISTENCE_MEMORY"          = var.loki_persistence_memory
     "LOKI_MAX_ENTRIES_LIMIT_PER_QUERY" = var.loki_max_entries_limet_per_query
-    "LOKI_PVC_NAME"                    = var.provisioner == "local-path" ? "${var.resources[0].name}-pvc" : ""
-    "GRAFANA_PVC_NAME"                 = var.provisioner == "local-path" ? "${var.resources[1].name}-pvc" : ""
+    "LOKI_PVC_NAME"                    = "pvc-disk-loki-core"
+    "LOKI_STORAGE_CLASS"               = var.pvc_loki_storage_class_name
+    "GRAFANA_PVC_NAME"                 = "pvc-disk-grafana-core"
     "GRAFANA_IMAGE_TAG"                = var.grafana_loki_compatibility_image_tag
-    "STORAGE_CLASS"                    = var.provisioner == "local-path" ? "-" : var.provisioner
+    "GRAFANA_STORAGE_CLASS"            = var.pvc_grafana_storage_class_name
   }
   values = var.is_bare_metal ? "values-vanilla" : "values-azure"
 }

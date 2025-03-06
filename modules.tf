@@ -46,8 +46,9 @@ module "loki" {
   loki_max_entries_limet_per_query     = var.loki_max_entries_limet_per_query
   grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
   is_bare_metal                        = var.is_bare_metal
-  provisioner                          = var.loki_provisioner
   resources                            = var.loki_resources
+  pvc_grafana_storage_class_name       = var.pvc_grafana_storage_class_name
+  pvc_loki_storage_class_name          = var.pvc_loki_storage_class_name
 
   depends_on = [module.create-prometheus-stack]
 }
@@ -283,5 +284,20 @@ module "create_tekton" {
   interceptors_helm_chart         = var.tekton_interceptors_helm_chart
   interceptors_helm_chart_version = var.tekton_interceptors_helm_chart_version
   interceptors_helm_release_name  = var.tekton_interceptors_helm_release_name
+
+}
+
+module "deploy-pvc-loki-stack" {
+  source = "./persistence-claim-loki-stack"
+
+  count = var.pvc_loki_stack_deploy ? 1 : 0
+
+  pvc_loki_stack_namespace       = var.pvc_loki_stack_namespace
+  pvc_grafana_storage_accessmode = var.pvc_grafana_storage_accessmode
+  pvc_grafana_storage_class_name = var.pvc_grafana_storage_class_name
+  pvc_grafana_storage_gbi        = var.pvc_grafana_storage_gbi
+  pvc_loki_storage_accessmode    = var.pvc_loki_storage_accessmode
+  pvc_loki_storage_class_name    = var.pvc_loki_storage_class_name
+  pvc_loki_storage_gbi           = var.pvc_loki_storage_gbi
 
 }

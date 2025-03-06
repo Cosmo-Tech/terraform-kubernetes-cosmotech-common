@@ -1,10 +1,19 @@
 loki:
   isDefault: false
+  tolerations:
+    - key: "vendor"
+      operator: "Equal"
+      value: "cosmotech"
+      effect: "NoSchedule"
+  nodeSelector:
+    "cosmotech.com/tier": "monitoring"
   persistence:
     enabled: true
     accessModes:
     - ReadWriteOnce
     size: "${LOKI_PERSISTENCE_MEMORY}"
+    storageClass: "${LOKI_STORAGE_CLASS}"
+    existingClaim: "${LOKI_PVC_NAME}"
   config:
     auth_enabled: false
     table_manager:
@@ -20,9 +29,17 @@ grafana:
     accessModes:
       - ReadWriteOnce
     size: "${LOKI_PERSISTENCE_MEMORY}"
+    storageClassName: "${GRAFANA_STORAGE_CLASS}"
+    existingClaim: "${GRAFANA_PVC_NAME}"
   image:
     tag: "${GRAFANA_IMAGE_TAG}"
-
+  tolerations:
+    - key: "vendor"
+      operator: "Equal"
+      value: "cosmotech"
+      effect: "NoSchedule"
+  nodeSelector:
+    "cosmotech.com/tier": "monitoring"
 promtail:
   config:
     clients:

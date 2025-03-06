@@ -49,8 +49,3 @@ variable "loki_resources" {
   value of the StorageClass for this provisioner.
   EOT
 }
-
-variable "loki_provisioner" {
-  type        = string
-  description = "Value for the provisioner key in the storage class. If in a bare metal environment and no provisioner available, set this to 'local-path'"
-}
