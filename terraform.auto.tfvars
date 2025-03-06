@@ -42,7 +42,6 @@ loki_helm_chart                      = "loki-stack"
 loki_helm_chart_version              = "2.10.2"
 loki_max_entries_limet_per_query     = 50000
 grafana_loki_compatibility_image_tag = ""
-loki_provisioner                     = ""
 loki_resources = [{
 
   name    = "loki"
@@ -63,6 +62,15 @@ loki_resources = [{
     access_modes = ["ReadWriteOnce"]
     path         = "/mnt/grafana-storage"
 }]
+
+pvc_loki_stack_deploy          = false
+pvc_loki_stack_namespace       = "cosmotech-monitoring"
+pvc_grafana_storage_accessmode = "ReadWriteOnce"
+pvc_grafana_storage_class_name = "default"
+pvc_grafana_storage_gbi        = "8Gi"
+pvc_loki_storage_accessmode    = "ReadWriteOnce"
+pvc_loki_storage_class_name    = "default"
+pvc_loki_storage_gbi           = "8Gi"
 
 # Nginx
 nginx_helm_repo_url     = "https://kubernetes.github.io/ingress-nginx"
@@ -231,3 +239,4 @@ tekton_interceptors_helm_repo_url      = "https://cosmo-tech.github.io/tekton/"
 tekton_interceptors_helm_chart         = "tekton-interceptors"
 tekton_interceptors_helm_chart_version = "0.1.21"
 tekton_interceptors_helm_release_name  = "tekton-interceptors"
+
