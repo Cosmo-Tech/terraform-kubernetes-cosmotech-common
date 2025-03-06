@@ -194,7 +194,11 @@ prometheus:
     retention: ${PROM_RETENTION}
     storageSpec:
       volumeClaimTemplate:
+        metadata:
+          name: pvc-disk-prometheus-core
+          namespace: ${MONITORING_NAMESPACE}
         spec:
+          volumeMode: Filesystem
           volumeName: ${PROM_PV_EXISTING_NAME}
           storageClassName: ${PROM_STORAGE_CLASS_NAME}
           accessModes:
