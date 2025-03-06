@@ -1,5 +1,7 @@
 module "deploy-storageclass" {
-  source                         = "./deploy-storageclass"
+
+  source = "./create-storageclass"
+
   storageclass_azure_deploy      = var.storageclass_azure_deploy
   storageclass_bare_deploy       = var.storageclass_bare_deploy
   storageclass_provisioner_azure = var.storageclass_provisioner_azure
