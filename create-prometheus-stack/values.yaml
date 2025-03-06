@@ -20,13 +20,7 @@ alertmanager:
     podMetadata:
       labels:
         networking/traffic-allowed: "yes"
-    resources:
-      limits:
-        cpu: 1
-        memory: 1Gi
-      requests:
-        cpu: 1
-        memory: 400Mi
+    resources: ${ALERT_MANAGER_RESOURCES}
 windowsMonitoring:
   enabled: false
 grafana:
@@ -196,13 +190,7 @@ prometheus:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: prometheus
-    resources:
-      limits:
-        cpu: 1
-        memory: ${PROM_CPU_MEM_LIMITS}
-      requests:
-        cpu: 1
-        memory: ${PROM_CPU_MEM_REQUESTS}
+    resources: ${PROM_RESOURCES}
     retention: ${PROM_RETENTION}
     storageSpec:
       volumeClaimTemplate:

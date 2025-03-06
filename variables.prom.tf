@@ -42,14 +42,6 @@ variable "prom_stack_version" {
   type = string
 }
 
-variable "prom_cpu_mem_limits" {
-  type = string
-}
-
-variable "prom_cpu_mem_request" {
-  type = string
-}
-
 variable "redis_admin_password" {
   type = string
 }
@@ -60,4 +52,30 @@ variable "prom_admin_password" {
 
 variable "prom_pvc_existing_name" {
   type = string
+}
+
+variable "prom_resources" {
+  type = object({
+    requests = object({
+      cpu    = string
+      memory = string
+    })
+    limits = object({
+      cpu    = string
+      memory = string
+    })
+  })
+}
+
+variable "prom_alert_manager_resources" {
+  type = object({
+    requests = object({
+      cpu    = string
+      memory = string
+    })
+    limits = object({
+      cpu    = string
+      memory = string
+    })
+  })
 }

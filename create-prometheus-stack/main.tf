@@ -9,14 +9,14 @@ locals {
     "REDIS_HOST"                    = "cosmotechredis-${var.redis_host_namespace}-master.${var.redis_host_namespace}.svc.cluster.local"
     "REDIS_PORT"                    = var.redis_port
     "REDIS_ADMIN_PASSWORD"          = local.local_redis_admin_password
+    "ALERT_MANAGER_RESOURCES"       = jsonencode(var.prom_alert_manager_resources)
     "PROM_ADMIN_PASSWORD"           = local.local_prom_admin_password
     "PROM_REPLICAS_NUMBER"          = var.prom_replicas_number
     "PROM_STORAGE_RESOURCE_REQUEST" = var.prom_storage_resource_request
     "PROM_STORAGE_CLASS_NAME"       = var.prom_storage_class_name
-    "PROM_CPU_MEM_LIMITS"           = var.prom_cpu_mem_limits
-    "PROM_CPU_MEM_REQUESTS"         = var.prom_cpu_mem_request
+    "PROM_RESOURCES"                = jsonencode(var.prom_resources)
     "PROM_RETENTION"                = var.prom_retention
-    "PROM_PVC_EXISTING_NAME" = var.prom_pvc_existing_name
+    "PROM_PVC_EXISTING_NAME"        = var.prom_pvc_existing_name
   }
 }
 
@@ -61,7 +61,7 @@ resource "helm_release" "prometheus-stack" {
 
 resource "kubernetes_secret" "prom_first_datasource" {
   metadata {
-    name = "prom-redis-datasource"
+    name      = "prom-redis-datasource"
     namespace = "default"
   }
   data = {
