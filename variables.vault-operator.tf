@@ -34,8 +34,3 @@ variable "vault_secrets_operator_allowed_namespaces" {
 variable "vault_secrets_operator_replicas" {
   type = number
 }
-
-variable "tekton_deploy" {
-  type = string
-}
-
