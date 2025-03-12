@@ -210,10 +210,11 @@ tf_access_key_dns           = ""
 kubernetes_cluster_admin_activate = false
 
 # storage class
-storageclass_azure_deploy      = false
-storageclass_provisioner_azure = "disk.csi.azure.com"
-storageclass_bare_deploy       = false
-storageclass_provisioner_bare  = "longhorn"
+storageclass_azure_deploy           = false
+storageclass_provisioner_azure      = "disk.csi.azure.com"
+storageclass_provisioner_azure_file = "kubernetes.io/azure-file"
+storageclass_bare_deploy            = false
+storageclass_provisioner_bare       = "longhorn"
 
 nginx_deploy    = true
 loki_deploy     = true

@@ -19,3 +19,14 @@ resource "kubernetes_storage_class" "cosmotech-bare-retain" {
   allow_volume_expansion = true
   volume_binding_mode    = "WaitForFirstConsumer"
 }
+
+resource "kubernetes_storage_class" "cosmotech-azurefile-retain" {
+  count = var.storageclass_azure_deploy ? 1 : 0
+  metadata {
+    name = "cosmotech-azurefile-retain"
+  }
+  storage_provisioner    = var.storageclass_provisioner_azure_file
+  reclaim_policy         = "Retain"
+  allow_volume_expansion = true
+  volume_binding_mode    = "WaitForFirstConsumer"
+}
