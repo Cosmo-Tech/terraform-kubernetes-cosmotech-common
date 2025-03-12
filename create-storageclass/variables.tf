@@ -12,3 +12,7 @@ variable "storageclass_provisioner_azure" {
 variable "storageclass_provisioner_bare" {
   type = string
 }
+
+variable "storageclass_provisioner_azure_file" {
+  type = string
+}
