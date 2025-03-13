@@ -117,7 +117,13 @@ vault_replicas           = 1
 vault_secret_name        = "vault-token-secret"
 vault_ingress_enabled    = true
 
-# VSOPS
+
+# Vault auto unseal
+auto_restart_deploy        = false
+auto_restart_start_hours   = 5
+auto_restart_start_minutes = 0
+
+# Vault secrets operator
 vault_secrets_operator_deploy             = false
 vault_secrets_operator_helm_chart         = "vault-secrets-operator"
 vault_secrets_operator_helm_chart_version = "0.8.1"
@@ -126,15 +132,6 @@ vault_secrets_operator_helm_repo_url      = "https://helm.releases.hashicorp.com
 vault_secrets_operator_namespace          = "vault-secrets-operator"
 vault_secrets_operator_vault_address      = "http://vault.vault.svc.cluster.local:8200"
 vault_secrets_operator_replicas           = 1
-
-# Vault auto unseal
-auto_restart_deploy        = false
-auto_restart_start_hours   = 5
-auto_restart_start_minutes = 0
-
-# Vault secrets operator
-vault_secrets_operator_namespace     = "vault-secrets-operator"
-vault_secrets_operator_vault_address = "http://vault.vault.svc.cluster.local:8200"
 
 # velero
 velero_deploy                        = false
