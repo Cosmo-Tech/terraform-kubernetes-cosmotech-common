@@ -131,22 +131,6 @@ resource "kubectl_manifest" "platform_vault_secret" {
   depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection, kubernetes_annotations.namespace_default_annotation, kubernetes_namespace.allowed_namespaces]
 }
 
-# resource "kubectl_manifest" "kubectl_manifest" {
-#   validate_schema = false
-#   for_each        = toset(var.allowed_namespaces)
-
-#   yaml_body = templatefile("${path.module}/templates/workspace-vault-secret.yaml.tpl", {
-#     namespace = each.key, 
-#     tenant_id = var.tenant_id, 
-#     cluster_name = var.cluster_name, 
-#     organization = var.organization, 
-#     organization_id = var.organization_id, 
-#     workspace_key = var.workspace_key
-#   })
-
-#   depends_on = [helm_release.vault_secrets_operator, kubectl_manifest.namespace_vault_auth, kubectl_manifest.namespace_vault_connection, kubernetes_annotations.namespace_default_annotation, kubernetes_namespace.allowed_namespaces]
-# }
-
 resource "kubernetes_annotations" "namespace_default_annotation" {
   for_each = toset(var.allowed_namespaces)
 

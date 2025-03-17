@@ -14,6 +14,8 @@ module "create_argocd" {
   argocd_repositories            = var.argocd_repositories
   argocd_dns_name                = var.api_dns_name
   argocd_setup_job_image_version = var.argocd_setup_job_image_version
+  argocd_repository_access_token = var.argocd_repository_access_token
+  argocd_repository_username     = var.argocd_repository_username
 
   depends_on = [module.create_vault]
 }

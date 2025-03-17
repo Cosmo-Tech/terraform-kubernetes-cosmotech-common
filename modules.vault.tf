@@ -12,9 +12,6 @@ module "create_vault" {
   vault_secret_name     = var.vault_secret_name
   vault_ingress_enabled = var.vault_ingress_enabled
   vault_dns_name        = var.api_dns_name
-  start_aks_minutes     = var.auto_restart_start_minutes
-  start_aks_hours       = var.auto_restart_start_hours
-  auto_restart_deploy   = var.auto_restart_deploy
 
   depends_on = [module.cert-manager]
 }
@@ -31,7 +28,10 @@ module "create_vault_secrets_operator" {
   helm_release_name  = var.vault_secrets_operator_helm_release_name
   vault_address      = var.vault_secrets_operator_vault_address
   replicas           = var.vault_secrets_operator_replicas
+  allowed_namespaces = var.vault_secrets_operator_allowed_namespaces
+  tenant_id          = var.tenant_id
   vault_namespace    = var.vault_namespace
+  organization       = var.vault_secrets_operator_organization
 
   depends_on = [module.create_vault]
 }
