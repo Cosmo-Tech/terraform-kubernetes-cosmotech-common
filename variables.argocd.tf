@@ -1,9 +1,9 @@
-variable "create_argocd" {
+variable "argocd_deploy" {
   type = bool
 }
 
 variable "argocd_namespace" {
-  type    = string
+  type = string
 }
 
 variable "argocd_helm_repo_url" {
