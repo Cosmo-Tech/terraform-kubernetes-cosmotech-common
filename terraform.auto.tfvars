@@ -138,12 +138,7 @@ argocd_namespace               = "argocd"
 argocd_project                 = "phoenix"
 argocd_setup_job_image_version = "v2.0.5"
 argocd_repositories = [
-  {
-    url      = "https://github.com/Cosmo-Tech/cosmotech-api.git"
-    private  = false
-    username = ""
-    token    = ""
-  }
+  "https://github.com/Cosmo-Tech/cosmotech-api.git"
 ]
 
 # vault
