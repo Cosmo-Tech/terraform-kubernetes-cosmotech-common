@@ -1,12 +1,3 @@
-terraform {
-  required_providers {
-    kubectl = {
-      source  = "alekc/kubectl"
-      version = "2.0.4"
-    }
-  }
-}
-
 locals {
   values_loki = {
     "MONITORING_NAMESPACE"             = var.monitoring_namespace
@@ -15,22 +6,27 @@ locals {
     "LOKI_MAX_ENTRIES_LIMIT_PER_QUERY" = var.loki_max_entries_limet_per_query
     "LOKI_PVC_NAME"                    = var.provisioner == "local-path" ? "${var.resources[0].name}-pvc" : ""
     "GRAFANA_PVC_NAME"                 = var.provisioner == "local-path" ? "${var.resources[1].name}-pvc" : ""
-    "NAMESPACE"                        = var.namespace
     "GRAFANA_IMAGE_TAG"                = var.grafana_loki_compatibility_image_tag
     "STORAGE_CLASS"                    = var.provisioner == "local-path" ? "-" : var.provisioner
   }
   values = var.is_bare_metal ? "values-vanilla" : "values-azure"
 }
 
+resource "time_sleep" "wait_termination" {
+  destroy_duration = "10s"
+}
+
 resource "helm_release" "loki" {
   name         = var.loki_release_name
-  repository   = var.helm_repo_url
-  chart        = var.helm_chart
+  repository   = var.loki_helm_repo_url
+  chart        = var.loki_helm_chart
   namespace    = var.monitoring_namespace
+  version      = var.loki_helm_chart_version
   reset_values = true
   values = [
     templatefile("${path.module}/${local.values}.yaml", local.values_loki)
   ]
+  depends_on = [time_sleep.wait_termination]
 }
 
 resource "kubectl_manifest" "role" {

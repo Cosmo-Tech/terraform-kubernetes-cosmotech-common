@@ -1,0 +1,16 @@
+controller:
+  replicas: ${REPLICAS}
+  nodeSelector:
+    "cosmotech.com/tier": "services"
+  tolerations:
+  - key: "vendor"
+    operator: "Equal"
+    value: "cosmotech"
+    effect: "NoSchedule"
+  extraLabels:
+    networking/traffic-allowed: "yes"
+
+defaultVaultConnection:
+  enabled: true
+  address: ${VAULT_ADDR}
+  skipTLSVerify: false

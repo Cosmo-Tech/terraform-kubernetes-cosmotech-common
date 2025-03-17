@@ -1,8 +1,8 @@
-variable "helm_repo_url" {
+variable "cert_helm_repo_url" {
   type = string
 }
 
-variable "helm_release_name" {
+variable "cert_helm_release_name" {
   type = string
 }
 
@@ -28,10 +28,6 @@ variable "cert_namespace" {
   type = string
 }
 
-variable "monitoring_namespace" {
-  type = string
-}
-
 variable "tls_secret_name" {
   type = string
 }
@@ -52,6 +48,10 @@ variable "certificate_key_content" {
   type = string
 }
 
-variable "is_bare_metal" {
-  type = bool
+variable "publicip_resource_group" {
+  type = string
+}
+
+variable "publicip_address" {
+  type = string
 }
