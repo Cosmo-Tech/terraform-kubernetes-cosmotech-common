@@ -23,23 +23,3 @@ jobs:
 
     - name: Terraform Format
       run: terraform fmt -check
-
-  tofu_lint:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: OpenTofu - Setup Tofu
-      uses: opentofu/setup-opentofu@v1.0.3
-
-    - name: OpenTofu init
-      run: tofu init -backend=false
-
-    - name: OpenTofu Validate
-      run: tofu validate
-
-    - name: OpenTofu Format
-      run: tofu fmt -check
-
