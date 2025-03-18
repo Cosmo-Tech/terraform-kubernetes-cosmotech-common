@@ -67,17 +67,20 @@ resource "kubernetes_secret" "vault_unseal" {
     annotations = {
       "kubernetes.io/service-account.name" = "vault-unseal"
     }
-    generate_name = "vault-unseal-"
+    name      = "vault-unseal"
+    namespace = var.namespace
   }
   type                           = "kubernetes.io/service-account-token"
   wait_for_service_account_token = true
+  depends_on                     = [kubernetes_service_account.vault_unseal_serviceaccount]
 }
 
-resource "kubectl_manifest" "vault_unseal_serviceaccount" {
-  validate_schema = false
-  yaml_body = templatefile("${path.module}/vault-unseal-serviceaccount.yaml.tpl",
-    local.values_vault
-  )
+resource "kubernetes_service_account" "vault_unseal_serviceaccount" {
+  metadata {
+    name      = "vault-unseal"
+    namespace = var.namespace
+  }
+  automount_service_account_token = true
 }
 
 #Job for script
