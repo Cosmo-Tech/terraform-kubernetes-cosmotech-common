@@ -39,14 +39,14 @@ resource "helm_release" "vault" {
 
 resource "kubectl_manifest" "vault_unseal_role" {
   validate_schema = false
-  yaml_body = templatefile("${path.module}/vault-unseal-role.yaml",
+  yaml_body = templatefile("${path.module}/templates/vault-unseal-role.yaml",
     local.values_vault
   )
 }
 
 resource "kubectl_manifest" "vault_unseal_rolebinding" {
   validate_schema = false
-  yaml_body = templatefile("${path.module}/vault-unseal-rolebinding.yaml",
+  yaml_body = templatefile("${path.module}/templates/vault-unseal-rolebinding.yaml",
     local.values_vault
   )
 }
@@ -59,7 +59,7 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   }
 
   data = {
-    "unseal.sh" = file("${path.module}/unseal.sh")
+    "unseal_init.sh" = file("${path.module}/scripts/unseal_init.sh")
   }
   depends_on = [helm_release.vault]
 }
@@ -112,7 +112,7 @@ resource "kubernetes_job" "vault_unseal" {
           name  = "vault-unseal"
           image = "bitnami/kubectl:latest"
           command = [
-            "/bin/bash", "/scripts/unseal.sh",
+            "/bin/bash", "/scripts/unseal_init.sh",
             var.namespace,
             var.vault_secret_name,
             var.vault_replicas
@@ -120,8 +120,8 @@ resource "kubernetes_job" "vault_unseal" {
 
           volume_mount {
             name       = "script-volume"
-            mount_path = "/scripts/unseal.sh"
-            sub_path   = "unseal.sh"
+            mount_path = "/scripts/unseal_init.sh"
+            sub_path   = "unseal_init.sh"
           }
         }
 
@@ -132,8 +132,8 @@ resource "kubernetes_job" "vault_unseal" {
             name = kubernetes_config_map.vault_unseal_script.metadata[0].name
 
             items {
-              key  = "unseal.sh"
-              path = "unseal.sh"
+              key  = "unseal_init.sh"
+              path = "unseal_init.sh"
             }
           }
         }
