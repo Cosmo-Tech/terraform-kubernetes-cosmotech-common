@@ -3,8 +3,7 @@ variable "vault_deploy" {
 }
 
 variable "vault_namespace" {
-  type    = string
-  default = "vault"
+  type = string
 }
 
 variable "vault_helm_repo_url" {
@@ -33,4 +32,16 @@ variable "vault_secret_name" {
 
 variable "vault_ingress_enabled" {
   type = bool
+}
+
+variable "auto_restart_deploy" {
+  type = bool
+}
+
+variable "auto_start_aks_minutes" {
+  type = number
+}
+
+variable "auto_start_aks_hours" {
+  type = number
 }
