@@ -61,6 +61,9 @@
 | <a name="input_argocd_repository_access_token"></a> [argocd\_repository\_access\_token](#input\_argocd\_repository\_access\_token) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_repository_username"></a> [argocd\_repository\_username](#input\_argocd\_repository\_username) | n/a | `string` | n/a | yes |
 | <a name="input_argocd_setup_job_image_version"></a> [argocd\_setup\_job\_image\_version](#input\_argocd\_setup\_job\_image\_version) | n/a | `string` | n/a | yes |
+| <a name="input_auto_restart_deploy"></a> [auto\_restart\_deploy](#input\_auto\_restart\_deploy) | n/a | `bool` | n/a | yes |
+| <a name="input_auto_start_aks_hours"></a> [auto\_start\_aks\_hours](#input\_auto\_start\_aks\_hours) | n/a | `number` | n/a | yes |
+| <a name="input_auto_start_aks_minutes"></a> [auto\_start\_aks\_minutes](#input\_auto\_start\_aks\_minutes) | n/a | `number` | n/a | yes |
 | <a name="input_cert_helm_release_name"></a> [cert\_helm\_release\_name](#input\_cert\_helm\_release\_name) | n/a | `string` | n/a | yes |
 | <a name="input_cert_helm_repo_url"></a> [cert\_helm\_repo\_url](#input\_cert\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_cert_manager_version"></a> [cert\_manager\_version](#input\_cert\_manager\_version) | HELM Chart Version for cert-manager | `string` | n/a | yes |
@@ -185,6 +188,7 @@
 | <a name="input_vault_helm_release_name"></a> [vault\_helm\_release\_name](#input\_vault\_helm\_release\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_helm_repo_url"></a> [vault\_helm\_repo\_url](#input\_vault\_helm\_repo\_url) | n/a | `string` | n/a | yes |
 | <a name="input_vault_ingress_enabled"></a> [vault\_ingress\_enabled](#input\_vault\_ingress\_enabled) | n/a | `bool` | n/a | yes |
+| <a name="input_vault_namespace"></a> [vault\_namespace](#input\_vault\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_vault_replicas"></a> [vault\_replicas](#input\_vault\_replicas) | n/a | `number` | n/a | yes |
 | <a name="input_vault_secret_name"></a> [vault\_secret\_name](#input\_vault\_secret\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vault_secrets_operator_allowed_namespaces"></a> [vault\_secrets\_operator\_allowed\_namespaces](#input\_vault\_secrets\_operator\_allowed\_namespaces) | n/a | `list(string)` | n/a | yes |
@@ -215,7 +219,6 @@
 | <a name="input_velero_storage_account_access_key"></a> [velero\_storage\_account\_access\_key](#input\_velero\_storage\_account\_access\_key) | n/a | `string` | n/a | yes |
 | <a name="input_velero_storage_account_name"></a> [velero\_storage\_account\_name](#input\_velero\_storage\_account\_name) | n/a | `string` | n/a | yes |
 | <a name="input_velero_storage_account_resource_name"></a> [velero\_storage\_account\_resource\_name](#input\_velero\_storage\_account\_resource\_name) | n/a | `string` | n/a | yes |
-| <a name="input_vault_namespace"></a> [vault\_namespace](#input\_vault\_namespace) | n/a | `string` | `"vault"` | no |
 
 ## Outputs
 
