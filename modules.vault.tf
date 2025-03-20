@@ -12,6 +12,9 @@ module "create_vault" {
   vault_secret_name     = var.vault_secret_name
   vault_ingress_enabled = var.vault_ingress_enabled
   vault_dns_name        = var.api_dns_name
+  auto_restart_deploy   = var.auto_restart_deploy
+  start_aks_hours       = var.auto_start_aks_hours
+  start_aks_minutes     = var.auto_start_aks_minutes
 
   depends_on = [module.cert-manager]
 }

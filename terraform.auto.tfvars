@@ -142,7 +142,7 @@ argocd_repositories = [
 ]
 
 # vault
-vault_deploy             = true
+vault_deploy             = false
 vault_helm_chart         = "vault"
 vault_helm_chart_version = "0.28.1"
 vault_helm_release_name  = "vault"
@@ -150,8 +150,12 @@ vault_helm_repo_url      = "https://helm.releases.hashicorp.com"
 vault_namespace          = "vault"
 vault_replicas           = 1
 vault_secret_name        = "vault-token-secret"
-vault_ingress_enabled    = true
+vault_ingress_enabled    = false
 
+# Vault auto unseal
+auto_restart_deploy    = false
+auto_start_aks_hours   = 5
+auto_start_aks_minutes = 0
 
 # Vault secrets operator
 vault_secrets_operator_deploy             = false

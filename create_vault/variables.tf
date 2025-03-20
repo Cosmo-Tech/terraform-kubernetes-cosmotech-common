@@ -33,3 +33,15 @@ variable "vault_ingress_enabled" {
 variable "vault_dns_name" {
   type = string
 }
+
+variable "auto_restart_deploy" {
+  type = bool
+}
+
+variable "start_aks_minutes" {
+  type = number
+}
+
+variable "start_aks_hours" {
+  type = number
+}
