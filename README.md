@@ -76,6 +76,7 @@
 | <a name="input_cluster_issuer_name"></a> [cluster\_issuer\_name](#input\_cluster\_issuer\_name) | n/a | `string` | n/a | yes |
 | <a name="input_cluster_issuer_server"></a> [cluster\_issuer\_server](#input\_cluster\_issuer\_server) | The ACME server URL | `string` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | n/a | `string` | n/a | yes |
+| <a name="input_config_path"></a> [config\_path](#input\_config\_path) | n/a | `string` | n/a | yes |
 | <a name="input_grafana_loki_compatibility_image_tag"></a> [grafana\_loki\_compatibility\_image\_tag](#input\_grafana\_loki\_compatibility\_image\_tag) | n/a | `string` | n/a | yes |
 | <a name="input_is_bare_metal"></a> [is\_bare\_metal](#input\_is\_bare\_metal) | n/a | `bool` | n/a | yes |
 | <a name="input_keycloack_provisioner"></a> [keycloack\_provisioner](#input\_keycloack\_provisioner) | n/a | `string` | n/a | yes |
@@ -87,7 +88,6 @@
 | <a name="input_keycloak_ingress_hostname"></a> [keycloak\_ingress\_hostname](#input\_keycloak\_ingress\_hostname) | n/a | `string` | n/a | yes |
 | <a name="input_keycloak_namespace"></a> [keycloak\_namespace](#input\_keycloak\_namespace) | n/a | `string` | n/a | yes |
 | <a name="input_keycloak_postgres_user"></a> [keycloak\_postgres\_user](#input\_keycloak\_postgres\_user) | n/a | `string` | n/a | yes |
-| <a name="input_kube_config"></a> [kube\_config](#input\_kube\_config) | n/a | `string` | n/a | yes |
 | <a name="input_kubernetes_cluster_admin_activate"></a> [kubernetes\_cluster\_admin\_activate](#input\_kubernetes\_cluster\_admin\_activate) | n/a | `bool` | n/a | yes |
 | <a name="input_kubernetes_resource_group"></a> [kubernetes\_resource\_group](#input\_kubernetes\_resource\_group) | n/a | `string` | n/a | yes |
 | <a name="input_loki_deploy"></a> [loki\_deploy](#input\_loki\_deploy) | n/a | `bool` | n/a | yes |
