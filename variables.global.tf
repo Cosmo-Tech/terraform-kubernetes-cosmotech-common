@@ -10,6 +10,6 @@ variable "cluster_name" {
   type = string
 }
 
-variable "kube_config" {
+variable "config_path" {
   type = string
 }

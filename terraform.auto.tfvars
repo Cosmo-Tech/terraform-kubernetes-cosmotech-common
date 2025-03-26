@@ -2,7 +2,7 @@
 client_id     = ""
 client_secret = ""
 
-kube_config = ""
+config_path = ""
 
 # Project
 project_customer_name = "cosmotech"
