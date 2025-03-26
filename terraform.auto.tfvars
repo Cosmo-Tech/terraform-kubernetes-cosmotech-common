@@ -2,10 +2,7 @@
 client_id     = ""
 client_secret = ""
 
-host                   = ""
-client_certificate     = ""
-client_key             = ""
-cluster_ca_certificate = ""
+kube_config = ""
 
 # Project
 project_customer_name = "cosmotech"
