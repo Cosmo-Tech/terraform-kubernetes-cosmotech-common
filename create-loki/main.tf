@@ -6,9 +6,7 @@ locals {
     "LOKI_MAX_ENTRIES_LIMIT_PER_QUERY" = var.loki_max_entries_limet_per_query
     "LOKI_PVC_NAME"                    = "pvc-disk-loki-core"
     "LOKI_STORAGE_CLASS"               = var.pvc_loki_storage_class_name
-    "GRAFANA_PVC_NAME"                 = "pvc-disk-grafana-core"
     "GRAFANA_IMAGE_TAG"                = var.grafana_loki_compatibility_image_tag
-    "GRAFANA_STORAGE_CLASS"            = var.pvc_grafana_storage_class_name
   }
   values = var.is_bare_metal ? "values-vanilla" : "values-azure"
 }

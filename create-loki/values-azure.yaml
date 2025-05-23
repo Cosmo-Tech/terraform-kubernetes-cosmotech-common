@@ -22,15 +22,7 @@ loki:
     limits_config:
       max_entries_limit_per_query: ${LOKI_MAX_ENTRIES_LIMIT_PER_QUERY}
 grafana:
-  enabled: true
-  persistence:
-    type: pvc
-    enabled: true
-    accessModes:
-      - ReadWriteOnce
-    size: "${LOKI_PERSISTENCE_MEMORY}"
-    storageClassName: "${GRAFANA_STORAGE_CLASS}"
-    existingClaim: "${GRAFANA_PVC_NAME}"
+  enabled: false
   image:
     tag: "${GRAFANA_IMAGE_TAG}"
   tolerations:
