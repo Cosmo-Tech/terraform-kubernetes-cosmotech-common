@@ -25,6 +25,14 @@ windowsMonitoring:
   enabled: false
 grafana:
   enabled: true
+  persistence:
+    type: pvc
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+    size: "${GRAFANA_STORAGE_SIZE}"
+    storageClassName: "${GRAFANA_STORAGE_CLASS}"
+    existingClaim: "${GRAFANA_PVC_NAME}"
   sidecar:
     dashboards:
       multicluster:

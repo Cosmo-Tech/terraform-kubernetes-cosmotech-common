@@ -29,6 +29,7 @@
 | <a name="module_create_vault_secrets_operator"></a> [create\_vault\_secrets\_operator](#module\_create\_vault\_secrets\_operator) | ./create-vault-secrets-operator | n/a |
 | <a name="module_deploy-pvc-loki-stack"></a> [deploy-pvc-loki-stack](#module\_deploy-pvc-loki-stack) | ./persistence-claim-loki-stack | n/a |
 | <a name="module_deploy-pvc-postgres-keycloak"></a> [deploy-pvc-postgres-keycloak](#module\_deploy-pvc-postgres-keycloak) | ./persistence-claim-postgres-keycloak | n/a |
+| <a name="module_deploy-pvc-prometheus-stack"></a> [deploy-pvc-prometheus-stack](#module\_deploy-pvc-prometheus-stack) | ./persistence-claim-prometheus-stack | n/a |
 | <a name="module_deploy-storageclass"></a> [deploy-storageclass](#module\_deploy-storageclass) | ./create-storageclass | n/a |
 | <a name="module_deploy_velero"></a> [deploy\_velero](#module\_deploy\_velero) | ./create_velero | n/a |
 | <a name="module_keycloak"></a> [keycloak](#module\_keycloak) | ./create-keycloak | n/a |
@@ -139,6 +140,7 @@
 | <a name="input_pvc_loki_storage_class_name"></a> [pvc\_loki\_storage\_class\_name](#input\_pvc\_loki\_storage\_class\_name) | n/a | `string` | n/a | yes |
 | <a name="input_pvc_loki_storage_gbi"></a> [pvc\_loki\_storage\_gbi](#input\_pvc\_loki\_storage\_gbi) | n/a | `string` | n/a | yes |
 | <a name="input_pvc_postgres_keycloak_existing_name"></a> [pvc\_postgres\_keycloak\_existing\_name](#input\_pvc\_postgres\_keycloak\_existing\_name) | n/a | `string` | n/a | yes |
+| <a name="input_pvc_prometheus_stack_deploy"></a> [pvc\_prometheus\_stack\_deploy](#input\_pvc\_prometheus\_stack\_deploy) | n/a | `bool` | n/a | yes |
 | <a name="input_redis_admin_password"></a> [redis\_admin\_password](#input\_redis\_admin\_password) | n/a | `string` | n/a | yes |
 | <a name="input_storageclass_azure_deploy"></a> [storageclass\_azure\_deploy](#input\_storageclass\_azure\_deploy) | n/a | `bool` | n/a | yes |
 | <a name="input_storageclass_bare_deploy"></a> [storageclass\_bare\_deploy](#input\_storageclass\_bare\_deploy) | n/a | `bool` | n/a | yes |

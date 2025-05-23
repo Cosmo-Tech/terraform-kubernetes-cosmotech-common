@@ -43,7 +43,3 @@ variable "loki_helm_chart_version" {
 variable "pvc_loki_storage_class_name" {
   type = string
 }
-
-variable "pvc_grafana_storage_class_name" {
-  type = string
-}
