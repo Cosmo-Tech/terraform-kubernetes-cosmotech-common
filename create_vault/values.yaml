@@ -5,8 +5,6 @@ global:
 server:
   standalone:
     enabled: false
-
-
   resources: {}
   # resources:
   #   requests:
@@ -29,7 +27,6 @@ server:
       setNodeId: true
       config: |
         ui = true
-
         listener "tcp" {
           tls_disable = 1
           address = "[::]:8200"
@@ -39,7 +36,6 @@ server:
           #  unauthenticated_metrics_access = "true"
           #}
         }
-
         storage "raft" {
           path = "/vault/data"
         }
@@ -47,7 +43,6 @@ server:
         service_registration "kubernetes" {}
     disruptionBudget:
       enabled: false
-
   affinity: |
     # podAntiAffinity:
     #   requiredDuringSchedulingIgnoredDuringExecution:
@@ -57,33 +52,31 @@ server:
     #           app.kubernetes.io/instance: "{{ .Release.Name }}"
     #           component: server
     #       topologyKey: kubernetes.io/hostname
-
   ingress:
     enabled: ${VAULT_INGRESS_ENABLED}
     annotations:
       nginx.ingress.kubernetes.io/ssl-passthrough: "false"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     ingressClassName: "nginx"
-    pathType: Prefix
+    pathType: ImplementationSpecific
     activeService: true
     hosts:
       - host: ${VAULT_DNS_NAME}
     extraPaths:
       - path: "/vault(/|$)(.*)"
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: vault-active
             port:
               number: 8200
       - path: "/(.*)"
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: vault-active
             port:
-              number: 8200
-        
+              number: 8200       
 ui:
   enabled: true
         
