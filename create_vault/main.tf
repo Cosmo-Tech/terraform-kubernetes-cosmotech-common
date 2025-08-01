@@ -59,7 +59,7 @@ resource "kubernetes_config_map" "vault_unseal_script" {
   }
 
   data = {
-    "unseal_init.sh" = file("${path.module}/scripts/unseal_init.sh")
+    "unseal_init.sh" = trimspace(replace(file("${path.module}/scripts/unseal_init.sh"), "\r", ""))
   }
   depends_on = [helm_release.vault]
 }
@@ -73,7 +73,7 @@ resource "kubernetes_config_map" "vault_unseal_cron_script" {
   }
 
   data = {
-    "unseal_job.sh" = file("${path.module}/scripts/unseal_job.sh")
+    "unseal_job.sh" = trimspace(replace(file("${path.module}/scripts/unseal_job.sh"), "\r", ""))
   }
   depends_on = [
     helm_release.vault
@@ -219,7 +219,7 @@ resource "kubernetes_config_map" "vault_enable_auth_script" {
   }
 
   data = {
-    "enable_auth.sh" = file("${path.module}/scripts/enable_auth.sh")
+    "enable_auth.sh" = trimspace(replace(file("${path.module}/scripts/enable_auth.sh"), "\r", ""))
   }
   depends_on = [
     helm_release.vault
