@@ -1,0 +1,28 @@
+name: Track Dependencies
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  dependency_track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform init
+      - name: Install Syft
+        run: |
+          curl -sSfL https://get.anchore.io/syft | sudo sh -s -- -b /usr/local/bin
+      - name: Generate SBOM
+        run: |
+          syft scan -o cyclonedx-json . > sbom.json
+      - name: Upload cyclonedx bom to dependency
+        uses: DependencyTrack/gh-upload-sbom@v3
+        with:
+          serverhostname: ${{ secrets.DEPENDENCY_TRACK_SERVER_HOSTNAME }}
+          apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+          project: '525cf37b-98a5-4aab-9769-1c5e695d8232'
+          bomfilename: 'sbom.json'
