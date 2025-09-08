@@ -18,7 +18,7 @@ jobs:
           curl -sSfL https://get.anchore.io/syft | sudo sh -s -- -b /usr/local/bin
       - name: Generate SBOM
         run: |
-          syft scan -o cyclonedx-json . > sbom.json
+          syft scan -o cyclonedx-json .terraform.lock.hcl > sbom.json
       - name: Upload cyclonedx bom to dependency
         uses: DependencyTrack/gh-upload-sbom@v3
         with:
