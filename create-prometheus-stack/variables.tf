@@ -87,3 +87,10 @@ variable "prom_alert_manager_resources" {
     })
   })
 }
+
+variable "pvc_grafana_storage_class_name" {
+  type = string
+}
+variable "pvc_grafana_storage_gbi" {
+  type = string
+}
