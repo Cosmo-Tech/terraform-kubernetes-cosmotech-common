@@ -16,7 +16,10 @@ locals {
     "PROM_STORAGE_CLASS_NAME"       = var.prom_storage_class_name
     "PROM_RESOURCES"                = jsonencode(var.prom_resources)
     "PROM_RETENTION"                = var.prom_retention
-    "PROM_PV_EXISTING_NAME"        = var.prom_pv_existing_name
+    "PROM_PV_EXISTING_NAME"         = var.prom_pv_existing_name
+    "GRAFANA_PVC_NAME"              = "pvc-disk-grafana-core"
+    "GRAFANA_STORAGE_CLASS"         = var.pvc_grafana_storage_class_name
+    "GRAFANA_STORAGE_SIZE"          = var.pvc_grafana_storage_gbi
   }
 }
 

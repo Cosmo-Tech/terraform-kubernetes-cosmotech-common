@@ -60,14 +60,11 @@ loki_resources = [{
     path         = "/mnt/grafana-storage"
 }]
 
-pvc_loki_stack_deploy          = false
-pvc_loki_stack_namespace       = "cosmotech-monitoring"
-pvc_grafana_storage_accessmode = "ReadWriteOnce"
-pvc_grafana_storage_class_name = "default"
-pvc_grafana_storage_gbi        = "8Gi"
-pvc_loki_storage_accessmode    = "ReadWriteOnce"
-pvc_loki_storage_class_name    = "default"
-pvc_loki_storage_gbi           = "8Gi"
+pvc_loki_stack_deploy       = false
+pvc_loki_stack_namespace    = "cosmotech-monitoring"
+pvc_loki_storage_accessmode = "ReadWriteOnce"
+pvc_loki_storage_class_name = "default"
+pvc_loki_storage_gbi        = "8Gi"
 
 # Nginx
 nginx_helm_repo_url     = "https://kubernetes.github.io/ingress-nginx"
@@ -87,9 +84,13 @@ pvc_keycloak_postgres_storage_gbi        = "32Gi"
 pvc_postgres_keycloak_existing_name      = "pvc-disk-postgres-core-keycloak"
 
 # Monitoring
-prometheus_stack_deploy = true
-monitoring_namespace    = "cosmotech-monitoring"
-redis_admin_password    = ""
+prometheus_stack_deploy        = true
+pvc_prometheus_stack_deploy    = false
+pvc_grafana_storage_accessmode = "ReadWriteOnce"
+pvc_grafana_storage_class_name = "default"
+pvc_grafana_storage_gbi        = "8Gi"
+monitoring_namespace           = "cosmotech-monitoring"
+redis_admin_password           = ""
 prom_alert_manager_resources = {
   limits = {
     cpu    = "1"
@@ -108,7 +109,7 @@ prom_redis_port               = 6379
 prom_helm_chart               = "kube-prometheus-stack"
 prom_helm_repo_url            = "https://prometheus-community.github.io/helm-charts"
 prom_helm_release_name        = "kube-prometheus-stack"
-prom_stack_version            = "57.1.0"
+prom_stack_version            = "75.9.0"
 prom_admin_password           = ""
 prom_redis_host_namespace     = ""
 prom_pv_existing_name         = "pv-disk-prometheus-core"

@@ -14,7 +14,6 @@ module "loki" {
   grafana_loki_compatibility_image_tag = var.grafana_loki_compatibility_image_tag
   is_bare_metal                        = var.is_bare_metal
   resources                            = var.loki_resources
-  pvc_grafana_storage_class_name       = var.pvc_grafana_storage_class_name
   pvc_loki_storage_class_name          = var.pvc_loki_storage_class_name
 
   depends_on = [module.create-prometheus-stack]
@@ -25,12 +24,9 @@ module "deploy-pvc-loki-stack" {
 
   count = var.pvc_loki_stack_deploy ? 1 : 0
 
-  pvc_loki_stack_namespace       = var.pvc_loki_stack_namespace
-  pvc_grafana_storage_accessmode = var.pvc_grafana_storage_accessmode
-  pvc_grafana_storage_class_name = var.pvc_grafana_storage_class_name
-  pvc_grafana_storage_gbi        = var.pvc_grafana_storage_gbi
-  pvc_loki_storage_accessmode    = var.pvc_loki_storage_accessmode
-  pvc_loki_storage_class_name    = var.pvc_loki_storage_class_name
-  pvc_loki_storage_gbi           = var.pvc_loki_storage_gbi
+  pvc_loki_stack_namespace    = var.pvc_loki_stack_namespace
+  pvc_loki_storage_accessmode = var.pvc_loki_storage_accessmode
+  pvc_loki_storage_class_name = var.pvc_loki_storage_class_name
+  pvc_loki_storage_gbi        = var.pvc_loki_storage_gbi
 
 }
